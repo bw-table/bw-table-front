@@ -40,6 +40,10 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/require-default-props': 'off',
+    'react/jsx-filename-extension': [
+      2,
+      {extensions: ['.js', '.jsx', '.ts', '.tsx']},
+    ],
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': [
       'error',
@@ -65,10 +69,19 @@ module.exports = {
       },
     ],
     'import/order': [
-      'error',
+      'warn',
       {
-        groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'index'],
-        'newlines-between': 'always',
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+          'object',
+          'type',
+        ],
+        'newlines-between': 'never',
         alphabetize: {
           order: 'asc',
           caseInsensitive: true,
