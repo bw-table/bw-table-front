@@ -55,6 +55,7 @@ module.exports = {
           '**/*.spec.tsx',
           'jest.setup.ts',
           '**/*.stories.tsx',
+          'src/mocks/**',
         ],
       },
     ],

@@ -1,9 +1,5 @@
 import { ServerPrefetchProviderProps } from '@/types';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 export default async function ServerPrefetchProvider({
   children,
@@ -20,11 +16,7 @@ export default async function ServerPrefetchProvider({
       ),
     );
 
-    return (
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        {children}
-      </HydrationBoundary>
-    );
+    return <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>;
   } catch (error) {
     console.error('서버사이드 프리패칭 에러:', error);
 

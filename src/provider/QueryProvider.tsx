@@ -1,15 +1,11 @@
 'use client';
 
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
-import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
-import {PropsWithChildren, useState} from 'react';
-import {useError} from '@/hooks/useError';
+import { PropsWithChildren, useState } from 'react';
+import { useError } from '@/hooks/useError';
+import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-export default function QueryProvider({children}: PropsWithChildren) {
+export default function QueryProvider({ children }: PropsWithChildren) {
   const errorHandler = useError();
 
   const [client] = useState(
@@ -40,9 +36,7 @@ export default function QueryProvider({children}: PropsWithChildren) {
   return (
     <QueryClientProvider client={client}>
       {children}
-      {process.env.NODE_ENV !== 'production' && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
+      {process.env.NODE_ENV !== 'production' && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   );
 }

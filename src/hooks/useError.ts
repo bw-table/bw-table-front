@@ -1,4 +1,4 @@
-import {useCallback} from 'react';
+import { useCallback } from 'react';
 
 export const useError = () => {
   return useCallback((error: unknown) => {
@@ -22,19 +22,13 @@ export const useError = () => {
 
         switch (errorResponse.status) {
           case 400:
-            console.error(
-              '잘못된 요청: 필수 매개변수가 누락되었거나 요청이 잘못되었습니다.',
-            );
+            console.error('잘못된 요청: 필수 매개변수가 누락되었거나 요청이 잘못되었습니다.');
             break;
           case 401:
-            console.error(
-              '인증되지 않음: 유효한 API 키가 제공되지 않았습니다.',
-            );
+            console.error('인증되지 않음: 유효한 API 키가 제공되지 않았습니다.');
             break;
           case 403:
-            console.error(
-              '접근 금지: API 키에 해당 요청을 수행할 권한이 없습니다.',
-            );
+            console.error('접근 금지: API 키에 해당 요청을 수행할 권한이 없습니다.');
             break;
           case 404:
             console.error('찾을 수 없음: 요청한 리소스가 존재하지 않습니다.');
@@ -43,9 +37,7 @@ export const useError = () => {
             console.error('서버 오류: 서버에서 문제가 발생했습니다.');
             break;
           default:
-            console.error(
-              `서버 오류: ${errorResponse.message || '알 수 없는 오류'}`,
-            );
+            console.error(`서버 오류: ${errorResponse.message || '알 수 없는 오류'}`);
         }
       }
     }

@@ -1,5 +1,5 @@
-import {ReactNode} from 'react';
-import {QueryFunction, QueryKey} from '@tanstack/react-query';
+import { ReactNode } from 'react';
+import { QueryFunction, QueryKey } from '@tanstack/react-query';
 
 export interface ExampleComponentsProps {
   content: string;
