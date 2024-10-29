@@ -56,6 +56,7 @@ module.exports = {
           'jest.setup.ts',
           '**/*.stories.tsx',
           'src/mocks/**',
+          'tailwind.config.ts',
         ],
       },
     ],
