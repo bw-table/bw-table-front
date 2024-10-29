@@ -39,6 +39,7 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react/button-has-type': 'off',
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': [
       2,
@@ -105,9 +106,9 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
+        printWidth: 80,
         singleQuote: true,
         trailingComma: 'all',
-        printWidth: 100,
         tabWidth: 2,
         semi: true,
         bracketSpacing: true,
