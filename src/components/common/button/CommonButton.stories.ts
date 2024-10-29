@@ -12,6 +12,6 @@ type Story = StoryObj<typeof CommonButton>;
 
 export const Primary: Story = {
   args: {
-    label: '버튼',
+    children: '버튼',
   },
 };

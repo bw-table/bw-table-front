@@ -5,11 +5,16 @@ export interface ExampleComponentsProps {
   content: string;
 }
 
-export type ButtonProps = {
-  label: string;
+export type ButtonType = 'button' | 'submit' | 'reset';
+
+export interface ButtonProps {
+  children: string | ReactNode;
+  type: ButtonType;
+  classNames?: string;
+  onClick?: () => void;
+  disabled?: boolean;
   variant?: 'default';
-  className?: string;
-};
+}
 
 interface QueryConfig {
   queryKey: QueryKey;

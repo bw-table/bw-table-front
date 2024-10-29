@@ -8,11 +8,28 @@ const buttonStyles = cva('rounded-md transition-colors w-full', {
       default: 'bg-primary-500 py-3 text-white',
     },
   },
+
   defaultVariants: {
     variant: 'default',
   },
 });
 
-export default function CommonButton({ label, variant, className }: ButtonProps) {
-  return <button className={cn(buttonStyles({ variant }), className)}>{label}</button>;
+export default function CommonButton({
+  children,
+  variant,
+  classNames,
+  onClick,
+  disabled,
+  type,
+}: ButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      type={type}
+      className={cn(buttonStyles({ variant }), classNames)}
+      disabled={disabled}
+    >
+      {children}
+    </button>
+  );
 }
