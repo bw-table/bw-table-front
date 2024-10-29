@@ -1,8 +1,15 @@
 import { ReactNode } from 'react';
 import { QueryFunction, QueryKey } from '@tanstack/react-query';
+import {
+  Control,
+  FieldValues,
+  Path,
+  RegisterOptions,
+  UseFormRegister,
+} from 'react-hook-form';
 
 export type ButtonType = 'button' | 'submit' | 'reset';
-type InputType = 'text' | 'password' | 'email' | 'date' | 'number';
+type InputType = 'text' | 'password' | 'email' | 'date' | 'number' | 'tel';
 
 export interface ButtonProps {
   children: string | ReactNode;
@@ -25,6 +32,18 @@ export interface CommonInputProps {
   onFocus?: () => void;
   onBlur?: () => void;
   readOnly?: boolean;
+}
+
+export interface FormInputProps<T extends FieldValues>
+  extends CommonInputProps {
+  label: Path<T>;
+  register: UseFormRegister<T>;
+  control?: Control<T>;
+  rules?: Omit<
+    RegisterOptions<T>,
+    'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
+  >;
+  error?: string;
 }
 
 interface QueryConfig {
