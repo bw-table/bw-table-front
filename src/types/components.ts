@@ -7,7 +7,7 @@ export interface ExampleComponentsProps {
 
 export type ButtonProps = {
   label: string;
-  variant?: 'default' | 'outline' | 'ghost';
+  variant?: 'default';
   className?: string;
 };
 
