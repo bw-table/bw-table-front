@@ -19,7 +19,11 @@ const meta: Meta<typeof FormInput> = {
       control: { type: 'boolean' },
     },
     error: {
-      control: { type: 'boolean' },
+      control: { type: 'object' },
+      defaultValue: {
+        type: 'required',
+        message: '이 필드는 필수입니다',
+      },
     },
     required: {
       control: { type: 'boolean' },
@@ -64,5 +68,17 @@ export const Default: Story = {
     placeholder: '사용자 이름을 입력하세요',
     type: 'text',
     variant: 'default',
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    label: 'username',
+    placeholder: '사용자 이름을 입력하세요',
+    type: 'text',
+    error: {
+      type: 'required',
+      message: '이 필드는 필수입니다',
+    },
   },
 };

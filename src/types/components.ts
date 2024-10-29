@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { QueryFunction, QueryKey } from '@tanstack/react-query';
 import {
+  FieldError,
   FieldValues,
   Path,
   RegisterOptions,
@@ -34,14 +35,15 @@ export interface CommonInputProps {
 }
 
 export interface FormInputProps<T extends FieldValues>
-  extends CommonInputProps {
+  extends Omit<CommonInputProps, 'variant'> {
+  variant?: 'default' | 'disabled' | 'error';
   label: Path<T>;
   register: UseFormRegister<T>;
   rules?: Omit<
     RegisterOptions<T>,
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
-  error?: string;
+  error?: FieldError;
 }
 
 interface QueryConfig {
