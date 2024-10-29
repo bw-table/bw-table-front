@@ -2,7 +2,7 @@ import CommonButton from '@/components/common/button/CommonButton';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof CommonButton> = {
-  title: 'common/Button',
+  title: 'common/CommonButton',
   component: CommonButton,
   tags: ['autodocs'],
 };

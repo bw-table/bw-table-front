@@ -16,7 +16,7 @@ const buttonStyles = cva('rounded-md transition-colors w-full', {
 
 export default function CommonButton({
   children,
-  variant,
+  variant = 'default',
   classNames,
   onClick,
   disabled,

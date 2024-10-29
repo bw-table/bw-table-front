@@ -25,6 +25,9 @@ const config: Config = {
         warning: {
           500: '#F26B3A', // 노쇼 버튼 색상
         },
+        border: {
+          300: '#CCCCCC',
+        },
       },
     },
   },
