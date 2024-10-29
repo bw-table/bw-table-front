@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { QueryFunction, QueryKey } from '@tanstack/react-query';
 import {
-  Control,
   FieldValues,
   Path,
   RegisterOptions,
@@ -38,7 +37,6 @@ export interface FormInputProps<T extends FieldValues>
   extends CommonInputProps {
   label: Path<T>;
   register: UseFormRegister<T>;
-  control?: Control<T>;
   rules?: Omit<
     RegisterOptions<T>,
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'

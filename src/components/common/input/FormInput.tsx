@@ -33,7 +33,6 @@ export default function FormInput<T extends FieldValues>({
   onClick,
   onFocus,
   onBlur,
-  control,
 }: FormInputProps<T>) {
   const inputVariant = error ? 'error' : disable ? 'disabled' : variant;
 
