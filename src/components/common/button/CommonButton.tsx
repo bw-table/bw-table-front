@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 import { ButtonProps } from '@/types';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/cn'; // variant 마다 다른 스타일링을 하기 위해 cva 이용
 
 // variant 마다 다른 스타일링을 하기 위해 cva 이용
 const buttonStyles = cva('rounded-md transition-colors', {
@@ -16,6 +16,6 @@ const buttonStyles = cva('rounded-md transition-colors', {
   },
 });
 
-export default function Button({ label, variant, className }: ButtonProps) {
+export default function CommonButton({ label, variant, className }: ButtonProps) {
   return <button className={cn(buttonStyles({ variant }), className)}>{label}</button>;
 }
