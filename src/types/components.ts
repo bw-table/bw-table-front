@@ -59,3 +59,23 @@ export interface ContainerProps {
   variant: 'mobile' | 'tablet';
   classNames?: string;
 }
+
+export interface CommonCalendarProps {
+  onDateChangeAction?: (date: Date | null) => void;
+  showTodayButton?: boolean;
+}
+
+export interface CommonModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface ReservationConfirmProps {
+  date: string;
+  time: string;
+  people: number;
+  onCancel: () => void;
+  onConfirm: () => void;
+}
