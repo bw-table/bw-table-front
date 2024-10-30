@@ -1,6 +1,7 @@
 import CommonButton from '@/components/common/button/CommonButton';
 import KakaoLogo from '@public/KakaoLogo.svg';
 import Logo from '@public/Logo.svg';
+import Link from 'next/link';
 
 export default function AuthPage() {
   return (
@@ -28,7 +29,9 @@ export default function AuthPage() {
         </div>
         <div className="flex gap-5 mt-3">
           <span>이미 흑백테이블 회원이신가요?</span>
-          <span className="font-semibold underline">로그인 하기</span>
+          <Link href="/auth/signin" className="font-semibold underline">
+            로그인 하기
+          </Link>
         </div>
       </section>
     </div>
