@@ -3,19 +3,22 @@ import { FormInputProps } from '@/types';
 import { cn } from '@/utils/cn';
 import { FieldValues } from 'react-hook-form';
 
-const FormInputStyle = cva('pl-3 py-3 rounded-md w-full focus:outline-none', {
-  variants: {
-    variant: {
-      default: 'bg-white border border-solid border-border-300',
-      disabled:
-        'bg-white border border-solid border-border-300 cursor-not-allowed',
-      error: 'bg-white border border-solid border-red-500',
+const FormInputStyle = cva(
+  'pl-3 py-3 rounded-md w-full focus:outline-none hover:appearance-none',
+  {
+    variants: {
+      variant: {
+        default: 'bg-white border border-solid border-border-300',
+        disabled:
+          'bg-white border border-solid border-border-300 cursor-not-allowed',
+        error: 'bg-white border border-solid border-red-500',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
     },
   },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
+);
 
 export default function FormInput<T extends FieldValues>({
   register,

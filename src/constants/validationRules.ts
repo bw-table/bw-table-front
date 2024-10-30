@@ -67,7 +67,7 @@ export const signupValidationRules = {
     required: '전화번호를 입력해주세요',
     pattern: {
       value: REGEX_PATTERNS.TEL,
-      message: '올바른 전화번호 형식이 아닙니다 (예: 010-1234-5678)',
+      message: '올바른 전화번호 형식이 아닙니다 (예: 01012345678)',
     },
   } satisfies RegisterOptions<SignupFormData, 'tel'>,
 } as const;
