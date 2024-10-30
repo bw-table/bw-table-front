@@ -27,4 +27,5 @@ export const REGEX_PATTERNS = {
    * - 하이픈(-) 미포함
    */
   TEL: /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/,
+  BUSINESS: /^\d{10}$/,
 } as const;

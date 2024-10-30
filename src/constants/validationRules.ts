@@ -1,5 +1,5 @@
 import { SignupFormData } from '@/components/feature/signup/SignupForm';
-import { REGEX_PATTERNS } from '@/constants/regex'; // Define the form data interface
+import { REGEX_PATTERNS } from '@/constants/regex';
 import { RegisterOptions } from 'react-hook-form';
 
 export const signupValidationRules = {
@@ -70,4 +70,24 @@ export const signupValidationRules = {
       message: '올바른 전화번호 형식이 아닙니다 (예: 01012345678)',
     },
   } satisfies RegisterOptions<SignupFormData, 'tel'>,
+
+  businessNumber: (
+    verifyBusinessNumber: (
+      businessNumber: string,
+    ) => Promise<{ businesses: Array<{ b_no: string }> }>,
+  ): RegisterOptions<SignupFormData, 'businessNumber'> => ({
+    required: '사업자등록번호를 입력해주세요',
+    pattern: {
+      value: REGEX_PATTERNS.BUSINESS,
+      message: '사업자등록번호는 10자리 숫자여야 합니다',
+    },
+    validate: {
+      verifyBusiness: async (value) => {
+        const result = await verifyBusinessNumber(value);
+        const isValid =
+          result.businesses && result.businesses[0]?.b_no === value;
+        return isValid || '유효하지 않은 사업자등록번호입니다';
+      },
+    },
+  }),
 } as const;
