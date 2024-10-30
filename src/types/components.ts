@@ -14,6 +14,7 @@ type InputType = 'text' | 'password' | 'email' | 'date' | 'number' | 'tel';
 export interface ButtonProps {
   children: string | ReactNode;
   type: ButtonType;
+  href?: string;
   onClick?: () => void;
   disabled?: boolean;
   classNames?: string;

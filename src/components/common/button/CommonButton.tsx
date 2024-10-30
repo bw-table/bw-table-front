@@ -1,6 +1,10 @@
+'use client';
+
 import { cva } from 'class-variance-authority';
+import React from 'react';
 import { ButtonProps } from '@/types';
 import { cn } from '@/utils/cn';
+import { useRouter } from 'next/navigation';
 
 const buttonStyles = cva('rounded-md transition-colors w-full', {
   variants: {
@@ -21,10 +25,23 @@ export default function CommonButton({
   onClick,
   disabled,
   type,
+  href,
 }: ButtonProps) {
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (href) {
+      router.push(href);
+    }
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       type={type}
       className={cn(buttonStyles({ variant }), classNames)}
       disabled={disabled}
