@@ -1,10 +1,11 @@
-import { REGEX_PATTERNS } from '@/constants/regex';
+import { SignupFormData } from '@/components/feature/signup/SignupForm';
+import { REGEX_PATTERNS } from '@/constants/regex'; // Define the form data interface
 import { RegisterOptions } from 'react-hook-form';
 
 export const signupValidationRules = {
   email: (
     checkEmail: (email: string) => Promise<boolean>,
-  ): RegisterOptions => ({
+  ): RegisterOptions<SignupFormData, 'email'> => ({
     required: '이메일을 입력해주세요',
     pattern: {
       value: REGEX_PATTERNS.EMAIL,
@@ -28,9 +29,11 @@ export const signupValidationRules = {
       value: REGEX_PATTERNS.PASSWORD,
       message: '대문자, 소문자, 숫자, 특수문자를 모두 포함해야 합니다',
     },
-  } satisfies RegisterOptions,
+  } satisfies RegisterOptions<SignupFormData, 'password'>,
 
-  checkPassword: (getValues: () => Record<string, any>): RegisterOptions => ({
+  checkPassword: (
+    getValues: () => SignupFormData,
+  ): RegisterOptions<SignupFormData, 'checkPassword'> => ({
     required: '비밀번호를 한번 더 입력해주세요',
     validate: (value: string) =>
       value === getValues().password || '비밀번호가 일치하지 않습니다',
@@ -38,7 +41,7 @@ export const signupValidationRules = {
 
   nickname: (
     checkNickname: (nickname: string) => Promise<boolean>,
-  ): RegisterOptions => ({
+  ): RegisterOptions<SignupFormData, 'nickname'> => ({
     required: '닉네임을 입력해주세요',
     minLength: {
       value: 3,
@@ -66,5 +69,5 @@ export const signupValidationRules = {
       value: REGEX_PATTERNS.TEL,
       message: '올바른 전화번호 형식이 아닙니다 (예: 010-1234-5678)',
     },
-  } satisfies RegisterOptions,
+  } satisfies RegisterOptions<SignupFormData, 'tel'>,
 } as const;
