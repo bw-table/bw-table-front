@@ -20,7 +20,6 @@ const FormInputStyle = cva('pl-3 py-3 rounded-md w-full focus:outline-none', {
 export default function FormInput<T extends FieldValues>({
   register,
   label,
-  required,
   rules,
   variant,
   classNames,
@@ -30,9 +29,6 @@ export default function FormInput<T extends FieldValues>({
   error,
   maxLength,
   readOnly,
-  onClick,
-  onFocus,
-  onBlur,
 }: FormInputProps<T>) {
   let inputVariant = variant;
 
@@ -44,16 +40,13 @@ export default function FormInput<T extends FieldValues>({
 
   return (
     <input
-      {...register(label, { required, ...rules })}
+      {...register(label, rules)}
       className={cn(FormInputStyle({ variant: inputVariant }), classNames)}
       type={type}
       placeholder={placeholder}
       disabled={disable}
       maxLength={maxLength}
       readOnly={readOnly}
-      onClick={onClick}
-      onFocus={onFocus}
-      onBlur={onBlur}
     />
   );
 }
