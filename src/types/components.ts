@@ -11,12 +11,12 @@ import {
 export type ButtonType = 'button' | 'submit' | 'reset';
 type InputType = 'text' | 'password' | 'email' | 'date' | 'number' | 'tel';
 
-export interface ButtonProps {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string | ReactNode;
   type: ButtonType;
   href?: string;
   onClick?: () => void;
-  disabled?: boolean;
   classNames?: string;
   variant?: 'default';
 }

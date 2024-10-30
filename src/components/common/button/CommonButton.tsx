@@ -22,10 +22,9 @@ export default function CommonButton({
   children,
   variant = 'default',
   classNames,
-  onClick,
-  disabled,
-  type,
   href,
+  onClick,
+  ...htmlProps
 }: ButtonProps) {
   const router = useRouter();
 
@@ -36,15 +35,13 @@ export default function CommonButton({
     if (onClick) {
       onClick();
     }
-    return undefined;
   };
 
   return (
     <button
       onClick={handleClick}
-      type={type}
       className={cn(buttonStyles({ variant }), classNames)}
-      disabled={disabled}
+      {...htmlProps}
     >
       {children}
     </button>
