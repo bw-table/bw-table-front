@@ -1,10 +1,13 @@
 import CommonButton from '@/components/common/button/CommonButton';
+import Logo from '@public/Logo.svg';
 
 export default function AuthPage() {
   return (
     <div className="h-[calc(100vh-50px)] flex items-center justify-center">
       <section className="flex flex-col items-center justify-center gap-3 w-full px-3">
-        <h1>로고</h1>
+        <h1 className="mb-2">
+          <Logo />
+        </h1>
         <p className="text-center font-bold mb-8 text-2xl">
           흑백 테이블과 함께하는 <br /> 편리한 예약!
         </p>
