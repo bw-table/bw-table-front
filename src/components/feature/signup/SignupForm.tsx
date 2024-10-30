@@ -23,9 +23,17 @@ export default function SignupForm() {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
   } = useForm<SignupFormData>({
     mode: 'all',
   });
+
+  const handleManagementToggle = (checked: boolean) => {
+    setManagement(checked);
+    if (!checked) {
+      setValue('businessRegistrationNumber', '');
+    }
+  };
 
   const handleSignup = async (data: SignupFormData) => {
     console.log(data);
@@ -39,7 +47,7 @@ export default function SignupForm() {
           type="checkbox"
           className="toggle"
           checked={management}
-          onChange={(e) => setManagement(e.target.checked)}
+          onChange={(e) => handleManagementToggle(e.target.checked)}
         />
       </div>
 
