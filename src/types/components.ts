@@ -55,3 +55,9 @@ export interface ServerPrefetchProviderProps {
   children: ReactNode;
   queries: QueryConfig | QueryConfig[];
 }
+
+export interface ContainerProps {
+  children: ReactNode;
+  variant: 'mobile' | 'tablet';
+  classNames?: string;
+}
