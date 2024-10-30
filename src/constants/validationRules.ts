@@ -1,3 +1,4 @@
+import { REGEX_PATTERNS } from '@/constants/regex';
 import { RegisterOptions } from 'react-hook-form';
 
 export const signupValidationRules = {
@@ -6,7 +7,7 @@ export const signupValidationRules = {
   ): RegisterOptions => ({
     required: '이메일을 입력해주세요',
     pattern: {
-      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      value: REGEX_PATTERNS.EMAIL,
       message: '올바른 이메일 형식이 아닙니다',
     },
     validate: {
@@ -24,8 +25,7 @@ export const signupValidationRules = {
       message: '비밀번호는 8자 이상이어야 합니다',
     },
     pattern: {
-      value:
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+      value: REGEX_PATTERNS.PASSWORD,
       message: '대문자, 소문자, 숫자, 특수문자를 모두 포함해야 합니다',
     },
   } satisfies RegisterOptions,
@@ -49,7 +49,7 @@ export const signupValidationRules = {
       message: '닉네임은 20자를 초과할 수 없습니다',
     },
     pattern: {
-      value: /^[A-Za-z0-9]+$/,
+      value: REGEX_PATTERNS.NICKNAME,
       message: '영문자와 숫자만 사용 가능합니다',
     },
     validate: {
@@ -63,7 +63,7 @@ export const signupValidationRules = {
   tel: {
     required: '전화번호를 입력해주세요',
     pattern: {
-      value: /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/,
+      value: REGEX_PATTERNS.TEL,
       message: '올바른 전화번호 형식이 아닙니다 (예: 010-1234-5678)',
     },
   } satisfies RegisterOptions,
