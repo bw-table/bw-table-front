@@ -31,6 +31,7 @@
     "@chromatic-com/storybook": "^1.9.0",
     "@gogaille/storybook-addon-next-router": "^4.0.0",
     "@mswjs/http-middleware": "^0.10.1",
+    "@storybook/addon-actions": "^8.3.6",
     "@storybook/addon-essentials": "^8.3.6",
     "@storybook/addon-interactions": "^8.3.6",
     "@storybook/addon-links": "^8.3.6",

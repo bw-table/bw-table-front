@@ -2389,7 +2389,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-actions@npm:8.3.6":
+"@storybook/addon-actions@npm:8.3.6, @storybook/addon-actions@npm:^8.3.6":
   version: 8.3.6
   resolution: "@storybook/addon-actions@npm:8.3.6"
   dependencies:
@@ -11814,6 +11814,7 @@ __metadata:
     "@gogaille/storybook-addon-next-router": "npm:^4.0.0"
     "@mswjs/http-middleware": "npm:^0.10.1"
     "@stomp/stompjs": "npm:^7.0.0"
+    "@storybook/addon-actions": "npm:^8.3.6"
     "@storybook/addon-essentials": "npm:^8.3.6"
     "@storybook/addon-interactions": "npm:^8.3.6"
     "@storybook/addon-links": "npm:^8.3.6"
