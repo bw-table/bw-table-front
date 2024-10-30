@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn';
 const buttonStyles = cva('', {
   variants: {
     variant: {
-      mobile: 'max-w-[750px] mx-auto',
+      mobile: 'max-w-[600px] mx-auto',
       tablet: 'max-w-[1024px] mx-auto',
     },
   },
