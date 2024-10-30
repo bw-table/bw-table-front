@@ -29,12 +29,13 @@ export interface CommonInputProps
 }
 
 export interface FormInputProps<T extends FieldValues>
-  extends Omit<CommonInputProps, 'variant'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'variant'> {
   variant?: 'default' | 'disabled' | 'error';
   label: Path<T>;
   register: UseFormRegister<T>;
   rules?: RegisterOptions<T>;
   error?: FieldError;
+  classNames?: string;
 }
 
 interface QueryConfig {

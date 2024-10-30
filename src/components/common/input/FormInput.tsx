@@ -27,29 +27,23 @@ export default function FormInput<T extends FieldValues>({
   variant,
   classNames,
   type = 'text',
-  placeholder,
-  disable,
   error,
-  maxLength,
-  readOnly,
+  ...htmlProps
 }: FormInputProps<T>) {
   let inputVariant = variant;
 
   if (error?.type) {
     inputVariant = 'error';
-  } else if (disable) {
+  } else if (htmlProps.disabled) {
     inputVariant = 'disabled';
   }
 
   return (
     <input
       {...register(label, rules)}
-      className={cn(FormInputStyle({ variant: inputVariant }), classNames)}
+      {...htmlProps}
       type={type}
-      placeholder={placeholder}
-      disabled={disable}
-      maxLength={maxLength}
-      readOnly={readOnly}
+      className={cn(FormInputStyle({ variant: inputVariant }), classNames)}
     />
   );
 }
