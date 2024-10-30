@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import CommonButton from '@/components/common/button/CommonButton';
 import FormInput from '@/components/common/input/FormInput';
+import ValidationMessage from '@/components/feature/signup/ValidationMessage';
 import { signupValidationRules } from '@/constants/validationRules';
 import Logo from '@public/Logo.svg';
 import { useForm } from 'react-hook-form';
@@ -24,7 +25,7 @@ export default function SignupForm() {
     formState: { errors, touchedFields },
     getValues,
   } = useForm<SignupFormData>({
-    mode: 'onBlur',
+    mode: 'all',
   });
 
   const handleSignup = async (data: SignupFormData) => {
@@ -39,7 +40,7 @@ export default function SignupForm() {
         </h1>
         <h2 className="text-2xl font-bold text-center mb-6">회원가입</h2>
       </div>
-      {/* TODO: 이후 공통 체크박스 컴포넌트로 분리하기 */}
+
       <div className="flex items-center gap-2 mb-1.5">
         <input
           type="checkbox"
@@ -52,8 +53,9 @@ export default function SignupForm() {
           사장님 이신가요?
         </label>
       </div>
-      <form onSubmit={handleSubmit(handleSignup)} className="space-y-6">
-        <div className="space-y-2">
+
+      <form onSubmit={handleSubmit(handleSignup)}>
+        <div>
           {/* 이메일 입력 */}
           <FormInput
             placeholder="이메일을 입력해 주세요."
@@ -61,15 +63,13 @@ export default function SignupForm() {
             register={register}
             type="email"
             error={errors.email}
-            // rules={signupValidationRules.email(checkEmail)}
           />
-          <p className="mt-1 h-5 text-sm">
-            {errors.email?.message ? (
-              <span className="text-red-500">{errors.email.message}</span>
-            ) : touchedFields.email && !errors.email ? (
-              <span className="text-green-600">사용 가능합니다</span>
-            ) : null}
-          </p>
+          <div className="h-5 mb-2">
+            <ValidationMessage
+              error={errors.email?.message}
+              isTouched={touchedFields.email}
+            />
+          </div>
 
           {/* 비밀번호 입력 */}
           <FormInput
@@ -80,13 +80,13 @@ export default function SignupForm() {
             error={errors.password}
             rules={signupValidationRules.password}
           />
-          <p className="mt-1 h-5 text-sm">
-            {errors.password?.message ? (
-              <span className="text-red-500">{errors.password.message}</span>
-            ) : touchedFields.password && !errors.password ? (
-              <span className="text-green-600">사용 가능합니다</span>
-            ) : null}
-          </p>
+          <div className="h-5 mb-2">
+            <ValidationMessage
+              successMessage="사용 가능한 비밀번호 입니다"
+              error={errors.password?.message}
+              isTouched={touchedFields.password}
+            />
+          </div>
 
           {/* 비밀번호 확인 */}
           <FormInput
@@ -97,15 +97,13 @@ export default function SignupForm() {
             error={errors.checkPassword}
             rules={signupValidationRules.checkPassword(getValues)}
           />
-          <p className="mt-1 h-5 text-sm">
-            {errors.checkPassword?.message ? (
-              <span className="text-red-500">
-                {errors.checkPassword.message}
-              </span>
-            ) : touchedFields.checkPassword && !errors.checkPassword ? (
-              <span className="text-green-600">일치합니다</span>
-            ) : null}
-          </p>
+          <div className="h-5 mb-2">
+            <ValidationMessage
+              successMessage="비밀번호 두개가 일치합니다"
+              error={errors.checkPassword?.message}
+              isTouched={touchedFields.checkPassword}
+            />
+          </div>
 
           {/* 전화번호 입력 */}
           <FormInput
@@ -116,13 +114,12 @@ export default function SignupForm() {
             error={errors.tel}
             rules={signupValidationRules.tel}
           />
-          <p className="mt-1 h-5 text-sm">
-            {errors.tel?.message ? (
-              <span className="text-red-500">{errors.tel.message}</span>
-            ) : touchedFields.tel && !errors.tel ? (
-              <span className="text-green-600">사용 가능합니다</span>
-            ) : null}
-          </p>
+          <div className="h-5 mb-2">
+            <ValidationMessage
+              error={errors.tel?.message}
+              isTouched={touchedFields.tel}
+            />
+          </div>
 
           {/* 닉네임 입력 */}
           <FormInput
@@ -131,15 +128,13 @@ export default function SignupForm() {
             register={register}
             type="text"
             error={errors.nickname}
-            // rules={signupValidationRules.nickname(checkNickname)}
           />
-          <p className="mt-1 h-5 text-sm">
-            {errors.nickname?.message ? (
-              <span className="text-red-500">{errors.nickname.message}</span>
-            ) : touchedFields.nickname && !errors.nickname ? (
-              <span className="text-green-600">사용 가능합니다</span>
-            ) : null}
-          </p>
+          <div className="h-5 mb-2">
+            <ValidationMessage
+              error={errors.nickname?.message}
+              isTouched={touchedFields.nickname}
+            />
+          </div>
 
           <div
             className={`transition-all duration-500 ease-in-out ${management ? 'h-[74px]' : 'h-0'} overflow-hidden`}
@@ -152,17 +147,13 @@ export default function SignupForm() {
                   register={register}
                   type="number"
                   error={errors.businessNumber}
-                  // rules={signupValidationRules.businessNumber(checkBusinessNumber)}
                 />
-                <p className="mt-1 h-5 text-sm">
-                  {errors.businessNumber?.message ? (
-                    <span className="text-red-500">
-                      {errors.businessNumber.message}
-                    </span>
-                  ) : touchedFields.businessNumber && !errors.businessNumber ? (
-                    <span className="text-green-600">인증되었습니다</span>
-                  ) : null}
-                </p>
+                <div className="h-5 mb-2">
+                  <ValidationMessage
+                    error={errors.businessNumber?.message}
+                    isTouched={touchedFields.businessNumber}
+                  />
+                </div>
               </>
             )}
           </div>
