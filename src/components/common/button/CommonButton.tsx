@@ -29,14 +29,14 @@ export default function CommonButton({
 }: ButtonProps) {
   const router = useRouter();
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleClick = () => {
     if (href) {
       router.push(href);
     }
     if (onClick) {
       onClick();
     }
+    return undefined;
   };
 
   return (
