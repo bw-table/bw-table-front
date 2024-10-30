@@ -130,7 +130,7 @@ export default function SignupForm() {
           <div
             className={`transition-all duration-500 ease-in-out ${
               management ? 'h-20 opacity-100' : 'h-0 opacity-0'
-            } overflow-hidden`}
+            } `}
           >
             {management && (
               <div>
