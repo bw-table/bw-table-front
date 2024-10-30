@@ -1,5 +1,5 @@
-import { SignupFormData } from '@/components/feature/signup/SignupForm';
 import { REGEX_PATTERNS } from '@/constants/regex';
+import { SignupFormData } from '@/types';
 import { RegisterOptions } from 'react-hook-form';
 
 export const signupValidationRules = {

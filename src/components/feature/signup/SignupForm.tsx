@@ -5,16 +5,8 @@ import CommonButton from '@/components/common/button/CommonButton';
 import FormInput from '@/components/common/input/FormInput';
 import ValidationMessage from '@/components/feature/signup/ValidationMessage';
 import { signupValidationRules } from '@/constants/validationRules';
+import { SignupFormData } from '@/types';
 import { useForm } from 'react-hook-form';
-
-export interface SignupFormData {
-  email: string;
-  password: string;
-  checkPassword: string;
-  contactNumber: string;
-  nickname: string;
-  businessRegistrationNumber: string;
-}
 
 export default function SignupForm() {
   const [management, setManagement] = useState<boolean>(false);
