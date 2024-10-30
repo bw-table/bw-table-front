@@ -1,4 +1,5 @@
 import CommonButton from '@/components/common/button/CommonButton';
+import KakaoLogo from '@public/KakaoLogo.svg';
 import Logo from '@public/Logo.svg';
 
 export default function AuthPage() {
@@ -17,9 +18,12 @@ export default function AuthPage() {
           <p className="px-4 text-gray200">또는</p>
           <div className="flex-1 max-h-[1px] border-t border-solid border-border-300" />
         </div>
-        <CommonButton type="button" classNames="bg-kakao text-black">
-          카카오톡으로 시작하기
-        </CommonButton>
+        <div className="relative w-full">
+          <CommonButton type="button" classNames="bg-kakao text-black">
+            카카오톡으로 시작하기
+          </CommonButton>
+          <KakaoLogo className="absolute left-5 top-4 h-8 w-8" />
+        </div>
         <div className="flex gap-5 mt-3">
           <span>이미 흑백테이블 회원이신가요?</span>
           <span className="font-semibold underline">로그인 하기</span>
