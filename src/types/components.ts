@@ -40,10 +40,7 @@ export interface FormInputProps<T extends FieldValues>
   variant?: 'default' | 'disabled' | 'error';
   label: Path<T>;
   register: UseFormRegister<T>;
-  rules?: Omit<
-    RegisterOptions<T>,
-    'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
-  >;
+  rules?: RegisterOptions;
   error?: FieldError;
 }
 
