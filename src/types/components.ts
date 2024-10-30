@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { QueryFunction, QueryKey } from '@tanstack/react-query';
 import {
   FieldError,
@@ -21,18 +21,11 @@ export interface ButtonProps {
   variant?: 'default';
 }
 
-export interface CommonInputProps {
+export interface CommonInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   type: InputType;
   variant?: 'default' | 'disabled';
   classNames?: string;
-  placeholder?: string;
-  required?: boolean;
-  disable?: boolean;
-  maxLength?: number;
-  onClick?: () => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  readOnly?: boolean;
 }
 
 export interface FormInputProps<T extends FieldValues>

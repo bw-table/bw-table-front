@@ -17,30 +17,16 @@ const CommonInputStyle = cva('pl-3 py-3 rounded-md w-full focus:outline-none', {
 });
 
 export default function CommonInput({
-  classNames,
-  variant,
   type = 'text',
-  placeholder,
-  required = false,
-  disable = false,
-  maxLength,
-  onClick,
-  onFocus,
-  onBlur,
-  readOnly = false,
+  variant,
+  classNames,
+  ...htmlProps
 }: CommonInputProps) {
   return (
     <input
       type={type}
       className={cn(CommonInputStyle({ variant }), classNames)}
-      placeholder={placeholder}
-      required={required}
-      disabled={disable}
-      maxLength={maxLength}
-      onClick={onClick}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      readOnly={readOnly}
+      {...htmlProps}
     />
   );
 }
