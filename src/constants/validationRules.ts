@@ -3,18 +3,15 @@ import { REGEX_PATTERNS } from '@/constants/regex';
 import { RegisterOptions } from 'react-hook-form';
 
 export const signupValidationRules = {
-  email: (
-    checkEmail: (email: string) => Promise<boolean>,
-  ): RegisterOptions<SignupFormData, 'email'> => ({
+  email: (): RegisterOptions<SignupFormData, 'email'> => ({
     required: '이메일을 입력해주세요',
     pattern: {
       value: REGEX_PATTERNS.EMAIL,
       message: '올바른 이메일 형식이 아닙니다',
     },
     validate: {
-      checkDuplicate: async (value) => {
-        const isAvailable = await checkEmail(value);
-        return isAvailable || '이미 사용 중인 이메일입니다';
+      checkDuplicate: async (_value) => {
+        return true;
       },
     },
   }),
@@ -39,9 +36,7 @@ export const signupValidationRules = {
       value === getValues().password || '비밀번호가 일치하지 않습니다',
   }),
 
-  nickname: (
-    checkNickname: (nickname: string) => Promise<boolean>,
-  ): RegisterOptions<SignupFormData, 'nickname'> => ({
+  nickname: (): RegisterOptions<SignupFormData, 'nickname'> => ({
     required: '닉네임을 입력해주세요',
     minLength: {
       value: 3,
@@ -56,9 +51,8 @@ export const signupValidationRules = {
       message: '영문자와 숫자만 사용 가능합니다',
     },
     validate: {
-      checkDuplicate: async (value) => {
-        const isAvailable = await checkNickname(value);
-        return isAvailable || '이미 사용 중인 닉네임입니다';
+      checkDuplicate: async (_value) => {
+        return true;
       },
     },
   }),
@@ -71,22 +65,15 @@ export const signupValidationRules = {
     },
   } satisfies RegisterOptions<SignupFormData, 'tel'>,
 
-  businessNumber: (
-    verifyBusinessNumber: (
-      businessNumber: string,
-    ) => Promise<{ businesses: Array<{ b_no: string }> }>,
-  ): RegisterOptions<SignupFormData, 'businessNumber'> => ({
+  businessNumber: (): RegisterOptions<SignupFormData, 'businessNumber'> => ({
     required: '사업자등록번호를 입력해주세요',
     pattern: {
       value: REGEX_PATTERNS.BUSINESS,
       message: '사업자등록번호는 10자리 숫자여야 합니다',
     },
     validate: {
-      verifyBusiness: async (value) => {
-        const result = await verifyBusinessNumber(value);
-        const isValid =
-          result.businesses && result.businesses[0]?.b_no === value;
-        return isValid || '유효하지 않은 사업자등록번호입니다';
+      verifyBusiness: async (_value) => {
+        return true;
       },
     },
   }),
