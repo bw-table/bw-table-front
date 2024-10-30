@@ -2,20 +2,20 @@ import React from 'react';
 
 interface ValidationMessageProps {
   error?: string;
-  isTouched: boolean | undefined;
-  successMessage?: string; // 기본 메시지
+  isValid: boolean | '';
+  successMessage?: string;
 }
 
 export default function ValidationMessage({
   error,
-  isTouched,
+  isValid,
   successMessage = '인증되었습니다',
 }: ValidationMessageProps) {
   if (error) {
     return <span className="text-red-500 text-sm">{error}</span>;
   }
 
-  if (isTouched && !error) {
+  if (isValid) {
     return <span className="text-green-600 text-sm">{successMessage}</span>;
   }
 

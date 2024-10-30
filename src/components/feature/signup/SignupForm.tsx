@@ -22,7 +22,7 @@ export default function SignupForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, touchedFields },
+    formState: { errors },
     getValues,
   } = useForm<SignupFormData>({
     mode: 'all',
@@ -67,7 +67,7 @@ export default function SignupForm() {
           <div className="h-5 mb-2">
             <ValidationMessage
               error={errors.email?.message}
-              isTouched={touchedFields.email}
+              isValid={getValues('email') && !errors.email}
             />
           </div>
 
@@ -84,7 +84,7 @@ export default function SignupForm() {
             <ValidationMessage
               successMessage="사용 가능한 비밀번호 입니다"
               error={errors.password?.message}
-              isTouched={touchedFields.password}
+              isValid={getValues('password') && !errors.password}
             />
           </div>
 
@@ -99,9 +99,9 @@ export default function SignupForm() {
           />
           <div className="h-5 mb-2">
             <ValidationMessage
-              successMessage="비밀번호 두개가 일치합니다"
+              successMessage="비밀번호 두 개가 일치합니다"
               error={errors.checkPassword?.message}
-              isTouched={touchedFields.checkPassword}
+              isValid={getValues('checkPassword') && !errors.checkPassword}
             />
           </div>
 
@@ -117,7 +117,7 @@ export default function SignupForm() {
           <div className="h-5 mb-2">
             <ValidationMessage
               error={errors.tel?.message}
-              isTouched={touchedFields.tel}
+              isValid={getValues('tel') && !errors.tel}
             />
           </div>
 
@@ -132,7 +132,7 @@ export default function SignupForm() {
           <div className="h-5 mb-2">
             <ValidationMessage
               error={errors.nickname?.message}
-              isTouched={touchedFields.nickname}
+              isValid={getValues('nickname') && !errors.nickname}
             />
           </div>
 
@@ -151,7 +151,9 @@ export default function SignupForm() {
                 <div className="h-5 mb-2">
                   <ValidationMessage
                     error={errors.businessNumber?.message}
-                    isTouched={touchedFields.businessNumber}
+                    isValid={
+                      getValues('businessNumber') && !errors.businessNumber
+                    }
                   />
                 </div>
               </>
