@@ -1,3 +1,9 @@
+import SignupForm from '@/components/feature/signup/SignupForm';
+
 export default function SignupPage() {
-  return <div>회원가입 페이지</div>;
+  return (
+    <div>
+      <SignupForm />
+    </div>
+  );
 }
