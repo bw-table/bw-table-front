@@ -14,6 +14,7 @@ type InputType = 'text' | 'password' | 'email' | 'date' | 'number' | 'tel';
 export interface ButtonProps {
   children: string | ReactNode;
   type: ButtonType;
+  href?: string;
   onClick?: () => void;
   disabled?: boolean;
   classNames?: string;
@@ -39,10 +40,7 @@ export interface FormInputProps<T extends FieldValues>
   variant?: 'default' | 'disabled' | 'error';
   label: Path<T>;
   register: UseFormRegister<T>;
-  rules?: Omit<
-    RegisterOptions<T>,
-    'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
-  >;
+  rules?: RegisterOptions<T>;
   error?: FieldError;
 }
 
@@ -54,4 +52,10 @@ interface QueryConfig {
 export interface ServerPrefetchProviderProps {
   children: ReactNode;
   queries: QueryConfig | QueryConfig[];
+}
+
+export interface ContainerProps {
+  children: ReactNode;
+  variant: 'mobile' | 'tablet';
+  classNames?: string;
 }

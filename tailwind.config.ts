@@ -28,6 +28,7 @@ const config: Config = {
         border: {
           300: '#CCCCCC',
         },
+        kakao: '#FEE500',
       },
     },
   },
