@@ -29,6 +29,9 @@ const config: Config = {
           300: '#CCCCCC',
         },
         kakao: '#FEE500',
+        mainColor: {
+          500: '#5A0202',
+        },
       },
     },
   },

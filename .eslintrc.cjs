@@ -43,7 +43,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': [
       2,
-      {extensions: ['.js', '.jsx', '.ts', '.tsx']},
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': [
@@ -93,12 +93,12 @@ module.exports = {
     ],
     '@typescript-eslint/no-unused-vars': [
       'error',
-      {argsIgnorePattern: '^_', varsIgnorePattern: '^_'},
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
     ],
     '@typescript-eslint/lines-between-class-members': [
       'error',
       'always',
-      {exceptAfterSingleLine: true},
+      { exceptAfterSingleLine: true },
     ],
     '@typescript-eslint/no-throw-literal': 'error',
     'lines-between-class-members': 'off',
