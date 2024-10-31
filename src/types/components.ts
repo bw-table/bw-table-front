@@ -70,6 +70,7 @@ export interface ReservationConfirmProps {
   date: string;
   time: string;
   people: number;
+  onSpecialRequest: string;
   onCancel: () => void;
   onConfirm: () => void;
 }
