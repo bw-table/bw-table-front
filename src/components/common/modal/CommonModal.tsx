@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { cva } from 'class-variance-authority';
-import { cn } from '../../../utils/cn.ts';
-import { CommonModalProps } from '../../../types/components';
+import { cn } from '@/utils/cn';
+import { CommonModalProps } from '@/types/components';
 
 const modalContentStyles = cva(
   'bg-white rounded-t-lg shadow-lg max-w-md w-full p-6 transition-transform duration-300 transform',

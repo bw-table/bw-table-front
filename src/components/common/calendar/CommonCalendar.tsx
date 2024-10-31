@@ -1,11 +1,11 @@
 'use client';
 
-import { CommonCalendarProps } from '../../../types/components';
+import { CommonCalendarProps } from '@/types/components';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { cva } from 'class-variance-authority';
-import { cn } from '../../../utils/cn';
+import { cn } from '@/utils/cn';
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];

@@ -3,7 +3,7 @@ import { BsCalendarCheck } from 'react-icons/bs';
 import { BsClock } from 'react-icons/bs';
 import { BsFillPeopleFill } from 'react-icons/bs';
 import CommonButton from '../common/button/CommonButton';
-import { ReservationConfirmProps } from '../../types/components';
+import { ReservationConfirmProps } from '@/types/components';
 
 export default function ReservationConfirm({
   date,

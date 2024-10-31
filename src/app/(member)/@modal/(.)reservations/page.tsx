@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import CommonModal from '../../../../components/common/modal/CommonModal';
-import CommonButton from '../../../../components/common/button/CommonButton';
-import ReservationForm from '../../../../components/feature/ReservationForm';
-import ReservationConfirm from '../../../../components/feature/ReservationConfirm';
+import CommonModal from '@/components/common/modal/CommonModal';
+import CommonButton from '@/components/common/button/CommonButton';
+import ReservationForm from '@/components/feature/ReservationForm';
+import ReservationConfirm from '@/components/feature/ReservationConfirm';
 import { useRouter } from 'next/navigation';
 
 export default function ReservationsPage() {

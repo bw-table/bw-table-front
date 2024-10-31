@@ -2,8 +2,8 @@
 
 import { cva } from 'class-variance-authority';
 import React from 'react';
-import { ButtonProps } from '../../../types';
-import { cn } from '../../../utils/cn';
+import { ButtonProps } from '@/types';
+import { cn } from '@/utils/cn';
 import { useRouter } from 'next/navigation';
 
 const buttonStyles = cva('rounded-md transition-colors w-full', {
