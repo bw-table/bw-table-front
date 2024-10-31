@@ -53,12 +53,9 @@ export const signupValidationRules = {
       value: REGEX_PATTERNS.TEL,
       message: '올바른 전화번호 형식이 아닙니다 (예: 01012345678)',
     },
-  } satisfies RegisterOptions<SignupFormData, 'contactNumber'>,
+  } satisfies RegisterOptions<SignupFormData, 'phone'>,
 
-  businessNumber: (): RegisterOptions<
-    SignupFormData,
-    'businessRegistrationNumber'
-  > => ({
+  businessNumber: (): RegisterOptions<SignupFormData, 'businessNumber'> => ({
     required: '사업자등록번호를 입력해주세요',
     pattern: {
       value: REGEX_PATTERNS.BUSINESS,

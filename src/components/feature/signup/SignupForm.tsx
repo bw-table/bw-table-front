@@ -23,7 +23,7 @@ export default function SignupForm() {
   const handleManagementToggle = (checked: boolean) => {
     setManagement(checked);
     if (!checked) {
-      setValue('businessRegistrationNumber', '');
+      setValue('businessNumber', '');
     }
   };
 
@@ -98,17 +98,15 @@ export default function SignupForm() {
           <div>
             <FormInput
               placeholder="전화번호를 입력해 주세요. (예: 01012345678)"
-              label="contactNumber"
+              label="phone"
               register={register}
               type="number"
-              error={errors.contactNumber}
+              error={errors.phone}
               rules={signupValidationRules.tel}
             />
             <ValidationMessage
-              error={errors.contactNumber?.message}
-              isValid={
-                getValues('contactNumber') && !errors.contactNumber?.message
-              }
+              error={errors.phone?.message}
+              isValid={getValues('phone') && !errors.phone?.message}
             />
           </div>
 
@@ -136,17 +134,16 @@ export default function SignupForm() {
               <div>
                 <FormInput
                   placeholder="사업자등록번호를 입력해 주세요. (숫자 10자리)"
-                  label="businessRegistrationNumber"
+                  label="businessNumber"
                   register={register}
                   type="number"
-                  error={errors.businessRegistrationNumber}
+                  error={errors.businessNumber}
                   rules={signupValidationRules.businessNumber()}
                 />
                 <ValidationMessage
-                  error={errors.businessRegistrationNumber?.message}
+                  error={errors.businessNumber?.message}
                   isValid={
-                    getValues('businessRegistrationNumber') &&
-                    !errors.businessRegistrationNumber
+                    getValues('businessNumber') && !errors.businessNumber
                   }
                 />
               </div>
