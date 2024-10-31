@@ -9,11 +9,6 @@ export const signupValidationRules = {
       value: REGEX_PATTERNS.EMAIL,
       message: '올바른 이메일 형식이 아닙니다',
     },
-    validate: {
-      checkDuplicate: async (_value) => {
-        return true;
-      },
-    },
   }),
 
   password: {
@@ -50,11 +45,6 @@ export const signupValidationRules = {
       value: REGEX_PATTERNS.NICKNAME,
       message: '영문자와 숫자만 사용 가능합니다',
     },
-    validate: {
-      checkDuplicate: async (_value) => {
-        return true;
-      },
-    },
   }),
 
   tel: {
@@ -73,11 +63,6 @@ export const signupValidationRules = {
     pattern: {
       value: REGEX_PATTERNS.BUSINESS,
       message: '사업자등록번호는 10자리 숫자여야 합니다',
-    },
-    validate: {
-      verifyBusiness: async (_value) => {
-        return true;
-      },
     },
   }),
 } as const;
