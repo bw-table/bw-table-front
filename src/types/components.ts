@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { QueryFunction, QueryKey } from '@tanstack/react-query';
 import {
   FieldError,
@@ -11,37 +11,31 @@ import {
 export type ButtonType = 'button' | 'submit' | 'reset';
 type InputType = 'text' | 'password' | 'email' | 'date' | 'number' | 'tel';
 
-export interface ButtonProps {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string | ReactNode;
   type: ButtonType;
   href?: string;
   onClick?: () => void;
-  disabled?: boolean;
   classNames?: string;
   variant?: 'default';
 }
 
-export interface CommonInputProps {
+export interface CommonInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   type: InputType;
   variant?: 'default' | 'disabled';
   classNames?: string;
-  placeholder?: string;
-  required?: boolean;
-  disable?: boolean;
-  maxLength?: number;
-  onClick?: () => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  readOnly?: boolean;
 }
 
 export interface FormInputProps<T extends FieldValues>
-  extends Omit<CommonInputProps, 'variant'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'variant'> {
   variant?: 'default' | 'disabled' | 'error';
   label: Path<T>;
   register: UseFormRegister<T>;
   rules?: RegisterOptions<T>;
   error?: FieldError;
+  classNames?: string;
 }
 
 interface QueryConfig {

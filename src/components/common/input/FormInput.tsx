@@ -3,22 +3,18 @@ import { FormInputProps } from '@/types';
 import { cn } from '@/utils/cn';
 import { FieldValues } from 'react-hook-form';
 
-const FormInputStyle = cva(
-  'pl-3 py-3 rounded-md w-full focus:outline-none hover:appearance-none',
-  {
-    variants: {
-      variant: {
-        default: 'bg-white border border-solid border-border-300',
-        disabled:
-          'bg-white border border-solid border-border-300 cursor-not-allowed',
-        error: 'bg-white border border-solid border-red-500',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
+const FormInputStyle = cva('input input-bordered w-full', {
+  variants: {
+    variant: {
+      default: 'input-ghost w-full',
+      disabled: 'input-bordered',
+      error: 'input-bordered input-error',
     },
   },
-);
+  defaultVariants: {
+    variant: 'default',
+  },
+});
 
 export default function FormInput<T extends FieldValues>({
   register,
@@ -27,29 +23,23 @@ export default function FormInput<T extends FieldValues>({
   variant,
   classNames,
   type = 'text',
-  placeholder,
-  disable,
   error,
-  maxLength,
-  readOnly,
+  ...htmlProps
 }: FormInputProps<T>) {
   let inputVariant = variant;
 
   if (error?.type) {
     inputVariant = 'error';
-  } else if (disable) {
+  } else if (htmlProps.disabled) {
     inputVariant = 'disabled';
   }
 
   return (
     <input
       {...register(label, rules)}
-      className={cn(FormInputStyle({ variant: inputVariant }), classNames)}
+      {...htmlProps}
       type={type}
-      placeholder={placeholder}
-      disabled={disable}
-      maxLength={maxLength}
-      readOnly={readOnly}
+      className={cn(FormInputStyle({ variant: inputVariant }), classNames)}
     />
   );
 }
