@@ -1,9 +1,84 @@
 import { END_POINT } from '@/constants/endPoint';
 import { DB } from '@/mocks/db/db';
+import { SignUpRequestType } from '@/types';
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
   http.get(END_POINT.EXAMPLE, () => {
     return HttpResponse.json(DB.example, {});
+  }),
+  http.post(END_POINT.EMAIL_DUPLICATE, async ({ request }) => {
+    const { email } = (await request.json()) as { email: string };
+
+    if (email === 'test123@email.com') {
+      return HttpResponse.json(DB.emailDuplicateFail, {});
+    }
+
+    return HttpResponse.json(DB.emailDuplicateSuccess, {});
+  }),
+
+  http.post(END_POINT.NICKNAME_DUPLICATE, async ({ request }) => {
+    const { nickname } = (await request.json()) as { nickname: string };
+
+    if (nickname === 'testuser') {
+      return HttpResponse.json(DB.nicknameDuplicateFail, {});
+    }
+
+    return HttpResponse.json(DB.nicknameDuplicateSuccess, {});
+  }),
+
+  http.post(END_POINT.TEL_DUPLICATE, async ({ request }) => {
+    const { tel } = (await request.json()) as { tel: string };
+
+    if (tel === '01012345678') {
+      return HttpResponse.json(DB.telDuplicateFail, {});
+    }
+
+    return HttpResponse.json(DB.telDuplicateSuccess, {});
+  }),
+
+  http.post(END_POINT.BUSINESS_DUPLICATE, async ({ request }) => {
+    const { business } = (await request.json()) as { business: string };
+
+    if (business === '1234567890') {
+      return HttpResponse.json(DB.businessDuplicateFail, {});
+    }
+
+    return HttpResponse.json(DB.businessDuplicateSuccess, {});
+  }),
+
+  http.post(END_POINT.SIGNUP, async ({ request }) => {
+    const { email, password, name, nickname, phone, role } =
+      (await request.json()) as SignUpRequestType;
+
+    if (!email || !password || !name || !nickname || !phone || !role) {
+      return HttpResponse.json(
+        {
+          status: 'error',
+          message: '필수값이 누락되었습니다.',
+          data: null,
+          error: 'MISSING DATA',
+        },
+        { status: 400 },
+      );
+    }
+
+    if (role === 'GUEST') {
+      return HttpResponse.json(DB.guestSignup);
+    }
+
+    if (role === 'OWNER') {
+      return HttpResponse.json(DB.ownerSignup);
+    }
+
+    return HttpResponse.json(
+      {
+        status: 'error',
+        message: '알 수 없는 오류',
+        data: null,
+        error: 'UNKNOWN ERROR',
+      },
+      { status: 400 },
+    );
   }),
 ];
