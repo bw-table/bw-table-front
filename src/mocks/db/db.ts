@@ -114,4 +114,24 @@ export const DB = {
     },
     error: null,
   },
+
+  signIn: {
+    status: 'success',
+    message: '요청이 성공적으로 처리되었습니다.',
+    data: {
+      accessToken:
+        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJndWVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTczMDI5MjY5MywiZXhwIjoxNzMwMjk0NDkzfQ.mixuNgZMQKWfMiknOwlr_hw9MbzrC3lr-7mwIn_Vt0PRLE1ps2gmbQMkRjlHxPW5iiL0Kcr1ppqUW6Jp_YCNgg',
+    },
+    error: null,
+  },
+
+  signInError: {
+    status: 'fail',
+    message: '로그인 실패 했습니다.',
+    data: {
+      accessToken: null,
+      refreshToken: null,
+    },
+    error: null,
+  },
 };

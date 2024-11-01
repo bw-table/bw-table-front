@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { requestInterceptor, responseInterceptor } from '@/api/interceptors';
 
 export const axiosDefault = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -14,3 +15,12 @@ export const axiosAuth = axios.create({
   },
   withCredentials: true,
 });
+
+axiosAuth.interceptors.request.use(requestInterceptor, (error) =>
+  Promise.reject(error),
+);
+
+axiosAuth.interceptors.response.use(
+  (response) => response,
+  responseInterceptor,
+);

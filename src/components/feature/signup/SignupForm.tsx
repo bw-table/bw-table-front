@@ -4,10 +4,11 @@ import { useState } from 'react';
 import CommonButton from '@/components/common/button/CommonButton';
 import FormInput from '@/components/common/input/FormInput';
 import ValidationMessage from '@/components/feature/signup/ValidationMessage';
-import { useSignupRules } from '@/constants/validationRules';
 import { useSignUp } from '@/hooks/queries/auth/useSignUp';
+import { useSignupRules } from '@/hooks/useSignupRules';
 import { useWatchDuplicate } from '@/hooks/useWatchDuplicate';
 import { SignupFormData } from '@/types';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 export default function SignupForm() {
@@ -94,10 +95,7 @@ export default function SignupForm() {
               error={errors.password}
               rules={validationRules.password}
             />
-            <ValidationMessage
-              error={errors.password?.message}
-              isValid={getValues('password') && !errors.password?.message}
-            />
+            <ValidationMessage error={errors.password?.message} />
           </div>
 
           {/* 비밀번호 확인 */}
@@ -177,7 +175,9 @@ export default function SignupForm() {
             )}
           </div>
         </div>
-
+        <Link className="underline text-sm text-gray-500" href="/auth/signin">
+          이미 회원이신가요?
+        </Link>
         <CommonButton type="submit" classNames="w-full mt-8">
           회원가입
         </CommonButton>

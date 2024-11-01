@@ -1,6 +1,6 @@
 import { END_POINT } from '@/constants/endPoint';
 import { DB } from '@/mocks/db/db';
-import { SignUpRequestType } from '@/types';
+import { SignInRequestType, SignUpRequestType } from '@/types';
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
@@ -13,7 +13,7 @@ export const handlers = [
       {
         message: '예약이 성공적으로 완료되었습니다.',
       },
-      { status: 200 }
+      { status: 200 },
     );
   }),
 
@@ -90,5 +90,32 @@ export const handlers = [
       },
       { status: 400 },
     );
+  }),
+
+  http.post(END_POINT.SIGN_IN, async ({ request }) => {
+    const body = (await request.json()) as SignInRequestType;
+
+    if (body.email === 'guest@example.com' && body.password === 'Qwerty123@@') {
+      return HttpResponse.json(DB.signIn);
+    }
+
+    return HttpResponse.json(DB.signInError, {
+      status: 400,
+    });
+  }),
+
+  http.post(END_POINT.TOKEN_REFRESH, () => {
+    return HttpResponse.json({ data: { accessToken: 'sddslkfji213' } });
+  }),
+
+  http.get('/api/auth/test', async ({ request }) => {
+    const authHeader = request.headers.get('Authorization');
+    const token = authHeader?.replace('Bearer ', '');
+
+    if (!token) {
+      return HttpResponse.json({ error: '토큰없는 접근' }, { status: 401 });
+    }
+
+    return HttpResponse.json({ success: '토큰 검증 성공' }, { status: 200 });
   }),
 ];
