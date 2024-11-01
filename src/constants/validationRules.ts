@@ -53,6 +53,18 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
       value === getValues().password || '비밀번호가 일치하지 않습니다',
   };
 
+  const nameRule = {
+    required: '이름을 입력해주세요',
+    maxLength: {
+      value: 5,
+      message: '이름은 5자를 초과할 수 없습니다',
+    },
+    pattern: {
+      value: REGEX_PATTERNS.NAME,
+      message: '한글 이름만 가능합니다.',
+    },
+  };
+
   const nicknameRule = {
     required: '닉네임을 입력해주세요',
     minLength: {
@@ -121,6 +133,7 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
     email: emailRule,
     password: passwordRule,
     checkPassword: checkPasswordRule,
+    name: nameRule,
     nickname: nicknameRule,
     tel: telRule,
     businessNumber: businessNumberRule,

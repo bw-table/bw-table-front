@@ -5,8 +5,8 @@ import CommonButton from '@/components/common/button/CommonButton';
 import FormInput from '@/components/common/input/FormInput';
 import ValidationMessage from '@/components/feature/signup/ValidationMessage';
 import { useSignupRules } from '@/constants/validationRules';
+import { useSignUp } from '@/hooks/queries/auth/useSignUp';
 import { useWatchDuplicate } from '@/hooks/useWatchDuplicate';
-import { useAuthStore } from '@/store';
 import { SignupFormData } from '@/types';
 import { useForm } from 'react-hook-form';
 
@@ -33,7 +33,7 @@ export default function SignupForm() {
     }
   };
 
-  const { isEmailDuplicate } = useAuthStore();
+  const { signUpMutation } = useSignUp();
 
   const handleSignup = async (data: SignupFormData) => {
     const { businessNumber, checkPassword, ...baseData } = data;
@@ -44,6 +44,7 @@ export default function SignupForm() {
         businessNumber,
         role: 'OWNER',
       };
+      // signUpMutation(managementData);
       console.log(managementData);
     } else {
       const guestData = {
@@ -124,6 +125,21 @@ export default function SignupForm() {
               rules={validationRules.tel}
             />
             <ValidationMessage error={errors.phone?.message} />
+          </div>
+
+          {/* 이름 입력 */}
+          <div className="flex gap-3">
+            <div className="relative flex-1">
+              <FormInput
+                placeholder="이름을 입력해 주세요."
+                label="name"
+                register={register}
+                type="text"
+                error={errors.name}
+                rules={validationRules.name}
+              />
+              <ValidationMessage error={errors.name?.message} />
+            </div>
           </div>
 
           {/* 닉네임 입력 */}

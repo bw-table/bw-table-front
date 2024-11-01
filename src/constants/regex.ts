@@ -28,4 +28,5 @@ export const REGEX_PATTERNS = {
    */
   TEL: /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/,
   BUSINESS: /^\d{10}$/,
+  NAME: /^[가-힣]{1}[가-힣]{1,4}$/,
 } as const;
