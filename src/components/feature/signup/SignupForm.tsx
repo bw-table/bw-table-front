@@ -95,10 +95,7 @@ export default function SignupForm() {
               error={errors.password}
               rules={validationRules.password}
             />
-            <ValidationMessage
-              error={errors.password?.message}
-              isValid={getValues('password') && !errors.password?.message}
-            />
+            <ValidationMessage error={errors.password?.message} />
           </div>
 
           {/* 비밀번호 확인 */}
@@ -178,7 +175,7 @@ export default function SignupForm() {
             )}
           </div>
         </div>
-        <Link className="underline text-sm text-gray-500" href="/auth">
+        <Link className="underline text-sm text-gray-500" href="/auth/signin">
           이미 회원이신가요?
         </Link>
         <CommonButton type="submit" classNames="w-full mt-8">
