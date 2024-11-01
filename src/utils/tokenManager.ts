@@ -8,6 +8,10 @@ class TokenManager {
   getToken() {
     return this.token;
   }
+
+  clearToken() {
+    this.token = null;
+  }
 }
 
 export const tokenManager = new TokenManager();
