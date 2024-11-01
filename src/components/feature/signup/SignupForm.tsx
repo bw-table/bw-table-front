@@ -8,6 +8,7 @@ import { useSignupRules } from '@/constants/validationRules';
 import { useSignUp } from '@/hooks/queries/auth/useSignUp';
 import { useWatchDuplicate } from '@/hooks/useWatchDuplicate';
 import { SignupFormData } from '@/types';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 export default function SignupForm() {
@@ -177,7 +178,9 @@ export default function SignupForm() {
             )}
           </div>
         </div>
-
+        <Link className="underline text-sm text-gray-500" href="/auth">
+          이미 회원이신가요?
+        </Link>
         <CommonButton type="submit" classNames="w-full mt-8">
           회원가입
         </CommonButton>
