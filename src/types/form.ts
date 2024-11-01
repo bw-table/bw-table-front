@@ -2,7 +2,8 @@ export interface SignupFormData {
   email: string;
   password: string;
   checkPassword: string;
-  contactNumber: string;
+  phone: string;
   nickname: string;
-  businessRegistrationNumber: string;
+  name: string;
+  businessNumber: string;
 }

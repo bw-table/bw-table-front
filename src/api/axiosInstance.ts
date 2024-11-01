@@ -1,9 +1,16 @@
 import axios from 'axios';
 
 export const axiosDefault = axios.create({
-  // 현재 목데이터 서버 주소 / 포트:9090
-  baseURL: 'http://localhost:9090',
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+});
+
+export const axiosAuth = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true,
 });
