@@ -1,18 +1,41 @@
 /* eslint-disable no-underscore-dangle */
-import { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { axiosAuth } from '@/api/axiosInstance';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { END_POINT } from '@/constants/endPoint';
 import { tokenManager } from '@/utils/tokenManager';
 
-export const requestInterceptor = (config: InternalAxiosRequestConfig) => {
-  const accessToken = tokenManager.getToken();
+const getNewToken = async () => {
+  try {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}${END_POINT.TOKEN_REFRESH}`,
+      {},
+      {
+        withCredentials: true,
+      },
+    );
+    const newToken = res.data.data.accessToken;
+    tokenManager.setToken(newToken);
+    return newToken; // 여기서 새 토큰을 반환
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/auth`;
+      throw Error(e.message);
+    }
+  }
+  return null;
+};
+
+export const requestInterceptor = async (
+  config: InternalAxiosRequestConfig,
+) => {
+  let accessToken = tokenManager.getToken();
 
   if (!accessToken) {
-    throw new Error('엑세스 토큰이 존재하지 않습니다.');
+    accessToken = await getNewToken(); // 새 토큰을 받아서 저장
   }
 
-  // eslint-disable-next-line no-param-reassign
-  config.headers.Authorization = `Bearer ${accessToken}`;
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
 
   return config;
 };
@@ -24,28 +47,16 @@ export const responseInterceptor = async (error: AxiosError) => {
     return Promise.reject(error);
   }
 
-  if (error.response?.status === 401 && !originalRequest._retry) {
-    originalRequest._retry = true;
-
-    try {
-      const res = await axiosAuth.post(END_POINT.TOKEN_REFRESH);
-
-      if (res.status === 200) {
-        const token = res.data.accessToken;
-        tokenManager.setToken(token);
-
-        return await axiosAuth(originalRequest);
-      }
-    } catch (tokenError) {
-      if (tokenError instanceof AxiosError) {
-        if (tokenError.response?.status === 403) {
-          tokenManager.clearToken();
-          window.location.href = 'http://localhost:3000/auth';
-        }
-        return Promise.reject(error);
-      }
-      return Promise.reject(error);
+  if (error.response?.status === 401) {
+    const newToken = await getNewToken(); // 새 토큰을 받아서
+    if (newToken) {
+      originalRequest.headers.Authorization = `Bearer ${newToken}`; // 헤더에 설정
     }
+    return axios(originalRequest);
+  }
+
+  if (error.response?.status === 403) {
+    window.location.href = process.env.NEXT_PUBLIC_BASE_URL as string;
   }
   return Promise.reject(error);
 };

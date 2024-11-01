@@ -103,4 +103,19 @@ export const handlers = [
       status: 400,
     });
   }),
+
+  http.post(END_POINT.TOKEN_REFRESH, () => {
+    return HttpResponse.json({ data: { accessToken: 'sddslkfji213' } });
+  }),
+
+  http.get('/api/auth/test', async ({ request }) => {
+    const authHeader = request.headers.get('Authorization');
+    const token = authHeader?.replace('Bearer ', '');
+
+    if (!token) {
+      return HttpResponse.json({ error: '토큰없는 접근' }, { status: 401 });
+    }
+
+    return HttpResponse.json({ success: '토큰 검증 성공' }, { status: 200 });
+  }),
 ];
