@@ -1,6 +1,6 @@
 import { END_POINT } from '@/constants/endPoint';
 import { DB } from '@/mocks/db/db';
-import { SignInResponseType, SignUpRequestType } from '@/types';
+import { SignInRequestType, SignUpRequestType } from '@/types';
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
@@ -93,9 +93,9 @@ export const handlers = [
   }),
 
   http.post(END_POINT.SIGN_IN, async ({ request }) => {
-    const body = (await request.json()) as SignInResponseType;
+    const body = (await request.json()) as SignInRequestType;
 
-    if (body.email === 'guest@example.com') {
+    if (body.email === 'guest@example.com' && body.password === 'Qwerty123@@') {
       return HttpResponse.json(DB.signIn);
     }
 

@@ -15,7 +15,7 @@ export interface ReservationData {
   specialRequest: string;
 }
 
-export interface SignInResponseType {
+export interface SignInRequestType {
   email: string;
   password: string;
 }

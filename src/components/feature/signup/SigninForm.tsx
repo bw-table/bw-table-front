@@ -3,6 +3,7 @@
 import CommonButton from '@/components/common/button/CommonButton';
 import FormInput from '@/components/common/input/FormInput';
 import ValidationMessage from '@/components/feature/signup/ValidationMessage';
+import { useSignIn } from '@/hooks/queries/auth/useSignIn';
 import { SignInFormData } from '@/types';
 import { useForm } from 'react-hook-form';
 
@@ -13,8 +14,10 @@ export default function SignInForm() {
     handleSubmit,
   } = useForm<SignInFormData>();
 
+  const { signInMutation } = useSignIn();
+
   const handleSignUp = (data: SignInFormData) => {
-    console.log(data);
+    signInMutation(data);
   };
 
   return (
