@@ -121,8 +121,6 @@ export const DB = {
     data: {
       accessToken:
         'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJndWVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTczMDI5MjY5MywiZXhwIjoxNzMwMjk0NDkzfQ.mixuNgZMQKWfMiknOwlr_hw9MbzrC3lr-7mwIn_Vt0PRLE1ps2gmbQMkRjlHxPW5iiL0Kcr1ppqUW6Jp_YCNgg',
-      refreshToken:
-        'eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MzAyOTI2OTMsImV4cCI6MTczMDM3OTA5M30.5pzAQsJadOGSEFEiXESJKsavGwDnvXCHR6T5c8KGcvcskcXhmI5drqNsg4TXHDaNTpEGyVDMiWMvkbYssCj3zw',
     },
     error: null,
   },
