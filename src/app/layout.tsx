@@ -1,6 +1,6 @@
 import React from 'react';
-import QueryProvider from '../provider/QueryProvider';
-import { pretendard } from '../utils/fonts';
+import QueryProvider from '@/provider/QueryProvider';
+import { pretendard } from '@/utils/fonts';
 import type { Metadata } from 'next';
 import './globals.css';
 

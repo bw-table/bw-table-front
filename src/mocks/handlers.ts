@@ -7,6 +7,16 @@ export const handlers = [
   http.get(END_POINT.EXAMPLE, () => {
     return HttpResponse.json(DB.example, {});
   }),
+  // 예약 정보 POST 핸들러
+  http.post(END_POINT.RESERVATION, (req) => {
+    return HttpResponse.json(
+      {
+        message: '예약이 성공적으로 완료되었습니다.',
+      },
+      { status: 200 }
+    );
+  }),
+
   http.post(END_POINT.EMAIL_DUPLICATE, async ({ request }) => {
     const { email } = (await request.json()) as { email: string };
 
