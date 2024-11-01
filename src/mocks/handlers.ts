@@ -1,6 +1,6 @@
 import { END_POINT } from '@/constants/endPoint';
 import { DB } from '@/mocks/db/db';
-import { SignUpRequestType } from '@/types';
+import { SignInResponseType, SignUpRequestType } from '@/types';
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
@@ -13,7 +13,7 @@ export const handlers = [
       {
         message: '예약이 성공적으로 완료되었습니다.',
       },
-      { status: 200 }
+      { status: 200 },
     );
   }),
 
@@ -90,5 +90,17 @@ export const handlers = [
       },
       { status: 400 },
     );
+  }),
+
+  http.post(END_POINT.SIGN_IN, async ({ request }) => {
+    const body = (await request.json()) as SignInResponseType;
+
+    if (body.email === 'guest@example.com') {
+      return HttpResponse.json(DB.signIn);
+    }
+
+    return HttpResponse.json(DB.signInError, {
+      status: 400,
+    });
   }),
 ];

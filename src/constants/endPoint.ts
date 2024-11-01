@@ -6,4 +6,5 @@ export const END_POINT = {
   NICKNAME_DUPLICATE: '/api/auth/nickname/duplicate',
   TEL_DUPLICATE: '/api/auth/tel/duplicate',
   BUSINESS_DUPLICATE: '/api/auth/business/duplicate',
+  SIGN_IN: '/api/auth/signin',
 } as const;
