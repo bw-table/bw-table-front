@@ -73,7 +73,7 @@ export const useSignupDuplicate = () => {
   const { mutateAsync: telDuplicateMutation } = useMutation({
     mutationFn: telDuplicate,
     onSuccess: (data) => {
-      setTelDuplicate(!data.data.isTelDuplicate);
+      setTelDuplicate(!data.data.isPhoneDuplicate);
       return data;
     },
     onError: (error) => {
