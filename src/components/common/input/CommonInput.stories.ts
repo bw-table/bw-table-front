@@ -18,7 +18,6 @@ export const Default: Story = {
     type: 'text',
     placeholder: '텍스트를 입력하세요',
     required: false,
-    disable: false,
     maxLength: 50,
     readOnly: false,
     onClick: fn(),

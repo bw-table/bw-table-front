@@ -1,14 +1,9 @@
-import Check from '@public/Check.svg';
-
 interface ValidationMessageProps {
   error?: string;
-  isValid: boolean | '';
+  isValid?: boolean | '';
 }
 
-export default function ValidationMessage({
-  error,
-  isValid,
-}: ValidationMessageProps) {
+export default function ValidationMessage({ error }: ValidationMessageProps) {
   return (
     <div className="relative">
       <div
@@ -18,11 +13,6 @@ export default function ValidationMessage({
       >
         {error && <span className="text-red-500 text-sm">{error}</span>}
       </div>
-      {isValid && (
-        <span className="text-green-600 text-sm absolute right-5 -top-9">
-          <Check className="ml-1 mt-1" />
-        </span>
-      )}
     </div>
   );
 }

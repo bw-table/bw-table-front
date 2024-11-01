@@ -37,14 +37,14 @@ export const DB = {
     status: 'success',
     message: '요청이 성공적으로 처리되었습니다.',
     data: {
-      isTelDuplicate: false,
+      isPhoneDuplicate: false,
     },
   },
   telDuplicateFail: {
     status: 'fail',
     message: '요청이 성공적으로 처리되었습니다.',
     data: {
-      isTelDuplicate: true,
+      isPhoneDuplicate: true,
     },
   },
 
@@ -53,14 +53,14 @@ export const DB = {
     status: 'success',
     message: '요청이 성공적으로 처리되었습니다.',
     data: {
-      isBusinessDuplicate: false,
+      isBusinessNumberDuplicate: false,
     },
   },
   businessDuplicateFail: {
     status: 'fail',
     message: '요청이 성공적으로 처리되었습니다.',
     data: {
-      isBusinessDuplicate: true,
+      isBusinessNumberDuplicate: true,
     },
   },
   guestSignup: {
