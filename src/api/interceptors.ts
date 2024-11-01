@@ -14,7 +14,7 @@ const getNewToken = async () => {
     );
     const newToken = res.data.data.accessToken;
     tokenManager.setToken(newToken);
-    return newToken; // 여기서 새 토큰을 반환
+    return newToken;
   } catch (e) {
     if (e instanceof AxiosError) {
       window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/auth`;
@@ -30,10 +30,11 @@ export const requestInterceptor = async (
   let accessToken = tokenManager.getToken();
 
   if (!accessToken) {
-    accessToken = await getNewToken(); // 새 토큰을 받아서 저장
+    accessToken = await getNewToken();
   }
 
   if (accessToken) {
+    // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
 

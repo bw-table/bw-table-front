@@ -13,6 +13,7 @@ export const axiosAuth = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 axiosAuth.interceptors.request.use(requestInterceptor, (error) =>
