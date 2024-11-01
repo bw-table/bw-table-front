@@ -44,14 +44,13 @@ export default function SignupForm() {
         businessNumber,
         role: 'OWNER',
       };
-      // signUpMutation(managementData);
-      console.log(managementData);
+      signUpMutation(managementData);
     } else {
       const guestData = {
         ...baseData,
         role: 'GUEST',
       };
-      console.log(guestData);
+      signUpMutation(guestData);
     }
   };
 

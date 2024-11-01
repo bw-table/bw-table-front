@@ -95,7 +95,6 @@ export const useSignupDuplicate = () => {
   const { mutateAsync: businessCheckMutation } = useMutation({
     mutationFn: businessCheck,
     onSuccess: (data) => {
-      console.log(data);
       return data;
     },
     onError: (error) => {

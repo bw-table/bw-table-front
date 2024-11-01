@@ -118,7 +118,6 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
       const res = await businessDuplicateMutation(value);
       const check = await businessCheckMutation(value);
       const isChecked = check.match_cnt === 1;
-      console.log(check);
       if (res.data.isBusinessNumberDuplicate) {
         return '이미 존재하는 사업자 번호 입니다';
       }
