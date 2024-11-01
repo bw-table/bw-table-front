@@ -1,9 +1,12 @@
 import React from 'react';
-import { BsCalendarCheck } from 'react-icons/bs';
-import { BsClock } from 'react-icons/bs';
-import { BsFillPeopleFill } from 'react-icons/bs';
-import CommonButton from '../common/button/CommonButton';
+import CommonButton from '@/components/common/button/CommonButton';
 import { ReservationConfirmProps } from '@/types/components';
+import {
+  BsCalendarCheck,
+  BsClock,
+  BsFillPeopleFill,
+  BsMagic,
+} from 'react-icons/bs';
 
 export default function ReservationConfirm({
   date,
@@ -11,6 +14,7 @@ export default function ReservationConfirm({
   people,
   onCancel,
   onConfirm,
+  onSpecialRequest,
 }: ReservationConfirmProps) {
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
     month: '2-digit',
@@ -48,6 +52,13 @@ export default function ReservationConfirm({
             <span>{people}명</span>
           </div>
         </div>
+        <div className="p-4 mx-auto bg-white">
+          <div className="flex items-center mb-2">
+            <BsMagic className="text-xl mr-2" />
+            <p className="font-semibold text-lg">요청사항</p>
+          </div>
+          <span className="block text-gray-700">{onSpecialRequest}</span>
+        </div>
       </div>
 
       <p className="text-gray-500 text-sm mb-6">
@@ -63,7 +74,7 @@ export default function ReservationConfirm({
         >
           취소
         </CommonButton>
-        <CommonButton type="button" onClick={onConfirm}>
+        <CommonButton type="submit" onClick={onConfirm}>
           확인
         </CommonButton>
       </div>

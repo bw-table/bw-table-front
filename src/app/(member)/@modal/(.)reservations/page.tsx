@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
-import CommonModal from '@/components/common/modal/CommonModal';
+import React, { useEffect, useState } from 'react';
 import CommonButton from '@/components/common/button/CommonButton';
-import ReservationForm from '@/components/feature/ReservationForm';
-import ReservationConfirm from '@/components/feature/ReservationConfirm';
+import CommonModal from '@/components/common/modal/CommonModal';
+import ReservationConfirm from '@/components/feature/reservation/ReservationConfirm';
+import ReservationForm from '@/components/feature/reservation/ReservationForm';
 import { useRouter } from 'next/navigation';
+import { usePostReservation } from '@/hooks/queries/reservation/usePostReservation';
 
 export default function ReservationsPage() {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -13,15 +14,44 @@ export default function ReservationsPage() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [selectedPeople, setSelectedPeople] = useState<number | null>(null);
+  const [specialRequest, setSpecialRequest] = useState<string>('');
   const router = useRouter();
 
+  // 예약 POST 요청 훅 설정
+  const { submitReservation, isPending } = usePostReservation();
+
   const closeModal = () => router.back();
+  const isNextDisabled = !selectedDate || !selectedTime || !selectedPeople;
+
+  useEffect(() => {
+    if (specialRequest.trim() === '') {
+      setSpecialRequest('요청사항 없음');
+    }
+  }, [specialRequest]);
 
   // 다음 단계로 이동
-  const nextStep = () => setCurrentStep((prev) => prev + 1);
+  const handleNextStep = () => {
+    if (isNextDisabled) {
+      alert('모든 예약 정보를 입력해 주세요.');
+      return;
+    }
+    setCurrentStep((prev) => prev + 1);
+  };
 
   // 이전 단계로 이동
   const prevStep = () => setCurrentStep((prev) => (prev > 1 ? prev - 1 : prev));
+
+
+  // 예약 전송 함수
+  const handleConfirmReservation = () => {
+    submitReservation({
+      date: selectedDate?.toISOString() || '',
+      time: selectedTime || '',
+      people: selectedPeople || 1,
+      specialRequest: specialRequest,
+    });
+    closeModal();
+  };
 
   return (
     <div className="p-6">
@@ -32,6 +62,9 @@ export default function ReservationsPage() {
               onSelectDate={setSelectedDate}
               onSelectTime={setSelectedTime}
               onSelectPeople={setSelectedPeople}
+              onSpecialRequest={(request) =>
+                setSpecialRequest(request || '요청사항 없음')
+              }
             />
             <div className="mt-6 flex justify-between gap-2">
               <CommonButton
@@ -41,7 +74,7 @@ export default function ReservationsPage() {
               >
                 취소하기
               </CommonButton>
-              <CommonButton type="button" onClick={nextStep}>
+              <CommonButton type="button" onClick={handleNextStep}>
                 다음
               </CommonButton>
             </div>
@@ -58,9 +91,8 @@ export default function ReservationsPage() {
                 time={selectedTime}
                 people={selectedPeople}
                 onCancel={prevStep}
-                onConfirm={() => {
-                  closeModal();
-                }}
+                onSpecialRequest={specialRequest}
+                onConfirm={handleConfirmReservation}
               />
             </div>
           )}
@@ -68,3 +100,4 @@ export default function ReservationsPage() {
     </div>
   );
 }
+

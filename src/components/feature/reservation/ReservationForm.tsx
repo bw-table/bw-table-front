@@ -1,24 +1,28 @@
-import CommonCalendar from '../common/calendar/CommonCalendar';
 import React, { useState } from 'react';
+import CommonInput from '@/components/common/input/CommonInput';
+import CommonCalendar from '../../common/calendar/CommonCalendar';
+import { BsMagic } from 'react-icons/bs';
 
 type ReservationFormProps = {
   onSelectDate: (date: Date | null) => void;
   onSelectTime: (time: string | null) => void;
   onSelectPeople: (people: number | null) => void;
+  onSpecialRequest: (request: string) => void;
 };
 
 export default function ReservationForm({
   onSelectDate,
   onSelectTime,
   onSelectPeople,
+  onSpecialRequest,
 }: ReservationFormProps) {
   const [selectedPeople, setSelectedPeople] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [specialRequest, setSpecialRequest] = useState<string>('');
 
-  {
-    /* 임시데이터 - 목데이터로 연동예정 */
-  }
+  /* 임시데이터 - 목데이터로 연동예정 */
+
   const peopleOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const timeOptions = [
     '오후 5:00',
@@ -42,6 +46,12 @@ export default function ReservationForm({
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
     onSelectTime(time);
+  };
+
+  const handleRequestChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newRequest = event.target.value;
+    setSpecialRequest(newRequest);
+    onSpecialRequest(newRequest);
   };
 
   return (
@@ -78,6 +88,18 @@ export default function ReservationForm({
             {time}
           </button>
         ))}
+      </div>
+      <div className="my-2 flex flex-col gap-2 text-left">
+      <div className="flex items-center gap-1">
+        <BsMagic className="text-lg" />
+        <span className="font-semibold">요청사항 추가</span>
+      </div>
+        <CommonInput
+          type="text"
+          placeholder="요청사항을 입력해주세요."
+          value={specialRequest}
+          onChange={handleRequestChange}
+        />
       </div>
     </div>
   );
