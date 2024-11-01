@@ -11,10 +11,11 @@ export default function SignInForm() {
     register,
     formState: { errors },
     handleSubmit,
-    getValues,
   } = useForm<SignInFormData>();
 
-  const handleSignUp = (data: SignInFormData) => {};
+  const handleSignUp = (data: SignInFormData) => {
+    console.log(data);
+  };
 
   return (
     <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
@@ -24,11 +25,11 @@ export default function SignInForm() {
           <div className="relative flex-1">
             <FormInput
               classNames="flex-1"
-              placeholder="이메일"
+              placeholder="이메일을 입력해 주세요"
               label="email"
               register={register}
               type="email"
-              rules={{ required: '이메일을 입력해 주세요.' }}
+              rules={{ required: '이메일은 필수 입니다' }}
             />
             <ValidationMessage error={errors.email?.message} />
           </div>
@@ -37,11 +38,11 @@ export default function SignInForm() {
         {/* 비밀번호 입력 */}
         <div>
           <FormInput
-            placeholder="비밀번호 (8자 이상, 영문/숫자/특수문자 조합)"
+            placeholder="비밀번호를 입력해 주세요"
             label="password"
             register={register}
             type="password"
-            rules={{ required: '비밀번호를 입력해 주세요.' }}
+            rules={{ required: '비밀번호는 필수 입니다' }}
           />
           <ValidationMessage error={errors.password?.message} />
         </div>
