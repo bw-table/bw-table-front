@@ -1,5 +1,7 @@
+import axios from 'axios'; // 이메일 중복 체크
 import { axiosDefault } from '@/api/axiosInstance';
 import { END_POINT } from '@/constants/endPoint';
+import { useAuthStore } from '@/store';
 import { useMutation } from '@tanstack/react-query';
 
 // 이메일 중복 체크
@@ -30,11 +32,26 @@ const businessDuplicate = async (business: string) => {
   return res.data;
 };
 
+const businessCheck = async (business: string) => {
+  const res = await axios.post(process.env.NEXT_PUBLIC_API_URL as string, {
+    b_no: [business],
+  });
+  return res.data;
+};
+
 // 메인 쿼리 훅
 export const useSignupDuplicate = () => {
+  const {
+    setEmailDuplicate,
+    setNicknameDuplicate,
+    setTelDuplicate,
+    setBusinessDuplicate,
+  } = useAuthStore();
+
   const { mutateAsync: emailDuplicateMutation } = useMutation({
     mutationFn: emailDuplicate,
     onSuccess: (data) => {
+      setEmailDuplicate(!data.data.isEmailDuplicate);
       return data;
     },
     onError: (error) => {
@@ -45,6 +62,7 @@ export const useSignupDuplicate = () => {
   const { mutateAsync: nicknameDuplicateMutation } = useMutation({
     mutationFn: nicknameDuplicate,
     onSuccess: (data) => {
+      setNicknameDuplicate(!data.data.isNicknameDuplicate);
       return data;
     },
     onError: (error) => {
@@ -55,6 +73,7 @@ export const useSignupDuplicate = () => {
   const { mutateAsync: telDuplicateMutation } = useMutation({
     mutationFn: telDuplicate,
     onSuccess: (data) => {
+      setTelDuplicate(!data.data.isTelDuplicate);
       return data;
     },
     onError: (error) => {
@@ -65,6 +84,18 @@ export const useSignupDuplicate = () => {
   const { mutateAsync: businessDuplicateMutation } = useMutation({
     mutationFn: businessDuplicate,
     onSuccess: (data) => {
+      setBusinessDuplicate(!data.data.isBusinessNumberDuplicate);
+      return data;
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
+  const { mutateAsync: businessCheckMutation } = useMutation({
+    mutationFn: businessCheck,
+    onSuccess: (data) => {
+      console.log(data);
       return data;
     },
     onError: (error) => {
@@ -73,6 +104,7 @@ export const useSignupDuplicate = () => {
   });
 
   return {
+    businessCheckMutation,
     emailDuplicateMutation,
     nicknameDuplicateMutation,
     telDuplicateMutation,

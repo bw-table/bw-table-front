@@ -1,5 +1,6 @@
 import { REGEX_PATTERNS } from '@/constants/regex';
 import { useSignupDuplicate } from '@/hooks/queries/auth/useSignupDuplicate';
+import { useAuthStore } from '@/store';
 import { SignupFormData } from '@/types';
 import { UseFormGetValues } from 'react-hook-form';
 
@@ -9,7 +10,15 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
     businessDuplicateMutation,
     telDuplicateMutation,
     emailDuplicateMutation,
+    businessCheckMutation,
   } = useSignupDuplicate();
+
+  const {
+    isEmailDuplicate,
+    isNicknameDuplicate,
+    isTelDuplicate,
+    isBusinessDuplicate,
+  } = useAuthStore();
 
   const emailRule = {
     required: '이메일을 입력해주세요',
@@ -18,8 +27,10 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
       message: '올바른 이메일 형식이 아닙니다',
     },
     validate: async (value: string) => {
+      if (isEmailDuplicate) {
+        return true;
+      }
       const res = await emailDuplicateMutation(value);
-      console.log(res);
       return res.data.isEmailDuplicate ? '이미 존재하는 이메일 입니다' : true;
     },
   };
@@ -57,6 +68,9 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
       message: '영문자와 숫자만 사용 가능합니다',
     },
     validate: async (value: string) => {
+      if (isNicknameDuplicate) {
+        return true;
+      }
       const res = await nicknameDuplicateMutation(value);
       return res.data.isNicknameDuplicate
         ? '이미 존재하는 닉네임 입니다'
@@ -71,6 +85,9 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
       message: '올바른 전화번호 형식이 아닙니다 (예: 01012345678)',
     },
     validate: async (value: string) => {
+      if (isTelDuplicate) {
+        return true;
+      }
       const res = await telDuplicateMutation(value);
       return res.data.isPhoneDuplicate ? '이미 존재하는 번호 입니다' : true;
     },
@@ -83,10 +100,20 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
       message: '사업자등록번호는 10자리 숫자여야 합니다',
     },
     validate: async (value: string) => {
+      if (isBusinessDuplicate) {
+        return true;
+      }
       const res = await businessDuplicateMutation(value);
-      return res.data.isBusinessNumberDuplicate
-        ? '이미 존재하는 사업자 번호 입니다'
-        : true;
+      const check = await businessCheckMutation(value);
+      const isChecked = check.match_cnt === 1;
+      console.log(check);
+      if (res.data.isBusinessNumberDuplicate) {
+        return '이미 존재하는 사업자 번호 입니다';
+      }
+      if (!isChecked) {
+        return '없는 사업자 번호 입니다.';
+      }
+      return true;
     },
   };
 

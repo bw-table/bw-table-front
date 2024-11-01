@@ -5,6 +5,8 @@ import CommonButton from '@/components/common/button/CommonButton';
 import FormInput from '@/components/common/input/FormInput';
 import ValidationMessage from '@/components/feature/signup/ValidationMessage';
 import { useSignupRules } from '@/constants/validationRules';
+import { useWatchDuplicate } from '@/hooks/useWatchDuplicate';
+import { useAuthStore } from '@/store';
 import { SignupFormData } from '@/types';
 import { useForm } from 'react-hook-form';
 
@@ -17,10 +19,11 @@ export default function SignupForm() {
     formState: { errors },
     getValues,
     setValue,
+    watch,
   } = useForm<SignupFormData>({
     mode: 'onBlur',
   });
-
+  useWatchDuplicate(watch);
   const validationRules = useSignupRules(getValues);
 
   const handleManagementToggle = (checked: boolean) => {
@@ -29,6 +32,8 @@ export default function SignupForm() {
       setValue('businessNumber', '');
     }
   };
+
+  const { isEmailDuplicate } = useAuthStore();
 
   const handleSignup = async (data: SignupFormData) => {
     const { businessNumber, checkPassword, ...baseData } = data;
