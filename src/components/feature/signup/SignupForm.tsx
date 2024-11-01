@@ -116,7 +116,7 @@ export default function SignupForm() {
           {/* 전화번호 입력 */}
           <div>
             <FormInput
-              placeholder="전화번호를 입력해 주세요. (예: 01012345678)"
+              placeholder="전화번호 (예: 01012345678)"
               label="phone"
               register={register}
               type="number"
@@ -130,7 +130,7 @@ export default function SignupForm() {
           <div className="flex gap-3">
             <div className="relative flex-1">
               <FormInput
-                placeholder="이름을 입력해 주세요."
+                placeholder="이름"
                 label="name"
                 register={register}
                 type="text"
@@ -145,7 +145,7 @@ export default function SignupForm() {
           <div className="flex gap-3">
             <div className="relative flex-1">
               <FormInput
-                placeholder="닉네임을 입력해 주세요. (3-20자, 영문/숫자)"
+                placeholder="닉네임 (3-20자, 영문/숫자)"
                 label="nickname"
                 register={register}
                 type="text"
@@ -164,7 +164,7 @@ export default function SignupForm() {
             {management && (
               <div>
                 <FormInput
-                  placeholder="사업자등록번호를 입력해 주세요. (숫자 10자리)"
+                  placeholder="사업자등록번호 (숫자 10자리)"
                   label="businessNumber"
                   register={register}
                   type="number"
