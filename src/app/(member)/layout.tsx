@@ -1,6 +1,7 @@
 import React from 'react';
+import Container from '@/components/layout/Container';
 
-export default function RestaurantLayout({
+export default function MemberLayout({
   children,
   modal,
 }: {
@@ -8,9 +9,9 @@ export default function RestaurantLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <div>
+    <Container variant='mobile'>
       {children}
       {modal}
-    </div>
+    </Container>
   );
 }
