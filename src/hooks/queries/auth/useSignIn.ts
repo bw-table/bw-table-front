@@ -24,13 +24,10 @@ export const useSignIn = () => {
   const { mutate: signInMutation } = useMutation({
     mutationFn: signInFetch,
     onSuccess: async () => {
-      console.log(session?.accessToken);
       if (session?.accessToken) {
         tokenManager.setToken(session.accessToken);
       }
       router.push('/');
-
-      console.log(tokenManager.getToken());
     },
     onError: (error) => {
       console.error(error);

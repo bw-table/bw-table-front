@@ -15,13 +15,7 @@ class TokenManager {
   private token: string | null = null;
   private refreshPromise: Promise<string | null> | null = null;
 
-  private constructor() {
-    if (typeof window !== 'undefined') {
-      console.log('TokenManager initialized in client-side');
-    } else {
-      console.log('TokenManager initialized in server-side');
-    }
-  }
+  private constructor() {}
 
   public static getInstance(): TokenManager {
     if (!TokenManager.instance) {
