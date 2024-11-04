@@ -8,4 +8,5 @@ export const END_POINT = {
   BUSINESS_DUPLICATE: '/api/auth/business/duplicate',
   SIGN_IN: '/api/auth/signin',
   TOKEN_REFRESH: '/api/auth/refresh',
+  RESTAURANTS: 'api/restaurants',
 } as const;

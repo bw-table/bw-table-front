@@ -17,6 +17,17 @@ export const handlers = [
     );
   }),
 
+  http.get(`${END_POINT.RESTAURANTS}/:restaurantId`, ({ params }) => {
+    const { restaurantId } = params;
+    const restaurant = DB.restaurant.find((rest) => rest.restaurantId === Number(restaurantId));
+
+    if (restaurant) {
+      return HttpResponse.json(restaurant, { status: 200 });
+    } else {
+      return HttpResponse.json({ error: "Restaurant not found" }, { status: 404 });
+    }
+  }),
+
   http.post(END_POINT.EMAIL_DUPLICATE, async ({ request }) => {
     const { email } = (await request.json()) as { email: string };
 
