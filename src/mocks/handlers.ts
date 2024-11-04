@@ -118,4 +118,11 @@ export const handlers = [
 
     return HttpResponse.json({ success: '토큰 검증 성공' }, { status: 200 });
   }),
+
+  http.get('api/auth/test2', async ({ request }) => {
+    return HttpResponse.json(
+      { error: '토큰 만료 테스트 응답' },
+      { status: 403 },
+    );
+  }),
 ];

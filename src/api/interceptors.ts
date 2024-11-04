@@ -1,28 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { END_POINT } from '@/constants/endPoint';
 import { tokenManager } from '@/utils/tokenManager';
-
-const getNewToken = async () => {
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}${END_POINT.TOKEN_REFRESH}`,
-      {},
-      {
-        withCredentials: true,
-      },
-    );
-    const newToken = res.data.data.accessToken;
-    tokenManager.setToken(newToken);
-    return newToken;
-  } catch (e) {
-    if (e instanceof AxiosError) {
-      window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/auth`;
-      throw Error(e.message);
-    }
-  }
-  return null;
-};
 
 export const requestInterceptor = async (
   config: InternalAxiosRequestConfig,
@@ -30,7 +8,7 @@ export const requestInterceptor = async (
   let accessToken = tokenManager.getToken();
 
   if (!accessToken) {
-    accessToken = await getNewToken();
+    accessToken = await tokenManager.refreshToken();
   }
 
   if (accessToken) {
@@ -49,15 +27,16 @@ export const responseInterceptor = async (error: AxiosError) => {
   }
 
   if (error.response?.status === 401) {
-    const newToken = await getNewToken(); // 새 토큰을 받아서
+    const newToken = await tokenManager.refreshToken();
     if (newToken) {
-      originalRequest.headers.Authorization = `Bearer ${newToken}`; // 헤더에 설정
+      originalRequest.headers.Authorization = `Bearer ${newToken}`;
     }
     return axios(originalRequest);
   }
 
   if (error.response?.status === 403) {
-    window.location.href = process.env.NEXT_PUBLIC_BASE_URL as string;
+    tokenManager.clearToken();
+    window.location.href = 'http://localhost:3000' as string;
   }
   return Promise.reject(error);
 };
