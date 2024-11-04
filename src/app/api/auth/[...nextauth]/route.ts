@@ -1,4 +1,4 @@
-import { axiosAuth } from '@/api/axiosInstance';
+import { axiosDefault } from '@/api/axiosInstance';
 import { END_POINT } from '@/constants/endPoint';
 import NextAuth, { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
 
       async authorize(credentials): Promise<CustomUser | null> {
         try {
-          const response = await axiosAuth.post(END_POINT.SIGN_IN, {
+          const response = await axiosDefault.post(END_POINT.SIGN_IN, {
             email: credentials?.email,
             password: credentials?.password,
           });

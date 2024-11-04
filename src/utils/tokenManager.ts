@@ -1,5 +1,3 @@
-'use client';
-
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { END_POINT } from '@/constants/endPoint';
