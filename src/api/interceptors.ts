@@ -36,7 +36,7 @@ export const responseInterceptor = async (error: AxiosError) => {
 
   if (error.response?.status === 403) {
     tokenManager.clearToken();
-    window.location.href = 'http://localhost:3000' as string;
+    window.location.href = process.env.NEXT_PUBLIC_ORIGINAL_URL as string;
   }
   return Promise.reject(error);
 };
