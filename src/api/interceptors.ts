@@ -7,7 +7,7 @@ export const requestInterceptor = async (
 ) => {
   let accessToken = tokenManager.getToken();
 
-  if (!accessToken) {
+  if (!accessToken || !tokenManager.isValid()) {
     accessToken = await tokenManager.refreshToken();
   }
 
