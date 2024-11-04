@@ -13,8 +13,6 @@ class TokenManager {
   private token: string | null = null;
   private refreshPromise: Promise<string | null> | null = null;
 
-  private constructor() {}
-
   public static getInstance(): TokenManager {
     if (!TokenManager.instance) {
       TokenManager.instance = new TokenManager();
@@ -26,12 +24,18 @@ class TokenManager {
     this.token = token;
   }
 
-  getToken() {
+  getToken(): string | null {
+    if (!this.token) return null;
+    if (this.isTokenExpired()) {
+      this.clearToken();
+      return null;
+    }
     return this.token;
   }
 
   clearToken() {
     this.token = null;
+    this.refreshPromise = null;
   }
 
   async refreshToken(): Promise<string | null> {
@@ -70,6 +74,10 @@ class TokenManager {
     } catch {
       return null;
     }
+  }
+
+  isValid(): boolean {
+    return !!this.token && !this.isTokenExpired();
   }
 
   private isTokenExpired(): boolean {
