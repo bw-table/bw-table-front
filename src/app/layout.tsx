@@ -3,6 +3,7 @@ import QueryProvider from '@/provider/QueryProvider';
 import { pretendard } from '@/utils/fonts';
 import type { Metadata } from 'next';
 import './globals.css';
+import AuthSessionProvider from '@/provider/AuthSessionProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.variable}`}>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <AuthSessionProvider>{children}</AuthSessionProvider>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -1,3 +1,5 @@
+'use client';
+
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { END_POINT } from '@/constants/endPoint';
@@ -13,6 +15,14 @@ class TokenManager {
   private token: string | null = null;
   private refreshPromise: Promise<string | null> | null = null;
 
+  private constructor() {
+    if (typeof window !== 'undefined') {
+      console.log('TokenManager initialized in client-side');
+    } else {
+      console.log('TokenManager initialized in server-side');
+    }
+  }
+
   public static getInstance(): TokenManager {
     if (!TokenManager.instance) {
       TokenManager.instance = new TokenManager();
@@ -21,15 +31,11 @@ class TokenManager {
   }
 
   setToken(token: string) {
+    console.log('TokenManager setToken called, current token:', token);
     this.token = token;
   }
 
-  getToken(): string | null {
-    if (!this.token) return null;
-    if (this.isTokenExpired()) {
-      this.clearToken();
-      return null;
-    }
+  getToken() {
     return this.token;
   }
 
