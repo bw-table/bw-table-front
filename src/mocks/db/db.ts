@@ -1,7 +1,7 @@
 export const DB = {
   example: [{ id: 1, name: '오신웅' }],
 
-// 예약 요청
+  // 예약 요청
   reservation: [
     {
       reservationId: 1,
@@ -120,6 +120,9 @@ export const DB = {
     status: 'success',
     message: '요청이 성공적으로 처리되었습니다.',
     data: {
+      id: 1,
+      email: 'guest@example.com',
+      name: 'guest',
       accessToken:
         'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJndWVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTczMDI5MjY5MywiZXhwIjoxNzMwMjk0NDkzfQ.mixuNgZMQKWfMiknOwlr_hw9MbzrC3lr-7mwIn_Vt0PRLE1ps2gmbQMkRjlHxPW5iiL0Kcr1ppqUW6Jp_YCNgg',
     },
@@ -136,7 +139,7 @@ export const DB = {
     error: null,
   },
 
-  //식당 임시 데이터
+  // 식당 임시 데이터
   restaurant: [
   {
     restaurantId: 2,
@@ -155,56 +158,49 @@ export const DB = {
         "http://example.com/images/restaurant2.jpg","http://example.com/images/restaurant1.jpg"
     ],
     menus: [
-        {
-            id: 3,
-            name: "파스타1",
-            price: 10000,
-            description: "파스타1",
-            imageUrl: "http://example.com/images/food1.jpg",
-            restaurantId: 2
-        },
-        {
-            id: 4,
-            name: "파스타2",
-            price: 17000,
-            description: "파스타2",
-            imageUrl: "http://example.com/images/food2.jpg",
-            restaurantId: 2
-        }
-    ],
-    facilities: [
-        "PARKING",
-        "HIGHCHAIR"
-    ],
-    hashtags: [
-        "데이트",
-        "용산맛집",
-        "파스타"
-    ],
-    operatingHours: [
-        {
-            id: 4,
-            dayOfWeek: "MONDAY",
-            openingTime: "10:00:00",
-            closingTime: "22:00:00",
-            restaurantId: 2
-        },
-        {
-          id: 5,
-          dayOfWeek: "TUESDAY",
-          openingTime: "10:00:00",
-          closingTime: "22:00:00",
-          restaurantId: 2
+      {
+        id: 3,
+        name: '파스타1',
+        price: 10000,
+        description: '파스타1',
+        imageUrl: 'http://example.com/images/food1.jpg',
+        restaurantId: 2,
       },
       {
-          id: 6,
-          dayOfWeek: "WEDNESDAY",
-          openingTime: "10:00:00",
-          closingTime: "22:00:00",
-          restaurantId: 2
-      }
-  ],
-}
+        id: 4,
+        name: '파스타2',
+        price: 17000,
+        description: '파스타2',
+        imageUrl: 'http://example.com/images/food2.jpg',
+        restaurantId: 2,
+      },
+    ],
+    facilities: ['PARKING', 'HIGHCHAIR'],
+    hashtags: ['데이트', '용산맛집', '파스타'],
+    operatingHours: [
+      {
+        id: 4,
+        dayOfWeek: 'MONDAY',
+        openingTime: '10:00:00',
+        closingTime: '22:00:00',
+        restaurantId: 2,
+      },
+      {
+        id: 5,
+        dayOfWeek: 'TUESDAY',
+        openingTime: '10:00:00',
+        closingTime: '22:00:00',
+        restaurantId: 2,
+      },
+      {
+        id: 6,
+        dayOfWeek: 'WEDNESDAY',
+        openingTime: '10:00:00',
+        closingTime: '22:00:00',
+        restaurantId: 2,
+      },
+    ],
+  },
 ],
 
 //특정 레스토랑 리뷰 
