@@ -25,15 +25,14 @@ export interface RestaurantDetailRequestType {
   name: string,
   description: string,
   address: string,
+  latitude: number,
+  longtitude: number,
   contact: string,
   closedDay: string,
   category: string,
   link: string,
-  rating: number,
-  reviews: [],
-  notices: [
-    { id: number, title: string, content: string },
-  ]
+  averageRating: number,
+  info: string,
   images: [],
   menus: [
       {

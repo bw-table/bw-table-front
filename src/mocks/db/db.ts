@@ -144,18 +144,13 @@ export const DB = {
     description: "파스타 맛집입니다",
     address: "서울시 용산구 123",
     contact: "010-7897-5671",
+    latitude: 0,
+    longtitude: 0,
     closedDay: "일요일",
     category: "RESTAURANT",
     link: "abc.co.kr",
-    notice: "저희 식당은 예약 필수입니다",
-    rating: 4.5,
-    reviews: [
-      {
-        reviewId: 2,
-        title:"존맛이에여",
-        description: "어쩌구 저쩌구 브ㅡㄹㄹ",
-      }
-    ],
+    info: "저희 식당은 예약 필수입니다",
+    averageRating: 4.5,
     images: [
         "http://example.com/images/restaurant2.jpg","http://example.com/images/restaurant1.jpg"
     ],
@@ -209,10 +204,46 @@ export const DB = {
           restaurantId: 2
       }
   ],
-  notices: [
-    { id: 1, title: "[안내] 특별 메뉴 출시", content: "안녕하세요, 새로운 스테이크 메뉴를 소개합니다." },
-    { id: 2, title: "[공지] 주말 예약 안내", content: "주말 예약은 사전 예약제로 운영됩니다." },
-  ]
 }
-]
+],
+
+//특정 레스토랑 리뷰 
+reviews: [
+  {
+    id: 1,
+    restaurantId: 1,
+    content: '파스타가 너무 맛있어요~!',
+    rating: 4,
+    createdAt: "2024-10-20T13:00:00",
+    updatedAt: "2024-10-20T13:00:00", 
+    userId: 1
+  },
+  {
+    id: 1,
+    restaurantId: 1,
+    content: '직원분들이 더 친절했으면 좋겠어요!',
+    rating: 5,
+    createdAt: "2024-10-20T13:00:00",
+    updatedAt: "2024-10-20T13:00:00", 
+    userId: 3
+  },
+],
+
+//레스토랑 공지사항 및 이벤트 
+  announcement: [
+    {
+      announcementId: 1,
+      isEvent: false,
+      title: "Holiday Hours",
+      content: "We are closed on holidays.",
+      createdAt: "2024-10-01T12:00",
+    },
+    {
+      announcementId: 2,
+      isEvent: true,
+      title: "아메리카노 증정 이벤트",
+      content: "첫방문 후 리뷰를 남겨주시고, 직원에게 인증해주시면 아메리카노 1잔 무료 증정됩니다!",
+      createdAt: "2024-10-01T12:00"
+    }
+  ],
 };
