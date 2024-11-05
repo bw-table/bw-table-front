@@ -3,6 +3,8 @@ import { DB } from '@/mocks/db/db';
 import { SignInRequestType, SignUpRequestType } from '@/types';
 import { http, HttpResponse } from 'msw';
 
+const isFirstCall = true;
+
 export const handlers = [
   http.get(END_POINT.EXAMPLE, () => {
     return HttpResponse.json(DB.example, {});
@@ -19,13 +21,17 @@ export const handlers = [
 
   http.get(`${END_POINT.RESTAURANTS}/:restaurantId`, ({ params }) => {
     const { restaurantId } = params;
-    const restaurant = DB.restaurant.find((rest) => rest.restaurantId === Number(restaurantId));
+    const restaurant = DB.restaurant.find(
+      (rest) => rest.restaurantId === Number(restaurantId),
+    );
 
     if (restaurant) {
       return HttpResponse.json(restaurant, { status: 200 });
-    } else {
-      return HttpResponse.json({ error: "Restaurant not found" }, { status: 404 });
     }
+    return HttpResponse.json(
+      { error: 'Restaurant not found' },
+      { status: 404 },
+    );
   }),
 
   http.post(END_POINT.EMAIL_DUPLICATE, async ({ request }) => {
@@ -134,6 +140,27 @@ export const handlers = [
     return HttpResponse.json(
       { error: '토큰 만료 테스트 응답' },
       { status: 403 },
+    );
+  }),
+
+  http.get('/api/auth/test3', async ({ request }) => {
+    const authHeader = request.headers.get('Authorization');
+    const token = authHeader?.replace('Bearer ', '');
+
+    if (!token) {
+      return HttpResponse.json({ error: '토큰없는 접근' }, { status: 401 });
+    }
+
+    if (isFirstCall) {
+      return HttpResponse.json(
+        { error: '첫 번째 요청은 401' },
+        { status: 401 },
+      );
+    }
+
+    return HttpResponse.json(
+      { success: '두 번째 이후 요청은 200' },
+      { status: 200 },
     );
   }),
 ];

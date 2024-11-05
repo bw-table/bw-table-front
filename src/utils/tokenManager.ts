@@ -1,12 +1,6 @@
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import { axiosAuth } from '@/api/axiosInstance';
 import { END_POINT } from '@/constants/endPoint';
-
-interface TokenPayload {
-  exp?: number; // 토큰 만료 시간 (Unix timestamp)
-  iat?: number; // 토큰 발급 시간
-  sub?: string; // 토큰 주체 (보통 사용자 ID)
-}
 
 class TokenManager {
   private static instance: TokenManager;
@@ -22,75 +16,77 @@ class TokenManager {
     return TokenManager.instance;
   }
 
-  setToken(token: string) {
-    console.log('TokenManager setToken called, current token:', token);
-    this.token = token;
+  async fetchHttpOnlyToken() {
+    try {
+      const res = await axios.get('/api/token');
+      this.setToken(res.data);
+      return res.data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    } finally {
+      this.refreshPromise = null;
+    }
   }
 
-  getToken() {
-    return this.token;
-  }
-
-  clearToken() {
-    this.token = null;
-    this.refreshPromise = null;
-  }
-
-  async refreshToken(): Promise<string | null> {
+  async getNewToken() {
     if (this.refreshPromise) {
       return this.refreshPromise;
     }
 
-    this.refreshPromise = (async () => {
-      try {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}${END_POINT.TOKEN_REFRESH}`,
-          {},
-          {
-            withCredentials: true,
-          },
-        );
-
-        const { accessToken } = await response.data.data;
-        this.setToken(accessToken);
-        return accessToken;
-      } catch (error) {
-        console.error('Error refreshing token:', error);
-        this.clearToken();
-        return null;
-      } finally {
-        this.refreshPromise = null;
-      }
-    })();
-
-    return this.refreshPromise;
-  }
-
-  decodeToken(): TokenPayload | null {
     try {
-      return this.token ? jwtDecode<TokenPayload>(this.token) : null;
-    } catch {
+      const res = await axiosAuth.post(END_POINT.TOKEN_REFRESH, {
+        accessToken: this.token,
+      });
+      const { accessToken } = res.data.data;
+      await this.updateToken(accessToken); // 새로운 토큰으로 업데이트
+      return accessToken;
+    } catch (error) {
+      console.error(error);
       return null;
     }
   }
 
-  isValid(): boolean {
-    return !!this.token && !this.isTokenExpired();
+  async clearTokens() {
+    try {
+      await axios.delete('/api/token', {
+        withCredentials: true,
+      });
+
+      this.token = null;
+      this.refreshPromise = null;
+
+      return true;
+    } catch (error) {
+      console.error('토큰 삭제 중 에러 발생:', error);
+      return false;
+    }
   }
 
-  private isTokenExpired(): boolean {
+  async updateToken(newToken: string) {
     try {
-      if (!this.token) return true;
+      await axios.put('/api/token', newToken, {
+        withCredentials: true,
+      });
 
-      const decoded = jwtDecode<TokenPayload>(this.token);
-      if (!decoded.exp) return true;
+      this.setToken(newToken);
 
-      // 만료 5분 전부터는 만료된 것으로 간주
-      const currentTime = Date.now() / 1000;
-      return decoded.exp <= currentTime + 300;
-    } catch {
       return true;
+    } catch (error) {
+      console.error('토큰 업데이트 중 에러 발생:', error);
+      return false;
     }
+  }
+
+  setToken(token: string) {
+    this.token = token;
+  }
+
+  getToken() {
+    if (this.token) {
+      return this.token;
+    }
+    return null;
   }
 }
 
