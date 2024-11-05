@@ -8,7 +8,7 @@ export default function AuthTestPage() {
 
   const testAuthFetch = async () => {
     try {
-      const res = await axiosAuth('/api/auth/test2');
+      const res = await axiosAuth('/api/auth/test3');
       setData(res.data);
     } catch (err) {
       console.error(err);

@@ -1,6 +1,7 @@
 import { SignInRequestType } from '@/types';
 import { tokenManager } from '@/utils/tokenManager';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 export const signInFetch = async (signInData: SignInRequestType) => {
@@ -17,11 +18,14 @@ export const signInFetch = async (signInData: SignInRequestType) => {
 };
 
 export const useSignIn = () => {
+  const router = useRouter();
+
   const { mutate: signInMutation } = useMutation({
     mutationFn: signInFetch,
     onSuccess: async () => {
       const token = await tokenManager.fetchHttpOnlyToken();
       console.log(token);
+      router.push('/');
     },
     onError: (error) => {
       console.error(error);
