@@ -26,6 +26,7 @@ export interface ReviewFormData {
   restaurantId: number,
   content: string,
   rating: number,
+  images?: string[];
   createdAt: string,
   updatedAt: string, 
   userId: number,
