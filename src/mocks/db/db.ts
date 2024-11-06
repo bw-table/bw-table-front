@@ -143,7 +143,7 @@ export const DB = {
   restaurant: [
   {
     restaurantId: 2,
-    name: "맛집 A",
+    name: "로키 스테이크",
     description: "파스타 맛집입니다",
     address: "서울시 용산구 123",
     contact: "010-7897-5671",
@@ -207,18 +207,23 @@ export const DB = {
 reviews: [
   {
     id: 1,
-    restaurantId: 1,
+    restaurantId: 2,
     content: '파스타가 너무 맛있어요~!',
     rating: 4,
+    images:[
+      "https://example.com/image1.jpg",
+      "https://example.com/image2.jpg",
+    ],
     createdAt: "2024-10-20T13:00:00",
     updatedAt: "2024-10-20T13:00:00", 
     userId: 1
   },
   {
-    id: 1,
-    restaurantId: 1,
+    id: 2,
+    restaurantId: 2,
     content: '직원분들이 더 친절했으면 좋겠어요!',
     rating: 5,
+    inmages: [],
     createdAt: "2024-10-20T13:00:00",
     updatedAt: "2024-10-20T13:00:00", 
     userId: 3

@@ -19,6 +19,7 @@ export const handlers = [
     );
   }),
 
+// 식당 상세 정보 가져오기
   http.get(`${END_POINT.RESTAURANTS}/:restaurantId`, ({ params }) => {
     const { restaurantId } = params;
     const restaurant = DB.restaurant.find(
@@ -33,6 +34,25 @@ export const handlers = [
       { status: 404 },
     );
   }),
+
+// 특정식당 리뷰 리스트 불러오기
+http.get(`${END_POINT.RESTAURANTS}/:restaurantId/reviews`, ({ params }) => {
+  const { restaurantId } = params;
+  const reviews = DB.reviews.filter(
+    (review) => review.restaurantId === Number(restaurantId)
+  );
+
+  if (reviews.length > 0) {
+    return HttpResponse.json({ data: reviews }, { status: 200 });
+  } else {
+    return HttpResponse.json(
+      { error: 'Reviews not found' },
+      { status: 404 }
+    );
+  }
+}),
+  
+
 
   http.post(END_POINT.EMAIL_DUPLICATE, async ({ request }) => {
     const { email } = (await request.json()) as { email: string };
