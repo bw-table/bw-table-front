@@ -1,5 +1,6 @@
 import React from 'react';
 import { RestaurantDetailRequestType } from '@/types';
+import Divider from '@/components/common/divider/CommonDivider';
 
 interface MenuTabProps {
   menus: RestaurantDetailRequestType['menus'];
@@ -7,7 +8,7 @@ interface MenuTabProps {
 
 const RestaurantMenuTab: React.FC<MenuTabProps> = ({ menus }) => {
   return (
-    <div className="px-4 mb-4">
+    <Divider classNames="px-4 mb-4">
       <h2 className="text-lg font-semibold">메뉴</h2>
       {menus?.map((menu) => (
         <div key={menu.id} className="flex justify-between py-2 border-b">
@@ -25,7 +26,7 @@ const RestaurantMenuTab: React.FC<MenuTabProps> = ({ menus }) => {
           )}
         </div>
       ))}
-    </div>
+    </Divider>
   );
 };
 
