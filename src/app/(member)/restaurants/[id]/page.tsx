@@ -7,6 +7,7 @@ import CommonNavigationBar from '@/components/common/navigation-bar/CommonNaviga
 import { useRouter } from 'next/navigation';
 import useGetRestaurantDetail from '@/hooks/queries/restaurant/useGetRestaurantDetail';
 import RestaurantReviewTab from '@/components/feature/restaurant/RestaurantReviewTab';
+import RestaurantMenuTab from '@/components/feature/restaurant/RestaurantMenuTab';
 
 export default function RestaurantDetail() {
   const router = useRouter();
@@ -66,16 +67,8 @@ export default function RestaurantDetail() {
     //   </div>
     // )} */}
 
-    {selectedTab === 'menu' && (
-      <div className="px-4 mb-4">
-        <h2 className="text-lg font-semibold">메뉴</h2>
-        {restaurantDetail?.menus?.map((menu) => (
-          <div key={menu.id} className="flex justify-between py-2 border-b">
-            <span>{menu.name}</span>
-            <span>{menu.price}</span>
-          </div>
-        ))}
-      </div>
+    {selectedTab === 'menu' && restaurantDetail?.menus && (
+      <RestaurantMenuTab menus={restaurantDetail.menus} />
     )}
 
     {selectedTab === 'reviews' && (
