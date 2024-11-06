@@ -2,20 +2,26 @@
 
 import React, { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
+import { FaMapMarkerAlt, FaRegClock } from "react-icons/fa";
 import CommonButton from '@/components/common/button/CommonButton';
 import CommonNavigationBar from '@/components/common/navigation-bar/CommonNavigationBar';
 import { useRouter } from 'next/navigation';
 import useGetRestaurantDetail from '@/hooks/queries/restaurant/useGetRestaurantDetail';
+import { useGetReviewList } from '@/hooks/queries/restaurant/useGetReviewList';
 import RestaurantReviewTab from '@/components/feature/restaurant/RestaurantReviewTab';
+import RestaurantAnnouncement from '@/components/feature/restaurant/RestaurantAnnouncement';
 import RestaurantMenuTab from '@/components/feature/restaurant/RestaurantMenuTab';
 import RestaurantDetailInfo from '@/components/feature/restaurant/RestaurantDetailInfo';
 import RestaurantFacilities from '@/components/feature/restaurant/RestaurantFacilities';
+import { CATEGORY } from '@/constants/restaurantCategory';
+import RestaurantHome from '@/components/feature/restaurant/ResturantHome';
 
 export default function RestaurantDetail() {
   const router = useRouter();
   const [selectedTab, setSelectedTab] = useState('home');
   const restaurantId = 2; // 임시 ID
   const { restaurantDetail } = useGetRestaurantDetail(restaurantId);
+  const { totalReviews } = useGetReviewList(restaurantId);
 
   const handleOpenModal = () => {
     router.push('/reservations');
@@ -29,6 +35,12 @@ export default function RestaurantDetail() {
     { key: 'info', label: '매장정보' },
   ];
 
+  const today = new Date();
+  const dayOfWeek = today.toLocaleString('ko-KR', { weekday: 'long' }).toUpperCase();
+  
+
+  const todayHours = restaurantDetail?.operatingHours?.find(hour => hour.dayOfWeek === dayOfWeek);
+
 
   return (
     <div className="max-w-md mx-auto bg-white relative">
@@ -41,13 +53,27 @@ export default function RestaurantDetail() {
       </div>
 
       <div className="px-4 mb-4">
+        <p className='text-xs text-gray-500 mb-2'>{restaurantDetail?.category ? 
+          CATEGORY[restaurantDetail.category] || '알 수 없는 카테고리' : 
+          '카테고리가 없습니다.'
+        }</p>
         <h1 className="text-2xl font-semibold">{restaurantDetail?.name}</h1>
         <div className="flex items-center text-yellow-500 my-2">
           <AiFillStar />
           <span className="ml-1">{restaurantDetail?.averageRating}</span>
+          <span className="ml-1 text-black font-semibold">{totalReviews}개의 리뷰</span>
         </div>
-        <p className="text-gray-500">{restaurantDetail?.address}</p>
-        <p className="text-gray-500">{restaurantDetail?.closedDay}</p>
+        <p className="text-gray-500">{restaurantDetail?.description}</p>
+        <div className='border border-b-gray-100 my-3'/>
+        <p className="flex items-center gap-2 text-gray-500 mb-2">
+          <FaMapMarkerAlt />
+          {restaurantDetail?.address}
+        </p>
+        <p className="flex items-center gap-2 text-gray-500">
+          <FaRegClock />
+          <p className="text-gray-500">오늘({dayOfWeek})</p>
+          {todayHours ? `${todayHours.openingTime} ~ ${todayHours.closingTime}` : '오늘은 영업하지 않습니다.'}
+        </p>
       </div>
 
       <CommonNavigationBar
@@ -57,17 +83,15 @@ export default function RestaurantDetail() {
         variant="text"
       />
       {/* 탭에 따라 다른 콘텐츠 표시 */}
-    {/* // {selectedTab === 'home' && (
-    //   <div className="px-4 mb-4">
-    //     <h2 className="text-lg font-semibold">소식</h2>
-    //     {restaurantDetail?.info?.map((notice) => (
-    //       <div key={notice.id} className="p-2 border border-gray-300 rounded mb-2">
-    //         <h3 className="font-semibold text-gray-700">{notice.title}</h3>
-    //         <p className="text-gray-500 text-sm">{notice.content}</p>
-    //       </div>
-    //     ))}
-    //   </div>
-    // )} */}
+      {selectedTab === 'home' && (
+        <RestaurantHome restaurantId={restaurantId} restaurantDetail={restaurantDetail} />
+      )}
+
+    {selectedTab === 'news' && (
+      <div className="mb-4">
+        <RestaurantAnnouncement restaurantId={restaurantId} />
+      </div>
+    )}
 
     {selectedTab === 'menu' && restaurantDetail?.menus && (
       <RestaurantMenuTab menus={restaurantDetail.menus} />
@@ -75,7 +99,6 @@ export default function RestaurantDetail() {
 
     {selectedTab === 'reviews' && (
       <div className="mb-4">
-        {/* 리뷰 리스트 컴포넌트를 표시합니다. */}
         <RestaurantReviewTab restaurantId={restaurantId} />
       </div>
     )}
