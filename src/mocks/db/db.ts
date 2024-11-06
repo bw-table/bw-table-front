@@ -231,9 +231,10 @@ reviews: [
 ],
 
 //레스토랑 공지사항 및 이벤트 
-  announcement: [
+  announcements: [
     {
       announcementId: 1,
+      restaurantId: 2,
       isEvent: false,
       title: "Holiday Hours",
       content: "We are closed on holidays.",
@@ -241,6 +242,7 @@ reviews: [
     },
     {
       announcementId: 2,
+      restaurantId: 2,
       isEvent: true,
       title: "아메리카노 증정 이벤트",
       content: "첫방문 후 리뷰를 남겨주시고, 직원에게 인증해주시면 아메리카노 1잔 무료 증정됩니다!",

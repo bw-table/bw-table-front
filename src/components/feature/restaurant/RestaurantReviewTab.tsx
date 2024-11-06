@@ -2,6 +2,7 @@ import React from 'react';
 import { useGetReviewList } from '@/hooks/queries/restaurant/useGetReviewList';
 import { ReviewFormData } from '@/types';
 import { AiFillStar } from 'react-icons/ai';
+import Divider from '@/components/common/divider/CommonDivider';
 
 interface ReviewListProps {
   restaurantId: number;
@@ -19,7 +20,7 @@ const RestaurantReviewTab: React.FC<ReviewListProps> = ({ restaurantId }) => {
   }
 
   return (
-    <div className="review-list">
+    <Divider classNames="review-list">
       {reviewData?.map((review: ReviewFormData) => (
         <div key={review.id} className="p-4 border-b">
           <div className="flex gap-2 items-center mb-2">
@@ -51,7 +52,7 @@ const RestaurantReviewTab: React.FC<ReviewListProps> = ({ restaurantId }) => {
           </div>
         </div>
       ))}
-    </div>
+    </Divider>
   );
 };
 

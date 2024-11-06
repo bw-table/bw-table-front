@@ -1,4 +1,5 @@
 export const QUERY_KEYS = {
   EXAMPLE: 'EXAMPLE_KEY',
-  REVIEWS:'reviews'
+  REVIEWS:'reviews',
+  ANNOUNCEMENTS: 'announcements',
 } as const;

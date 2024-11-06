@@ -22,12 +22,14 @@ export const useGetReviewList = (restaurantId: number) => {
       return DB.reviews.filter(review => review.restaurantId === restaurantId);
     },
   });
+  const totalReviews = reviewData ? reviewData.length : 0;
 
   if (isReviewLoadingSuccess) {
     console.log('데이터 가져오기 성공:', reviewData);
   }
 
   return {
+    totalReviews,
     reviewData,
     isReviewLoading,
     isReviewError,
