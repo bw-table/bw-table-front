@@ -152,7 +152,7 @@ export const DB = {
     closedDay: "일요일",
     category: "RESTAURANT",
     link: "abc.co.kr",
-    info: "저희 식당은 예약 필수입니다",
+    info: "원활한 예약을 위해 식사시간을 최대 2시간으로 설정하게 되었습니다. 양해부탁드리겠습니다. Catch Table 어플을 통하여 예약 변경 또는 취소가 어려우신 경우 매장으로 연락 주세요.",
     averageRating: 4.5,
     images: [
         "http://example.com/images/restaurant2.jpg","http://example.com/images/restaurant1.jpg"

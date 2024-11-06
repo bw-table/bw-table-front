@@ -27,12 +27,12 @@ export interface RestaurantDetailRequestType {
   address: string,
   latitude: number,
   longtitude: number,
-  contact: string,
-  closedDay: string,
+  contact?: string,
+  closedDay?: string,
   category: string,
   link: string,
   averageRating: number,
-  info: string,
+  info?: string,
   images: [],
   menus: [
       {
@@ -46,7 +46,7 @@ export interface RestaurantDetailRequestType {
   ],
   facilities: [],
   hashtags: [],
-  operatingHours: [
+  operatingHours?: [
       {
           id: number,
           dayOfWeek: string,

@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import useGetRestaurantDetail from '@/hooks/queries/restaurant/useGetRestaurantDetail';
 import RestaurantReviewTab from '@/components/feature/restaurant/RestaurantReviewTab';
 import RestaurantMenuTab from '@/components/feature/restaurant/RestaurantMenuTab';
+import RestaurantDetailInfo from '@/components/feature/restaurant/RestaurantDetailInfo';
+import RestaurantFacilities from '@/components/feature/restaurant/RestaurantFacilities';
 
 export default function RestaurantDetail() {
   const router = useRouter();
@@ -29,7 +31,7 @@ export default function RestaurantDetail() {
 
 
   return (
-    <div className="p-4 max-w-md mx-auto bg-white relative">
+    <div className="max-w-md mx-auto bg-white relative">
       <div className="mb-4">
         <img
           src="/assets/restaurant-example.png"
@@ -72,10 +74,21 @@ export default function RestaurantDetail() {
     )}
 
     {selectedTab === 'reviews' && (
-      <div className="px-4 mb-4">
-        <h2 className="text-lg font-semibold">리뷰</h2>
+      <div className="mb-4">
         {/* 리뷰 리스트 컴포넌트를 표시합니다. */}
         <RestaurantReviewTab restaurantId={restaurantId} />
+      </div>
+    )}
+
+    {selectedTab === 'info' && (
+      <div className="mb-4">
+        <RestaurantFacilities facilities={restaurantDetail?.facilities} />
+        <RestaurantDetailInfo
+          contact={restaurantDetail?.contact}
+          operatingHours={restaurantDetail?.operatingHours}
+          closedDay={restaurantDetail?.closedDay}
+          info={restaurantDetail?.info}
+        />
       </div>
     )}
       <div className="fixed inset-x-0 bottom-0 p-4 bg-white border-t border-gray-300 max-w-md mx-auto">
