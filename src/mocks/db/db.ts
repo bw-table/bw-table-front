@@ -141,83 +141,112 @@ export const DB = {
 
   // 식당 임시 데이터
   restaurant: [
+  {
+    restaurantId: 2,
+    name: "로키 스테이크",
+    description: "파스타 맛집입니다",
+    address: "서울시 용산구 123",
+    contact: "010-7897-5671",
+    latitude: 0,
+    longtitude: 0,
+    closedDay: "일요일",
+    category: "RESTAURANT",
+    link: "abc.co.kr",
+    info: "원활한 예약을 위해 식사시간을 최대 2시간으로 설정하게 되었습니다. 양해부탁드리겠습니다. Catch Table 어플을 통하여 예약 변경 또는 취소가 어려우신 경우 매장으로 연락 주세요.",
+    averageRating: 4.5,
+    images: [
+        "http://example.com/images/restaurant2.jpg","http://example.com/images/restaurant1.jpg"
+    ],
+    menus: [
+      {
+        id: 3,
+        name: '파스타1',
+        price: 10000,
+        description: '존맛탱구리 파스타입니다.사장님이 보증한다구.',
+        imageUrl:'https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp',
+        restaurantId: 2,
+      },
+      {
+        id: 4,
+        name: '파스타2',
+        price: 17000,
+        description: '준맛탱구리이지만 넘버원은 아닙니다. 다른것도 맛있어영',
+        imageUrl: 'https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp',
+        restaurantId: 2,
+      },
+    ],
+    facilities: ['PARKING', 'HIGHCHAIR'],
+    hashtags: ['데이트', '용산맛집', '파스타'],
+    operatingHours: [
+      {
+        id: 4,
+        dayOfWeek: 'MONDAY',
+        openingTime: '10:00:00',
+        closingTime: '22:00:00',
+        restaurantId: 2,
+      },
+      {
+        id: 5,
+        dayOfWeek: 'TUESDAY',
+        openingTime: '10:00:00',
+        closingTime: '22:00:00',
+        restaurantId: 2,
+      },
+      {
+        id: 6,
+        dayOfWeek: 'WEDNESDAY',
+        openingTime: '10:00:00',
+        closingTime: '22:00:00',
+        restaurantId: 2,
+      },
+    ],
+  },
+],
+
+//특정 레스토랑 리뷰 
+reviews: [
+  {
+    id: 1,
+    restaurantId: 2,
+    content: '파스타가 너무 맛있어요~!',
+    rating: 4,
+    images:[
+      "https://example.com/image1.jpg",
+      "https://example.com/image2.jpg",
+    ],
+    createdAt: "2024-10-20T13:00:00",
+    updatedAt: "2024-10-20T13:00:00", 
+    userId: 1
+  },
+  {
+    id: 2,
+    restaurantId: 2,
+    content: '직원분들이 더 친절했으면 좋겠어요!',
+    rating: 5,
+    inmages: [],
+    createdAt: "2024-10-20T13:00:00",
+    updatedAt: "2024-10-20T13:00:00", 
+    userId: 3
+  },
+],
+
+//레스토랑 공지사항 및 이벤트 
+  announcements: [
     {
+      announcementId: 1,
       restaurantId: 2,
-      name: '맛집 A',
-      description: '파스타 맛집입니다',
-      address: '서울시 용산구 123',
-      contact: '010-7897-5671',
-      closedDay: '일요일',
-      category: 'RESTAURANT',
-      link: 'abc.co.kr',
-      notice: '저희 식당은 예약 필수입니다',
-      rating: 4.5,
-      reviews: [
-        {
-          reviewId: 2,
-          title: '존맛이에여',
-          description: '어쩌구 저쩌구 브ㅡㄹㄹ',
-        },
-      ],
-      images: [
-        'http://example.com/images/restaurant2.jpg',
-        'http://example.com/images/restaurant1.jpg',
-      ],
-      menus: [
-        {
-          id: 3,
-          name: '파스타1',
-          price: 10000,
-          description: '파스타1',
-          imageUrl: 'http://example.com/images/food1.jpg',
-          restaurantId: 2,
-        },
-        {
-          id: 4,
-          name: '파스타2',
-          price: 17000,
-          description: '파스타2',
-          imageUrl: 'http://example.com/images/food2.jpg',
-          restaurantId: 2,
-        },
-      ],
-      facilities: ['PARKING', 'HIGHCHAIR'],
-      hashtags: ['데이트', '용산맛집', '파스타'],
-      operatingHours: [
-        {
-          id: 4,
-          dayOfWeek: 'MONDAY',
-          openingTime: '10:00:00',
-          closingTime: '22:00:00',
-          restaurantId: 2,
-        },
-        {
-          id: 5,
-          dayOfWeek: 'TUESDAY',
-          openingTime: '10:00:00',
-          closingTime: '22:00:00',
-          restaurantId: 2,
-        },
-        {
-          id: 6,
-          dayOfWeek: 'WEDNESDAY',
-          openingTime: '10:00:00',
-          closingTime: '22:00:00',
-          restaurantId: 2,
-        },
-      ],
-      notices: [
-        {
-          id: 1,
-          title: '[안내] 특별 메뉴 출시',
-          content: '안녕하세요, 새로운 스테이크 메뉴를 소개합니다.',
-        },
-        {
-          id: 2,
-          title: '[공지] 주말 예약 안내',
-          content: '주말 예약은 사전 예약제로 운영됩니다.',
-        },
-      ],
+      isEvent: false,
+      title: "Holiday Hours",
+      content: "We are closed on holidays.",
+      createdAt: "2024-10-01T12:00",
     },
+    {
+      announcementId: 2,
+      restaurantId: 2,
+      isEvent: true,
+      title: "아메리카노 증정 이벤트",
+      content: "첫방문 후 리뷰를 남겨주시고, 직원에게 인증해주시면 아메리카노 1잔 무료 증정됩니다!",
+      createdAt: "2024-10-01T12:00"
+    }
   ],
 };

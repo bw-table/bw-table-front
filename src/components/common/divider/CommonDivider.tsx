@@ -1,12 +1,16 @@
 import React, { ReactNode } from 'react';
+import { cva } from 'class-variance-authority';
+
+const dividerStyles = cva('w-full my-4 bg-white shadow-md');
 
 interface DividerProps {
   children?: ReactNode;
+  classNames?: string;
 }
 
-const Divider: React.FC<DividerProps> = ({ children }) => {
+const Divider: React.FC<DividerProps> = ({ children, classNames }) => {
   return (
-    <div className="p-4 bg-white shadow-md my-4">
+    <div className={`${dividerStyles()} ${classNames}`}>
       {children}
     </div>
   );
