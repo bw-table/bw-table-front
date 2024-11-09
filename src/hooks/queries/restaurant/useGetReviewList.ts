@@ -18,7 +18,7 @@ export const useGetReviewList = (restaurantId: number) => {
     queryKey: [QUERY_KEYS.REVIEWS, restaurantId],
     queryFn: () => fetchAPI(restaurantId),
   });
-  const totalReviews = reviewData ? reviewData.length : 0;
+  const totalReviews = reviewData?.data ? reviewData.data.length : 0;
 
   if (isReviewLoadingSuccess) {
     console.log('데이터 가져오기 성공:', reviewData);
@@ -26,7 +26,7 @@ export const useGetReviewList = (restaurantId: number) => {
 
   return {
     totalReviews,
-    reviewData,
+    reviewData: reviewData?.data || [],
     isReviewLoading,
     isReviewError,
   };
