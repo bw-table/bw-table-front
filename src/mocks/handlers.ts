@@ -84,7 +84,22 @@ http.get(`${END_POINT.RESTAURANTS}/:restaurantId/reviews`, ({ params }) => {
   }
 }),
   
+// 식당 공지사항
+http.get(`${END_POINT.RESTAURANTS}/:restaurantId/announcements`, ({ params }) => {
+  const { restaurantId } = params;
+  const announcements = DB.announcements.filter(
+    (announcement) => announcement.restaurantId === Number(restaurantId)
+  );
 
+  if (announcements.length > 0) {
+    return HttpResponse.json({ data: announcements }, { status: 200 });
+  } else {
+    return HttpResponse.json(
+      { error: 'Reviews not found' },
+      { status: 404 }
+    );
+  }
+}),
 
   http.post(END_POINT.EMAIL_DUPLICATE, async ({ request }) => {
     const { email } = (await request.json()) as { email: string };
