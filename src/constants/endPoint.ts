@@ -1,6 +1,6 @@
 export const END_POINT = {
   EXAMPLE: '/api/example',
-  RESERVATION: '/api/reservation',
+  RESERVATIONS: '/api/reservations',
   SIGNUP: '/api/auth/signup',
   EMAIL_DUPLICATE: '/api/auth/email/duplicate',
   NICKNAME_DUPLICATE: '/api/auth/nickname/duplicate',
