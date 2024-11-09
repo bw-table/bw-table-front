@@ -11,6 +11,7 @@ export const handlers = [
   }),
   // 예약 정보 POST 핸들러
   http.post(END_POINT.RESERVATION, (req) => {
+  http.post(END_POINT.RESERVATIONS, (req) => {
     return HttpResponse.json(
       {
         message: '예약이 성공적으로 완료되었습니다.',
@@ -18,6 +19,38 @@ export const handlers = [
       { status: 200 },
     );
   }),
+
+  //나의 예약 GET 핸들러
+  http.get(END_POINT.RESERVATIONS, async ({ request }) => {
+    const url = new URL(request.url);
+    const searchParams = url.searchParams;
+
+    const page = searchParams.get('page');
+    const size = searchParams.get('size');
+    const restaurantId = searchParams.get('restaurantId');
+    const memberId = searchParams.get('memberId');
+    const reservationStatus = searchParams.get('reservationStatus');
+    const reservationDate = searchParams.get('reservationDate');
+    const reservationTime = searchParams.get('reservationTime');
+
+    // 필터링 로직
+    const filteredReservations = DB.reservations.filter((reservation) => {
+        return (
+            (!restaurantId || reservation.restaurantId === Number(restaurantId)) &&
+            (!memberId || reservation.memberId === Number(memberId)) &&
+            (!reservationStatus || reservation.reservationStatus === reservationStatus) &&
+            (!reservationDate || reservation.reservationDate === reservationDate) &&
+            (!reservationTime || reservation.reservationTime === reservationTime)
+        );
+    });
+
+    return HttpResponse.json({
+        content: filteredReservations,
+        totalElements: filteredReservations.length,
+        totalPages: Math.ceil(filteredReservations.length / (size ? Number(size) : 10)),
+        number: page ? Number(page) : 0,
+    });
+}),
 
 // 식당 상세 정보 가져오기
   http.get(`${END_POINT.RESTAURANTS}/:restaurantId`, ({ params }) => {
