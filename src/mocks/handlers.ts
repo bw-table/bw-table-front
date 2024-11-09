@@ -10,7 +10,6 @@ export const handlers = [
     return HttpResponse.json(DB.example, {});
   }),
   // 예약 정보 POST 핸들러
-  http.post(END_POINT.RESERVATION, (req) => {
   http.post(END_POINT.RESERVATIONS, (req) => {
     return HttpResponse.json(
       {
