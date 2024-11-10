@@ -14,20 +14,20 @@ export interface SignInFormData {
 }
 
 export interface AnnouncementFormData {
-  announcementId: number,
-  isEvent: boolean,
-  title: string,
-  content: string,
-  createdAt: string,
+  announcementId: number;
+  isEvent: boolean;
+  title: string;
+  content: string;
+  createdAt: string;
 }
 
 export interface ReviewFormData {
-  id: number,
-  restaurantId: number,
-  content: string,
-  rating: number,
+  id: number;
+  restaurantId: number;
+  content: string;
+  rating: number;
   images?: string[];
-  createdAt: string,
-  updatedAt: string, 
-  userId: number,
+  createdAt: string;
+  updatedAt: string;
+  userId: number;
 }

@@ -5,7 +5,7 @@ import { axiosDefault } from '@/api/axiosInstance';
 import { ReservationData } from '@/types/request';
 
 const fetchAPI = async (data: ReservationData) => {
-  const response = await axiosDefault.post(END_POINT.RESERVATION, data);
+  const response = await axiosDefault.post(END_POINT.RESERVATIONS, data);
   return response.data;
 };
 

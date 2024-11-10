@@ -2,13 +2,11 @@ import { axiosAuth } from '@/api/axiosInstance';
 import { END_POINT } from '@/constants/endPoint';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/constants/queryKeys';
-import { DB } from '@/mocks/db/db';
 
-// 목데이터 사용중
-// const fetchAPI = async (restaurantId: number) => {
-//   const res = await axiosAuth.get(`${END_POINT.RESTAURANTS}/${restaurantId}/reviews`);
-//   return res.data;
-// };
+const fetchAPI = async (restaurantId: number) => {
+  const res = await axiosAuth.get(`${END_POINT.RESTAURANTS}/${restaurantId}/reviews`);
+  return res.data;
+};
 
 export const useGetReviewList = (restaurantId: number) => {
   const {
@@ -18,11 +16,9 @@ export const useGetReviewList = (restaurantId: number) => {
     isError: isReviewError,
   } = useQuery({
     queryKey: [QUERY_KEYS.REVIEWS, restaurantId],
-    queryFn: () => {
-      return DB.reviews.filter(review => review.restaurantId === restaurantId);
-    },
+    queryFn: () => fetchAPI(restaurantId),
   });
-  const totalReviews = reviewData ? reviewData.length : 0;
+  const totalReviews = reviewData?.data ? reviewData.data.length : 0;
 
   if (isReviewLoadingSuccess) {
     console.log('데이터 가져오기 성공:', reviewData);
@@ -30,7 +26,7 @@ export const useGetReviewList = (restaurantId: number) => {
 
   return {
     totalReviews,
-    reviewData,
+    reviewData: reviewData?.data || [],
     isReviewLoading,
     isReviewError,
   };

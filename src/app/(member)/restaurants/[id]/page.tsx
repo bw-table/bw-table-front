@@ -69,11 +69,11 @@ export default function RestaurantDetail() {
           <FaMapMarkerAlt />
           {restaurantDetail?.address}
         </p>
-        <p className="flex items-center gap-2 text-gray-500">
+        <div className="flex items-center gap-2 text-gray-500">
           <FaRegClock />
           <p className="text-gray-500">오늘({dayOfWeek})</p>
           {todayHours ? `${todayHours.openingTime} ~ ${todayHours.closingTime}` : '오늘은 영업하지 않습니다.'}
-        </p>
+        </div>
       </div>
 
       <CommonNavigationBar

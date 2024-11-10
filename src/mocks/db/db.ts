@@ -249,4 +249,30 @@ reviews: [
       createdAt: "2024-10-01T12:00"
     }
   ],
+
+  //레스토랑 예약 정보 DB
+  reservations: [
+    {
+      reservationId: 1,
+      restaurantId: 2,
+      memberId: 2,
+      reservationDate: "2024-11-01",
+      reservationTime: "18:00",
+      numberOfPeople: 4,
+      specialRequest: "Vegetarian",
+      reservationStatus: "CONFIRMED",
+    },
+    {
+      reservationId: 2,
+      restaurantId: 2,
+      memberId: 2,
+      reservationDate: '2024-11-02',
+      reservationTime: '19:00',
+      numberOfPeople: 2,
+      specialRequest: 'None',
+      reservationStatus: 'PENDING',
+    },
+  ],
 };
+
+

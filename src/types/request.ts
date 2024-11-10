@@ -21,38 +21,50 @@ export interface SignInRequestType {
 }
 
 export interface RestaurantDetailRequestType {
-  restaurantId: number,
-  name: string,
-  description: string,
-  address: string,
-  latitude: number,
-  longtitude: number,
-  contact?: string,
-  closedDay?: string,
-  category: string,
-  link: string,
-  averageRating: number,
-  info?: string,
-  images: [],
+  restaurantId: number;
+  name: string;
+  description: string;
+  address: string;
+  latitude: number;
+  longtitude: number;
+  contact?: string;
+  closedDay?: string;
+  category: string;
+  link: string;
+  averageRating: number;
+  info?: string;
+  images: [];
   menus: [
       {
-          id: number,
-          name: string,
-          price: number,
-          description: string,
-          imageUrl: string,
+          id: number;
+          name: string;
+          price: number;
+          description: string;
+          imageUrl: string;
           restaurantId: number
       }
   ],
-  facilities: [],
-  hashtags: [],
+  facilities: [];
+  hashtags: [];
   operatingHours?: [
       {
-          id: number,
-          dayOfWeek: string,
-          openingTime: string,
-          closingTime: string,
-          restaurantId: number
+          id: number;
+          dayOfWeek: string;
+          openingTime: string;
+          closingTime: string;
+          restaurantId: number;
       }
 ]
+}
+
+export interface ReservationsRequestType {
+  page?: number;
+  size?: number;
+  restaurantId: number;
+  reservationId?: number;
+  memberId: number;
+  reservationStatus: string;
+  reservationDate: string;
+  reservationTime: string;
+  numberOfPeople?:number;
 }
