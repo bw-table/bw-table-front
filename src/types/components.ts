@@ -74,3 +74,11 @@ export interface ReservationConfirmProps {
   onCancel: () => void;
   onConfirm: () => void;
 }
+
+export interface ReservationStateCardProps {
+  children: ReactNode;
+  title: string;
+  mainData: number;
+  increment: number;
+  availableTable?: number;
+}
