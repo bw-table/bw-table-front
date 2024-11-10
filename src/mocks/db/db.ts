@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const DB = {
   example: [{ id: 1, name: '오신웅' }],
 
@@ -141,126 +143,130 @@ export const DB = {
 
   // 식당 임시 데이터
   restaurant: [
-  {
-    restaurantId: 2,
-    name: "로키 스테이크",
-    description: "파스타 맛집입니다",
-    address: "서울시 용산구 123",
-    contact: "010-7897-5671",
-    latitude: 0,
-    longtitude: 0,
-    closedDay: "일요일",
-    category: "RESTAURANT",
-    link: "abc.co.kr",
-    info: "원활한 예약을 위해 식사시간을 최대 2시간으로 설정하게 되었습니다. 양해부탁드리겠습니다. Catch Table 어플을 통하여 예약 변경 또는 취소가 어려우신 경우 매장으로 연락 주세요.",
-    averageRating: 4.5,
-    images: [
-        "http://example.com/images/restaurant2.jpg","http://example.com/images/restaurant1.jpg"
-    ],
-    menus: [
-      {
-        id: 3,
-        name: '파스타1',
-        price: 10000,
-        description: '존맛탱구리 파스타입니다.사장님이 보증한다구.',
-        imageUrl:'https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp',
-        restaurantId: 2,
-      },
-      {
-        id: 4,
-        name: '파스타2',
-        price: 17000,
-        description: '준맛탱구리이지만 넘버원은 아닙니다. 다른것도 맛있어영',
-        imageUrl: 'https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp',
-        restaurantId: 2,
-      },
-    ],
-    facilities: ['PARKING', 'HIGHCHAIR'],
-    hashtags: ['데이트', '용산맛집', '파스타'],
-    operatingHours: [
-      {
-        id: 4,
-        dayOfWeek: 'MONDAY',
-        openingTime: '10:00:00',
-        closingTime: '22:00:00',
-        restaurantId: 2,
-      },
-      {
-        id: 5,
-        dayOfWeek: 'TUESDAY',
-        openingTime: '10:00:00',
-        closingTime: '22:00:00',
-        restaurantId: 2,
-      },
-      {
-        id: 6,
-        dayOfWeek: 'WEDNESDAY',
-        openingTime: '10:00:00',
-        closingTime: '22:00:00',
-        restaurantId: 2,
-      },
-    ],
-  },
-],
+    {
+      restaurantId: 2,
+      name: '로키 스테이크',
+      description: '파스타 맛집입니다',
+      address: '서울시 용산구 123',
+      contact: '010-7897-5671',
+      latitude: 0,
+      longtitude: 0,
+      closedDay: '일요일',
+      category: 'RESTAURANT',
+      link: 'abc.co.kr',
+      info: '원활한 예약을 위해 식사시간을 최대 2시간으로 설정하게 되었습니다. 양해부탁드리겠습니다. Catch Table 어플을 통하여 예약 변경 또는 취소가 어려우신 경우 매장으로 연락 주세요.',
+      averageRating: 4.5,
+      images: [
+        'http://example.com/images/restaurant2.jpg',
+        'http://example.com/images/restaurant1.jpg',
+      ],
+      menus: [
+        {
+          id: 3,
+          name: '파스타1',
+          price: 10000,
+          description: '존맛탱구리 파스타입니다.사장님이 보증한다구.',
+          imageUrl:
+            'https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp',
+          restaurantId: 2,
+        },
+        {
+          id: 4,
+          name: '파스타2',
+          price: 17000,
+          description: '준맛탱구리이지만 넘버원은 아닙니다. 다른것도 맛있어영',
+          imageUrl:
+            'https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp',
+          restaurantId: 2,
+        },
+      ],
+      facilities: ['PARKING', 'HIGHCHAIR'],
+      hashtags: ['데이트', '용산맛집', '파스타'],
+      operatingHours: [
+        {
+          id: 4,
+          dayOfWeek: 'MONDAY',
+          openingTime: '10:00:00',
+          closingTime: '22:00:00',
+          restaurantId: 2,
+        },
+        {
+          id: 5,
+          dayOfWeek: 'TUESDAY',
+          openingTime: '10:00:00',
+          closingTime: '22:00:00',
+          restaurantId: 2,
+        },
+        {
+          id: 6,
+          dayOfWeek: 'WEDNESDAY',
+          openingTime: '10:00:00',
+          closingTime: '22:00:00',
+          restaurantId: 2,
+        },
+      ],
+    },
+  ],
 
-//특정 레스토랑 리뷰 
-reviews: [
-  {
-    id: 1,
-    restaurantId: 2,
-    content: '파스타가 너무 맛있어요~!',
-    rating: 4,
-    images:[
-      "https://example.com/image1.jpg",
-      "https://example.com/image2.jpg",
-    ],
-    createdAt: "2024-10-20T13:00:00",
-    updatedAt: "2024-10-20T13:00:00", 
-    userId: 1
-  },
-  {
-    id: 2,
-    restaurantId: 2,
-    content: '직원분들이 더 친절했으면 좋겠어요!',
-    rating: 5,
-    inmages: [],
-    createdAt: "2024-10-20T13:00:00",
-    updatedAt: "2024-10-20T13:00:00", 
-    userId: 3
-  },
-],
+  // 특정 레스토랑 리뷰
+  reviews: [
+    {
+      id: 1,
+      restaurantId: 2,
+      content: '파스타가 너무 맛있어요~!',
+      rating: 4,
+      images: [
+        'https://example.com/image1.jpg',
+        'https://example.com/image2.jpg',
+      ],
+      createdAt: '2024-10-20T13:00:00',
+      updatedAt: '2024-10-20T13:00:00',
+      userId: 1,
+    },
+    {
+      id: 2,
+      restaurantId: 2,
+      content: '직원분들이 더 친절했으면 좋겠어요!',
+      rating: 5,
+      inmages: [],
+      createdAt: '2024-10-20T13:00:00',
+      updatedAt: '2024-10-20T13:00:00',
+      userId: 3,
+    },
+  ],
 
-//레스토랑 공지사항 및 이벤트 
+  // 레스토랑 공지사항 및 이벤트
   announcements: [
     {
       announcementId: 1,
       restaurantId: 2,
       isEvent: false,
-      title: "Holiday Hours",
-      content: "We are closed on holidays.",
-      createdAt: "2024-10-01T12:00",
+      title: 'Holiday Hours',
+      content: 'We are closed on holidays.',
+      createdAt: '2024-10-01T12:00',
     },
     {
       announcementId: 2,
       restaurantId: 2,
       isEvent: true,
-      title: "아메리카노 증정 이벤트",
-      content: "첫방문 후 리뷰를 남겨주시고, 직원에게 인증해주시면 아메리카노 1잔 무료 증정됩니다!",
-      createdAt: "2024-10-01T12:00"
-    }
+      title: '아메리카노 증정 이벤트',
+      content:
+        '첫방문 후 리뷰를 남겨주시고, 직원에게 인증해주시면 아메리카노 1잔 무료 증정됩니다!',
+      createdAt: '2024-10-01T12:00',
+    },
   ],
 
-  //레스토랑 예약 정보 DB
+  // 레스토랑 예약 정보 DB
   reservations: [
     {
       reservationId: 1,
       restaurantId: 2,
       memberId: 2,
-      reservationDate: "2024-11-01",
-      reservationTime: "18:00",
+      reservationDate: '2024-11-01',
+      reservationTime: '18:00',
       numberOfPeople: 4,
-      specialRequest: "Vegetarian",
-      reservationStatus: "CONFIRMED",
+      specialRequest: 'Vegetarian',
+      reservationStatus: 'CONFIRMED',
     },
     {
       reservationId: 2,
@@ -273,6 +279,57 @@ reviews: [
       reservationStatus: 'PENDING',
     },
   ],
+
+  reservationList: [
+    {
+      reservationId: 113,
+      memberId: 456,
+      reservationDate: dayjs(new Date())
+        .subtract(1, 'day')
+        .format('YYYY-MM-DD'),
+      reservationTime: '18:30:00',
+      numberOfPeople: 2,
+      specialRequest: '창가 자리로 부탁드립니다.',
+      reservationStatus: 'CONFIRMED',
+      restaurantInfoSummaryDtoInfo: {
+        id: 10,
+        name: '한식당 더맛있는집',
+        address: '서울특별시 강남구 강남대로 123',
+        categoryName: '한식',
+        firstImageUrl: 'https://example.com/images/restaurant1.jpg',
+      },
+    },
+    {
+      reservationId: 123,
+      memberId: 456,
+      reservationDate: dayjs(new Date()).format('YYYY-MM-DD'),
+      reservationTime: '18:30:00',
+      numberOfPeople: 8,
+      specialRequest: '창가 자리로 부탁드립니다.',
+      reservationStatus: 'CONFIRMED',
+      restaurantInfoSummaryDtoInfo: {
+        id: 10,
+        name: '한식당 더맛있는집',
+        address: '서울특별시 강남구 강남대로 123',
+        categoryName: '한식',
+        firstImageUrl: 'https://example.com/images/restaurant1.jpg',
+      },
+    },
+    {
+      reservationId: 189,
+      memberId: 456,
+      reservationDate: '2024-12-25',
+      reservationTime: '18:30:00',
+      numberOfPeople: 4,
+      specialRequest: '창가 자리로 부탁드립니다.',
+      reservationStatus: 'CONFIRMED',
+      restaurantInfoSummaryDtoInfo: {
+        id: 10,
+        name: '한식당 더맛있는집',
+        address: '서울특별시 강남구 강남대로 123',
+        categoryName: '한식',
+        firstImageUrl: 'https://example.com/images/restaurant1.jpg',
+      },
+    },
+  ],
 };
-
-
