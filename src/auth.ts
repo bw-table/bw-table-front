@@ -18,17 +18,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const { data } = response;
 
           if (data) {
-            const {
-              id,
-              name,
-              email,
-              nickname,
-              phone,
-              profileImage,
-              role,
-              businessNumber,
-            } = data.member;
-
             const cookieStore = await cookies();
             cookieStore.set('SSID', data.accessToken, {
               httpOnly: true,
@@ -36,14 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             });
 
             return {
-              id,
-              name,
-              email,
-              nickname,
-              phone,
-              profileImage,
-              role,
-              businessNumber,
+              ...data.member,
               restaurantId: data.restaurantId,
             };
           }
@@ -76,7 +58,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.profileImage = token.profileImage as string;
         session.user.role = token.role as string;
         session.user.businessNumber = token.businessNumber as string;
-        session.user.restaurantId = token.restaurantId as string;
+        session.user.restaurantId = token.restaurantId as number | undefined;
       }
       return session;
     },

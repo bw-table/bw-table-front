@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 export const DB = {
   example: [{ id: 1, name: '오신웅' }],
 
@@ -268,66 +266,13 @@ export const DB = {
     },
     {
       reservationId: 2,
-      restaurantId: 2,
-      memberId: 2,
+      restaurantId: 7,
+      memberId: 29,
       reservationDate: '2024-11-02',
       reservationTime: '19:00',
       numberOfPeople: 2,
       specialRequest: 'None',
       reservationStatus: 'PENDING',
-    },
-  ],
-
-  reservationList: [
-    {
-      reservationId: 113,
-      memberId: 456,
-      reservationDate: dayjs(new Date())
-        .subtract(1, 'day')
-        .format('YYYY-MM-DD'),
-      reservationTime: '18:30:00',
-      numberOfPeople: 2,
-      specialRequest: '창가 자리로 부탁드립니다.',
-      reservationStatus: 'CONFIRMED',
-      restaurantInfoSummaryDtoInfo: {
-        id: 10,
-        name: '한식당 더맛있는집',
-        address: '서울특별시 강남구 강남대로 123',
-        categoryName: '한식',
-        firstImageUrl: 'https://example.com/images/restaurant1.jpg',
-      },
-    },
-    {
-      reservationId: 123,
-      memberId: 456,
-      reservationDate: dayjs(new Date()).format('YYYY-MM-DD'),
-      reservationTime: '18:30:00',
-      numberOfPeople: 8,
-      specialRequest: '창가 자리로 부탁드립니다.',
-      reservationStatus: 'CONFIRMED',
-      restaurantInfoSummaryDtoInfo: {
-        id: 10,
-        name: '한식당 더맛있는집',
-        address: '서울특별시 강남구 강남대로 123',
-        categoryName: '한식',
-        firstImageUrl: 'https://example.com/images/restaurant1.jpg',
-      },
-    },
-    {
-      reservationId: 189,
-      memberId: 456,
-      reservationDate: '2024-12-25',
-      reservationTime: '18:30:00',
-      numberOfPeople: 4,
-      specialRequest: '창가 자리로 부탁드립니다.',
-      reservationStatus: 'CONFIRMED',
-      restaurantInfoSummaryDtoInfo: {
-        id: 10,
-        name: '한식당 더맛있는집',
-        address: '서울특별시 강남구 강남대로 123',
-        categoryName: '한식',
-        firstImageUrl: 'https://example.com/images/restaurant1.jpg',
-      },
     },
   ],
 };

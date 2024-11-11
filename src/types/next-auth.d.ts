@@ -10,7 +10,7 @@ declare module 'next-auth' {
     profileImage: string;
     role: string;
     businessNumber: string;
-    restaurantId?: string;
+    restaurantId: number | undefined;
   }
 
   interface Session {
@@ -23,7 +23,7 @@ declare module 'next-auth' {
       profileImage: string;
       role: string;
       businessNumber: string;
-      restaurantId?: string;
+      restaurantId: number | undefined;
     };
   }
 }

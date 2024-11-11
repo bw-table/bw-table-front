@@ -9,7 +9,7 @@ import { useSession } from 'next-auth/react';
 
 export default function TodayReservation() {
   const { data: session } = useSession();
-  const { reservationData } = useGetReservationList();
+  const { reservationData } = useGetReservationList(session?.user.restaurantId);
 
   console.log(session);
 
