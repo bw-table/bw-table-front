@@ -35,36 +35,37 @@ export interface RestaurantDetailRequestType {
   info?: string;
   images: [];
   menus: [
-      {
-          id: number;
-          name: string;
-          price: number;
-          description: string;
-          imageUrl: string;
-          restaurantId: number
-      }
-  ],
+    {
+      id: number;
+      name: string;
+      price: number;
+      description: string;
+      imageUrl: string;
+      restaurantId: number;
+    },
+  ];
   facilities: [];
   hashtags: [];
   operatingHours?: [
-      {
-          id: number;
-          dayOfWeek: string;
-          openingTime: string;
-          closingTime: string;
-          restaurantId: number;
-      }
-]
+    {
+      id: number;
+      dayOfWeek: string;
+      openingTime: string;
+
+      closingTime: string;
+      restaurantId: number;
+    },
+  ];
 }
 
 export interface ReservationsRequestType {
   page?: number;
   size?: number;
-  restaurantId: number;
+  restaurantId?: number;
   reservationId?: number;
-  memberId: number;
+  memberId?: number;
   reservationStatus: string;
   reservationDate: string;
   reservationTime: string;
-  numberOfPeople?:number;
+  numberOfPeople?: number;
 }

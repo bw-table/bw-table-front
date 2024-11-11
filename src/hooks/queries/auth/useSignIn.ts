@@ -1,5 +1,4 @@
 import { SignInRequestType } from '@/types';
-import { tokenManager } from '@/utils/tokenManager';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
@@ -10,7 +9,9 @@ export const signInFetch = async (signInData: SignInRequestType) => {
     redirect: false,
   });
 
-  if (!response?.ok) {
+  console.log(response);
+
+  if (response?.error) {
     throw new Error(response?.error || '로그인에 실패했습니다');
   }
 
@@ -23,12 +24,10 @@ export const useSignIn = () => {
   const { mutate: signInMutation } = useMutation({
     mutationFn: signInFetch,
     onSuccess: async () => {
-      const token = await tokenManager.fetchHttpOnlyToken();
-      console.log(token);
       router.push('/');
     },
     onError: (error) => {
-      console.error(error);
+      console.error('로그인 실패:', error);
     },
   });
   return { signInMutation };

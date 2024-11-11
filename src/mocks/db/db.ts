@@ -119,26 +119,24 @@ export const DB = {
   },
 
   signIn: {
-    status: 'success',
-    message: '요청이 성공적으로 처리되었습니다.',
-    data: {
-      id: 1,
-      email: 'guest@example.com',
-      name: 'guest',
-      accessToken:
-        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJndWVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTczMDI5MjY5MywiZXhwIjoxNzMwMjk0NDkzfQ.mixuNgZMQKWfMiknOwlr_hw9MbzrC3lr-7mwIn_Vt0PRLE1ps2gmbQMkRjlHxPW5iiL0Kcr1ppqUW6Jp_YCNgg',
+    accessToken:
+      'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJvd25lckBleGFtcGxlLmNvbSIsImlhdCI6MTczMTI1NzIxOSwiZXhwIjoxNzMxMjU5MDE5fQ.pZKd6E4pCxZR6DGbqPiQaGvu_AVNPz46mr8Yvd7gh2ex8sAEiUrpou6k9ojRe0gxD95hdyAkZrHhZSKeAQqkZw',
+    member: {
+      id: 29,
+      email: 'owner@example.com',
+      name: '사장님',
+      nickname: '샤쟝',
+      phone: '01012342222',
+      role: 'OWNER',
+      profileImage: null,
+      businessNumber: '1230122222',
     },
-    error: null,
+    restaurantId: 7,
   },
 
   signInError: {
-    status: 'fail',
-    message: '로그인 실패 했습니다.',
-    data: {
-      accessToken: null,
-      refreshToken: null,
-    },
-    error: null,
+    message: '이메일 또는 비밀번호가 유효하지 않습니다.',
+    httpStatus: 'UNAUTHORIZED',
   },
 
   // 식당 임시 데이터

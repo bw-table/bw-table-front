@@ -1,11 +1,19 @@
-import { useQuery } from '@tanstack/react-query';
 import { axiosAuth } from '@/api/axiosInstance';
 import { END_POINT } from '@/constants/endPoint';
 import { QUERY_KEYS } from '@/constants/queryKeys';
 import { ReservationsRequestType } from '@/types';
+import { useQuery } from '@tanstack/react-query';
 
 const fetchAPI = async (params: ReservationsRequestType) => {
-  const { page, size, restaurantId, memberId, reservationStatus, reservationDate, reservationTime } = params;
+  const {
+    page,
+    size,
+    restaurantId,
+    memberId,
+    reservationStatus,
+    reservationDate,
+    reservationTime,
+  } = params;
 
   const response = await axiosAuth.get(`${END_POINT.RESERVATIONS}`, {
     params: {
@@ -22,22 +30,26 @@ const fetchAPI = async (params: ReservationsRequestType) => {
   return response.data;
 };
 
-export const useGetReservationList = (restaurantId: number, memberId: number) => {
+export const useGetReservationList = (
+  restaurantId?: number,
+  memberId?: number,
+) => {
   const {
     data: reservationData,
     isLoading: isReservationLoading,
     isError: isReservationError,
   } = useQuery({
     queryKey: [QUERY_KEYS.RESERVATIONS, restaurantId, memberId],
-    queryFn: () => fetchAPI({
-      page: 1,
-      size: 10,
-      restaurantId,
-      memberId,
-      reservationStatus: '',
-      reservationDate: '',
-      reservationTime: '',
-    }),
+    queryFn: () =>
+      fetchAPI({
+        page: 1,
+        size: 10,
+        restaurantId,
+        memberId,
+        reservationStatus: '',
+        reservationDate: '',
+        reservationTime: '',
+      }),
   });
 
   if (reservationData) {

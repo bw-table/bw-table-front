@@ -1,7 +1,8 @@
+/* eslint-disable no-param-reassign */
 import { axiosDefault } from '@/api/axiosInstance';
 import { END_POINT } from '@/constants/endPoint';
 import { cookies } from 'next/headers';
-import NextAuth from 'next-auth';
+import NextAuth, { AuthError } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -16,34 +17,67 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           const { data } = response;
 
-          if (data?.data) {
-            const { id, accessToken, name, email } = data.data;
+          if (data) {
+            const {
+              id,
+              name,
+              email,
+              nickname,
+              phone,
+              profileImage,
+              role,
+              businessNumber,
+            } = data.member;
+
             const cookieStore = await cookies();
-            cookieStore.set('SSID', accessToken, {
+            cookieStore.set('SSID', data.accessToken, {
               httpOnly: true,
               sameSite: 'lax',
             });
+
             return {
               id,
               name,
               email,
-              accessToken,
+              nickname,
+              phone,
+              profileImage,
+              role,
+              businessNumber,
+              restaurantId: data.restaurantId,
             };
           }
-
           return null;
         } catch (error) {
           console.error('로그인 실패:', error);
-          return null;
+          throw new AuthError('로그인에 실패했습니다');
         }
       },
     }),
   ],
   callbacks: {
-    jwt({ token }) {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.nickname = user.nickname;
+        token.phone = user.phone;
+        token.profileImage = user.profileImage;
+        token.role = user.role;
+        token.businessNumber = user.businessNumber;
+        token.restaurantId = user.restaurantId;
+      }
       return token;
     },
-    session({ session }) {
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.id as string;
+        session.user.nickname = token.nickname as string;
+        session.user.phone = token.phone as string;
+        session.user.profileImage = token.profileImage as string;
+        session.user.role = token.role as string;
+        session.user.businessNumber = token.businessNumber as string;
+        session.user.restaurantId = token.restaurantId as string;
+      }
       return session;
     },
   },

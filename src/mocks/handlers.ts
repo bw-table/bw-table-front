@@ -228,20 +228,4 @@ export const handlers = [
       { status: 200 },
     );
   }),
-
-  http.get(END_POINT.RESERVATIONS, async ({ request }) => {
-    const url = new URL(request.url);
-    const reservationDate = url.searchParams.get('reservationDate');
-    console.log('reservationDate', reservationDate);
-
-    const data = DB.reservationList.filter(
-      (reservation) => reservation.reservationDate === reservationDate,
-    );
-
-    if (data.length > 0) {
-      return HttpResponse.json(data);
-    }
-
-    return HttpResponse.json([]);
-  }),
 ];
