@@ -2,6 +2,7 @@
 
 import ReservationStatusCard from '@/components/common/ReservationStatusCard/ReservationStatusCard';
 import { useGetReservationList } from '@/hooks/queries/reservation/useGetReservations';
+import { ReservationType } from '@/types';
 import Calendar from '@public/Calender.svg';
 import People from '@public/People.svg';
 import { useSession } from 'next-auth/react';
@@ -14,7 +15,7 @@ export default function TodayReservation() {
 
   const reservationCount = reservationData?.content.length;
   const allPeople = reservationData?.content.reduce(
-    (acc: number, current: any) => {
+    (acc: number, current: ReservationType) => {
       return acc + current.numberOfPeople;
     },
     0,
