@@ -40,4 +40,10 @@ export interface MenuFormData {
   description: string;
 }
 
+export interface OperatingHourData {
+  dayOfWeek: string;
+  openingTime: string;
+  closingTime: string;
+  }
+
 }
