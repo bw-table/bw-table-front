@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReservationStatusCard from '@/components/common/ReservationStatusCard/ReservationStatusCard';
 import { useGetReservationList } from '@/hooks/queries/reservation/useGetReservations';
+import { useDateStore } from '@/store/management';
 import { ReservationType } from '@/types';
 import CalendarIcon from '@public/Calender.svg';
 import People from '@public/People.svg';
@@ -15,6 +16,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function TodayReservation() {
   const [value, onChange] = useState<Value>(new Date());
+  const setDate = useDateStore.use.setDate();
   const { data: session } = useSession({ required: true });
   const { reservationData, isReservationLoading } = useGetReservationList(
     session?.user.restaurantId,
@@ -28,11 +30,21 @@ export default function TodayReservation() {
     0,
   );
 
+  useEffect(() => {
+    if (!value) return;
+    if (value instanceof Date) {
+      setDate(value);
+    } else if (Array.isArray(value) && value[0] instanceof Date) {
+      setDate(value[0]);
+    }
+  }, [value, setDate]);
+
   if (isReservationLoading) {
     return (
       <div className="flex flex-col gap-3 lg:col-span-3">
         <div className="skeleton h-20 w-full" />
         <div className="skeleton h-20 w-full" />
+        <div className="skeleton h-96 w-full" />
       </div>
     );
   }

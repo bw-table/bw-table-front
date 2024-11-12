@@ -15,3 +15,8 @@ export interface DuplicateSlice {
   setBusinessDuplicate: (value: boolean) => void;
   resetDuplicateStates: () => void;
 }
+
+export interface DateSlice {
+  date: Date | null;
+  setDate: (value: Date) => void;
+}
