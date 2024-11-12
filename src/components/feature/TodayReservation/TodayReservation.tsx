@@ -1,5 +1,6 @@
 'use client';
 
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import ReservationStatusCard from '@/components/common/ReservationStatusCard/ReservationStatusCard';
 import { useGetReservationList } from '@/hooks/queries/reservation/useGetReservations';
@@ -20,6 +21,8 @@ export default function TodayReservation() {
   const { data: session } = useSession({ required: true });
   const { reservationData, isReservationLoading } = useGetReservationList(
     session?.user.restaurantId,
+    undefined,
+    dayjs(new Date()).format('YYYY-MM-DD'),
   );
 
   const reservationCount = reservationData?.content.length;
