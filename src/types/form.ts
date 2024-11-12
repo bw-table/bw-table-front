@@ -31,3 +31,13 @@ export interface ReviewFormData {
   updatedAt: string;
   userId: number;
 }
+
+export interface MenuFormData {
+  id?: number;
+  image?: File | null;
+  name: string;
+  price: string;
+  description: string;
+}
+
+}
