@@ -33,13 +33,19 @@ const fetchAPI = async (params: ReservationsRequestType) => {
 export const useGetReservationList = (
   restaurantId?: number,
   memberId?: number,
+  reservationDate?: string,
 ) => {
   const {
     data: reservationData,
     isLoading: isReservationLoading,
     isError: isReservationError,
   } = useQuery({
-    queryKey: [QUERY_KEYS.RESERVATIONS, restaurantId, memberId],
+    queryKey: [
+      QUERY_KEYS.RESERVATIONS,
+      restaurantId,
+      memberId,
+      reservationDate,
+    ],
     queryFn: () =>
       fetchAPI({
         page: 1,
@@ -47,7 +53,7 @@ export const useGetReservationList = (
         restaurantId,
         memberId,
         reservationStatus: '',
-        reservationDate: '',
+        reservationDate,
         reservationTime: '',
       }),
   });

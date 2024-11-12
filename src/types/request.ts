@@ -65,7 +65,7 @@ export interface ReservationsRequestType {
   reservationId?: number;
   memberId?: number;
   reservationStatus: string;
-  reservationDate: string;
+  reservationDate?: string;
   reservationTime: string;
   numberOfPeople?: number;
 }
