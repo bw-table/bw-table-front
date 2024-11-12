@@ -13,7 +13,7 @@ const MyDiningPage = () => {
 
   const tabs = [
     { key: 'my-reservation', label: '나의 예약' },
-    { key: 'my-reviews', label: '나의 리뷰' },
+    { key: 'my-alarms', label: '나의 알림' },
   ];
   const restaurantId = 2;
   const memberId = 2;
@@ -41,7 +41,7 @@ const MyDiningPage = () => {
             isReservationError={isReservationError}
           />
         )}
-        {selectedTab === 'my-dining' && (
+        {selectedTab === 'my-alarms' && (
           <div className="mb-4">
             <p className="text-gray-500">알림이 없습니다.</p>
           </div>
