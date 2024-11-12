@@ -52,10 +52,6 @@ export const useGetReservationList = (
       }),
   });
 
-  if (reservationData) {
-    console.log('예약 데이터:', reservationData);
-  }
-
   return {
     reservationData,
     isReservationLoading,

@@ -78,7 +78,5 @@ export interface ReservationConfirmProps {
 export interface ReservationStateCardProps {
   children: ReactNode;
   title: string;
-  mainData: number;
-  increment: number;
-  availableTable?: number;
+  mainData: string;
 }

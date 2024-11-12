@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 export const signInFetch = async (signInData: SignInRequestType) => {
-  const response = await signIn('credentials', {
+  const response = await signIn('email', {
     ...signInData,
     redirect: false,
   });

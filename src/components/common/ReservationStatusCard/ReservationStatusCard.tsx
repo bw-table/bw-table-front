@@ -2,23 +2,16 @@ import { ReservationStateCardProps } from '@/types';
 
 export default function ReservationStatusCard({
   title,
-  children,
   mainData,
-  increment,
-  availableTable,
+  children,
 }: ReservationStateCardProps) {
   return (
-    <div className="flex flex-col gap-2 flex-1 border border-solid border-border-300 rounded py-2 px-5">
-      <div className="flex justify-between w-full">
-        <h2 className="font-semibold">{title}</h2>
+    <div className="flex justify-between border border-solid border-border-300 rounded py-7 px-5 w-full">
+      <div className="flex items-center gap-3">
         {children}
+        {title}
       </div>
-      <b className="text-xl">{mainData}</b>
-      <p className="text-gray-400 text-sm">
-        {availableTable
-          ? `총 ${availableTable} 테이블`
-          : `전날 대비 ${increment}%`}
-      </p>
+      <p className="font-bold text-lg">{mainData}</p>
     </div>
   );
 }
