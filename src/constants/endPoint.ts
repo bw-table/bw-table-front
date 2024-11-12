@@ -9,4 +9,5 @@ export const END_POINT = {
   SIGN_IN: '/api/auth/signin',
   TOKEN_REFRESH: '/api/auth/refresh',
   RESTAURANTS: 'api/restaurants',
+  NEW_RESTAURANTS:'api/restaurants/new',
 } as const;
