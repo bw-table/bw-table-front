@@ -20,6 +20,15 @@ export default function TodayReservation() {
     0,
   );
 
+  if (isReservationLoading) {
+    return (
+      <div className="flex flex-col gap-3">
+        <div className="skeleton h-20 w-full" />
+        <div className="skeleton h-20 w-full" />
+      </div>
+    );
+  }
+
   return (
     <section className="flex flex-col justify-center items-center gap-3 w-full">
       <ReservationStatusCard
