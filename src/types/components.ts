@@ -80,3 +80,11 @@ export interface ReservationStateCardProps {
   title: string;
   mainData: string;
 }
+
+export type StatusVariant = 'PENDING' | 'CONFIRMED' | 'CANCELED';
+
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant: StatusVariant;
+  classNames?: string;
+  children: React.ReactNode | string;
+}

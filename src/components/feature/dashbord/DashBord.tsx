@@ -2,9 +2,10 @@
 
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import Badge from '@/components/common/badge/Badge';
 import { useGetReservationList } from '@/hooks/queries/reservation/useGetReservations';
 import { useDateStore } from '@/store/management';
-import { ReservationType } from '@/types';
+import { ReservationType, StatusVariant } from '@/types';
 import { useSession } from 'next-auth/react';
 
 dayjs.locale('ko');
@@ -56,7 +57,7 @@ export default function DashBord() {
   }
 
   return (
-    <div className="col-span-1 lg:col-span-5 p-3 border border-solid border-border-300 rounded">
+    <div className="col-span-1 lg:col-span-5 p-3 border border-solid border-border-300 rounded ">
       <p className="text-2xl font-bold mb-5">
         {dayjs(date).format('YYYY-MM-DD (dd)')} 예약 목록
       </p>
@@ -80,18 +81,11 @@ export default function DashBord() {
                   >
                     <p>{reservation.nickname}</p>
                     <div className="flex items-center gap-4">
-                      <p>{reservation.numberOfPeople}명</p>
-                      <p
-                        className={`px-2 py-1 rounded ${
-                          reservation.reservationStatus === 'PENDING'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : reservation.reservationStatus === 'CONFIRMED'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-red-100 text-red-800'
-                        }`}
+                      <Badge
+                        variant={reservation.reservationStatus as StatusVariant}
                       >
                         {reservation.reservationStatus}
-                      </p>
+                      </Badge>
                     </div>
                   </div>
                 ))}

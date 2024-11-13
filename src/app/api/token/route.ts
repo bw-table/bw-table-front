@@ -4,8 +4,6 @@ export async function GET() {
   const cookieStore = await cookies();
   const token = cookieStore.get('SSID')?.value;
 
-  console.log('서버 토큰', token);
-
   if (!token) {
     cookieStore.delete('SSID');
     cookieStore.delete('authjs.session-token');
