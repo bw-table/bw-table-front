@@ -82,7 +82,7 @@ export default function DashBord() {
                     className="flex items-center justify-between py-2 border-b last:border-b-0"
                   >
                     <button
-                      className="cursor-pointer"
+                      className="cursor-pointer font-semibold"
                       onClick={() => setSelectedReservation(reservation)}
                     >
                       {reservation.nickname}
