@@ -237,4 +237,33 @@ export const handlers = [
       { status: 200 },
     );
   }),
+
+  http.put('/api/reservations/:id/visited', async ({ params }) => {
+    const { id } = params;
+    return HttpResponse.json({
+      message: 'Successfully updated to visited',
+      reservationId: id,
+      status: 'CONFIRMED',
+    });
+  }),
+
+  // 노쇼 처리
+  http.put('/api/reservations/:id/no-show', async ({ params }) => {
+    const { id } = params;
+    return HttpResponse.json({
+      message: 'Successfully updated to no-show',
+      reservationId: id,
+      status: 'NO_SHOW',
+    });
+  }),
+
+  // 취소 처리
+  http.put('/api/reservations/:id/cancel/owner', async ({ params }) => {
+    const { id } = params;
+    return HttpResponse.json({
+      message: 'Successfully canceled reservation',
+      reservationId: id,
+      status: 'CANCELED',
+    });
+  }),
 ];

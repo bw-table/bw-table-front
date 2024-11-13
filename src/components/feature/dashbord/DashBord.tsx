@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import React from 'react';
 import Badge from '@/components/common/badge/Badge';
+import { useStatusChange } from '@/hooks/queries/management/useStatusChange';
 import { useGetReservationList } from '@/hooks/queries/reservation/useGetReservations';
 import { useDateStore } from '@/store/management';
 import { StatusVariant } from '@/types';
@@ -21,6 +22,29 @@ export default function DashBord() {
     undefined,
     dayjs(date).format('YYYY-MM-DD'),
   );
+  const { visitedMutation, noShowMutation, cancelMutation } = useStatusChange();
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    reservationId: string,
+    date: string,
+  ) => {
+    const status = e.target.value as StatusVariant;
+
+    switch (status) {
+      case 'CONFIRMED':
+        visitedMutation({ reservationId, date });
+        break;
+      case 'NO_SHOW':
+        noShowMutation({ reservationId, date });
+        break;
+      case 'CANCELED':
+        cancelMutation({ reservationId, date });
+        break;
+      default:
+        break;
+    }
+  };
 
   if (isReservationLoading) {
     return (
@@ -60,9 +84,17 @@ export default function DashBord() {
                       >
                         {switchToKorean(reservation.reservationStatus)}
                       </Badge>
-                      <select className="select select-bordered w-full max-w-xs">
-                        <option>선택</option>
-                        <option value="PENDING">대기</option>
+                      <select
+                        onChange={(e) =>
+                          handleChange(
+                            e,
+                            String(reservation.reservationId),
+                            reservation.reservationDate,
+                          )
+                        }
+                        className="select select-bordered w-full max-w-xs"
+                      >
+                        <option value="PENDING">선택</option>
                         <option value="CONFIRMED">방문</option>
                         <option value="NO_SHOW">노쇼</option>
                         <option value="CANCELED">취소</option>
