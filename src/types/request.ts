@@ -26,7 +26,7 @@ export interface RestaurantDetailRequestType {
   description: string;
   address: string;
   latitude: number;
-  longtitude: number;
+  longitude: number;
   contact?: string;
   closedDay?: string;
   category: string;

@@ -18,7 +18,15 @@ export const handlers = [
       { status: 200 },
     );
   }),
-
+  // 가게 등록 POST 핸들러
+  http.post(END_POINT.NEW_RESTAURANTS, (req) => {
+    return HttpResponse.json(
+      {
+        message: '예약이 성공적으로 완료되었습니다.',
+      },
+      { status: 200 },
+    );
+  }),
   //나의 예약 GET 핸들러
   http.get(END_POINT.RESERVATIONS, async ({ request }) => {
     const url = new URL(request.url);
