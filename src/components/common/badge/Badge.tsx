@@ -9,6 +9,7 @@ const BadgeStyles = cva('rounded-md w-full', {
       PENDING: 'bg-warning-500 p-3 text-white',
       CONFIRMED: 'bg-success-500 p-3 text-white',
       CANCELED: 'bg-danger-500 p-3 text-white',
+      NO_SHOW: 'bg-danger-500 p-3 text-white',
     },
   },
 

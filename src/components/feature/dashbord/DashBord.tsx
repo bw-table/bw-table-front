@@ -2,17 +2,16 @@
 
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import React from 'react';
 import Badge from '@/components/common/badge/Badge';
 import { useGetReservationList } from '@/hooks/queries/reservation/useGetReservations';
 import { useDateStore } from '@/store/management';
-import { ReservationType, StatusVariant } from '@/types';
+import { StatusVariant } from '@/types';
+import { groupReservationsByTime } from '@/utils/groupReservationsByTime';
+import { switchToKorean } from '@/utils/switchStatusLang';
 import { useSession } from 'next-auth/react';
 
 dayjs.locale('ko');
-
-interface GroupedReservations {
-  [key: string]: ReservationType[];
-}
 
 export default function DashBord() {
   const date = useDateStore.use.date();
@@ -22,31 +21,6 @@ export default function DashBord() {
     undefined,
     dayjs(date).format('YYYY-MM-DD'),
   );
-
-  const groupReservationsByTime = (reservations: ReservationType[]) => {
-    const groupedByTime: GroupedReservations = {};
-
-    reservations.forEach((reservation) => {
-      const time = reservation.reservationTime;
-      if (!groupedByTime[time]) {
-        groupedByTime[time] = [];
-      }
-
-      groupedByTime[time].push({
-        memberId: reservation.memberId,
-        nickname: reservation.nickname,
-        numberOfPeople: reservation.numberOfPeople,
-        reservationDate: reservation.reservationDate,
-        reservationId: reservation.reservationId,
-        reservationStatus: reservation.reservationStatus,
-        reservationTime: reservation.reservationTime,
-        restaurantId: reservation.restaurantId,
-        specialRequest: reservation.specialRequest,
-      });
-    });
-
-    return groupedByTime;
-  };
 
   if (isReservationLoading) {
     return (
@@ -84,8 +58,15 @@ export default function DashBord() {
                       <Badge
                         variant={reservation.reservationStatus as StatusVariant}
                       >
-                        {reservation.reservationStatus}
+                        {switchToKorean(reservation.reservationStatus)}
                       </Badge>
+                      <select className="select select-bordered w-full max-w-xs">
+                        <option>선택</option>
+                        <option value="PENDING">대기</option>
+                        <option value="CONFIRMED">방문</option>
+                        <option value="NO_SHOW">노쇼</option>
+                        <option value="CANCELED">취소</option>
+                      </select>
                     </div>
                   </div>
                 ))}
