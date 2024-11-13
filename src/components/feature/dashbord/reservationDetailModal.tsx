@@ -54,11 +54,10 @@ export default function ReservationModal({
           <div className="flex flex-col gap-3">
             <span className="font-semibold">요청사항</span>
             <textarea
+              defaultValue={reservation.specialRequest}
               readOnly
               className="h-20  border border-solid border-border-300 rounded focus:outline-0 p-3"
-            >
-              {reservation.specialRequest}
-            </textarea>
+            />
           </div>
           <div className="flex justify-between" />
         </div>
