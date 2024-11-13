@@ -31,3 +31,37 @@ export interface ReviewFormData {
   updatedAt: string;
   userId: number;
 }
+
+export interface MenuFormData {
+  id?: number;
+  image?: File | null;
+  name: string;
+  price: string;
+  description: string;
+}
+
+export interface OperatingHourData {
+  dayOfWeek: string;
+  openingTime: string;
+  closingTime: string;
+  }
+
+export interface SubmitRestaurantData {
+  name: string;
+  description: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  contact: string;
+  closedDay: string;
+  category: string;
+  link: string;
+  info: string;
+  deposit: number;
+  impCode: string;
+  operatingHours: OperatingHourData[];
+  menus: MenuFormData[];
+  images: File[];
+  facilities: string[];
+  hashtags: string[];
+}

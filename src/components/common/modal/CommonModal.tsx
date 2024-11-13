@@ -4,7 +4,7 @@ import { cn } from '@/utils/cn';
 import { CommonModalProps } from '@/types/components';
 
 const modalContentStyles = cva(
-  'bg-white rounded-t-lg shadow-lg max-w-md w-full p-6 transition-transform duration-300 transform',
+  'bg-white rounded-t-lg shadow-lg border-t-4 max-w-[650px] mx-auto border-mainColor-500 max-w-md w-full p-6 transition-transform duration-300 transform',
   {
     variants: {
       isVisible: {

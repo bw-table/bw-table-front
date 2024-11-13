@@ -6,7 +6,7 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
-const headerStyles = cva('flex items-center justify-center gap-3 bg-white', {
+const headerStyles = cva('flex items-center justify-center gap-3 bg-white mb-3', {
   variants: {
     variant: {
       default: '',
@@ -39,7 +39,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
       onClick={handleClick} 
       className={cn(headerStyles({ variant }), classNames )}
     >
-      <BsChevronLeft className="mt-2 mb-4 text-2xl" />
+      <BsChevronLeft className="text-2xl" />
       {label && <span className='text-2xl font-semibold'>{label}</span>}
     </button>
   );

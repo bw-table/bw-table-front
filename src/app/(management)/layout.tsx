@@ -1,10 +1,17 @@
-import { ReactNode } from 'react';
+import React from 'react';
 import Container from '@/components/layout/Container';
 
-export default function ManagementLayout({
+export default function ManagerLayout({
   children,
+  modal,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
-  return <Container variant="tablet">{children}</Container>;
+  return (
+    <Container variant='tablet'>
+      {children}
+      {modal}
+    </Container>
+  );
 }
