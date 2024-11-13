@@ -6,11 +6,13 @@ import PeopleBlack from '@public/PeopleBlackIcon.svg';
 interface ReservationModalProps {
   id: string;
   reservation: ReservationType | null;
+  onClose: () => void;
 }
 
 export default function ReservationModal({
   id,
   reservation,
+  onClose,
 }: ReservationModalProps) {
   useEffect(() => {
     const element = document.getElementById(id);
@@ -26,7 +28,11 @@ export default function ReservationModal({
   if (!reservation) return null;
 
   return (
-    <dialog id={id} className="modal modal-bottom sm:modal-middle">
+    <dialog
+      id={id}
+      className="modal modal-bottom sm:modal-middle"
+      onClose={onClose}
+    >
       <div className="modal-box">
         <h3 className="font-bold text-lg">예약 상세 정보</h3>
         <div className="py-4 space-y-2">

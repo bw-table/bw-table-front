@@ -50,6 +50,10 @@ export default function DashBord() {
     }
   };
 
+  const handleCloseModal = () => {
+    setSelectedReservation(null);
+  };
+
   if (isReservationLoading) {
     return (
       <div className="flex items-center justify-center col-span-1 lg:col-span-5 p-3 border border-solid border-border-300 rounded">
@@ -117,6 +121,7 @@ export default function DashBord() {
         <ReservationModal
           id="reservation_modal"
           reservation={selectedReservation}
+          onClose={handleCloseModal}
         />
       </div>
     </div>
