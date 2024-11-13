@@ -2,12 +2,13 @@
 
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import React from 'react';
+import React, { useState } from 'react';
 import Badge from '@/components/common/badge/Badge';
+import ReservationModal from '@/components/feature/dashbord/reservationDetailModal';
 import { useStatusChange } from '@/hooks/queries/management/useStatusChange';
 import { useGetReservationList } from '@/hooks/queries/reservation/useGetReservations';
 import { useDateStore } from '@/store/management';
-import { StatusVariant } from '@/types';
+import { ReservationType, StatusVariant } from '@/types';
 import { groupReservationsByTime } from '@/utils/groupReservationsByTime';
 import { switchToKorean } from '@/utils/switchStatusLang';
 import { useSession } from 'next-auth/react';
@@ -15,6 +16,9 @@ import { useSession } from 'next-auth/react';
 dayjs.locale('ko');
 
 export default function DashBord() {
+  const [selectedReservation, setSelectedReservation] =
+    useState<ReservationType | null>(null);
+
   const date = useDateStore.use.date();
   const { data: session } = useSession({ required: true });
   const { reservationData, isReservationLoading } = useGetReservationList(
@@ -77,7 +81,12 @@ export default function DashBord() {
                     key={reservation.reservationId}
                     className="flex items-center justify-between py-2 border-b last:border-b-0"
                   >
-                    <p>{reservation.nickname}</p>
+                    <button
+                      className="cursor-pointer"
+                      onClick={() => setSelectedReservation(reservation)}
+                    >
+                      {reservation.nickname}
+                    </button>
                     <div className="flex items-center gap-4">
                       <Badge
                         variant={reservation.reservationStatus as StatusVariant}
@@ -105,6 +114,10 @@ export default function DashBord() {
               </div>
             </div>
           ))}
+        <ReservationModal
+          id="reservation_modal"
+          reservation={selectedReservation}
+        />
       </div>
     </div>
   );
