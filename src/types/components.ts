@@ -74,3 +74,17 @@ export interface ReservationConfirmProps {
   onCancel: () => void;
   onConfirm: () => void;
 }
+
+export interface ReservationStateCardProps {
+  children: ReactNode;
+  title: string;
+  mainData: string;
+}
+
+export type StatusVariant = 'PENDING' | 'CONFIRMED' | 'CANCELED' | 'NO_SHOW';
+
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant: StatusVariant;
+  classNames?: string;
+  children: React.ReactNode | string;
+}

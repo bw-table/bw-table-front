@@ -27,10 +27,11 @@ export const handlers = [
       { status: 200 },
     );
   }),
-  //나의 예약 GET 핸들러
+
+  // 나의 예약 GET 핸들러
   http.get(END_POINT.RESERVATIONS, async ({ request }) => {
     const url = new URL(request.url);
-    const searchParams = url.searchParams;
+    const { searchParams } = url;
 
     const page = searchParams.get('page');
     const size = searchParams.get('size');
@@ -42,24 +43,27 @@ export const handlers = [
 
     // 필터링 로직
     const filteredReservations = DB.reservations.filter((reservation) => {
-        return (
-            (!restaurantId || reservation.restaurantId === Number(restaurantId)) &&
-            (!memberId || reservation.memberId === Number(memberId)) &&
-            (!reservationStatus || reservation.reservationStatus === reservationStatus) &&
-            (!reservationDate || reservation.reservationDate === reservationDate) &&
-            (!reservationTime || reservation.reservationTime === reservationTime)
-        );
+      return (
+        (!restaurantId || reservation.restaurantId === Number(restaurantId)) &&
+        (!memberId || reservation.memberId === Number(memberId)) &&
+        (!reservationStatus ||
+          reservation.reservationStatus === reservationStatus) &&
+        (!reservationDate || reservation.reservationDate === reservationDate) &&
+        (!reservationTime || reservation.reservationTime === reservationTime)
+      );
     });
 
     return HttpResponse.json({
-        content: filteredReservations,
-        totalElements: filteredReservations.length,
-        totalPages: Math.ceil(filteredReservations.length / (size ? Number(size) : 10)),
-        number: page ? Number(page) : 0,
+      content: filteredReservations,
+      totalElements: filteredReservations.length,
+      totalPages: Math.ceil(
+        filteredReservations.length / (size ? Number(size) : 10),
+      ),
+      number: page ? Number(page) : 0,
     });
-}),
+  }),
 
-// 식당 상세 정보 가져오기
+  // 식당 상세 정보 가져오기
   http.get(`${END_POINT.RESTAURANTS}/:restaurantId`, ({ params }) => {
     const { restaurantId } = params;
     const restaurant = DB.restaurant.find(
@@ -75,39 +79,34 @@ export const handlers = [
     );
   }),
 
-// 특정식당 리뷰 리스트 불러오기
-http.get(`${END_POINT.RESTAURANTS}/:restaurantId/reviews`, ({ params }) => {
-  const { restaurantId } = params;
-  const reviews = DB.reviews.filter(
-    (review) => review.restaurantId === Number(restaurantId)
-  );
-
-  if (reviews.length > 0) {
-    return HttpResponse.json({ data: reviews }, { status: 200 });
-  } else {
-    return HttpResponse.json(
-      { error: 'Reviews not found' },
-      { status: 404 }
+  // 특정식당 리뷰 리스트 불러오기
+  http.get(`${END_POINT.RESTAURANTS}/:restaurantId/reviews`, ({ params }) => {
+    const { restaurantId } = params;
+    const reviews = DB.reviews.filter(
+      (review) => review.restaurantId === Number(restaurantId),
     );
-  }
-}),
-  
-// 식당 공지사항
-http.get(`${END_POINT.RESTAURANTS}/:restaurantId/announcements`, ({ params }) => {
-  const { restaurantId } = params;
-  const announcements = DB.announcements.filter(
-    (announcement) => announcement.restaurantId === Number(restaurantId)
-  );
 
-  if (announcements.length > 0) {
-    return HttpResponse.json({ data: announcements }, { status: 200 });
-  } else {
-    return HttpResponse.json(
-      { error: 'Reviews not found' },
-      { status: 404 }
-    );
-  }
-}),
+    if (reviews.length > 0) {
+      return HttpResponse.json({ data: reviews }, { status: 200 });
+    }
+    return HttpResponse.json({ error: 'Reviews not found' }, { status: 404 });
+  }),
+
+  // 식당 공지사항
+  http.get(
+    `${END_POINT.RESTAURANTS}/:restaurantId/announcements`,
+    ({ params }) => {
+      const { restaurantId } = params;
+      const announcements = DB.announcements.filter(
+        (announcement) => announcement.restaurantId === Number(restaurantId),
+      );
+
+      if (announcements.length > 0) {
+        return HttpResponse.json({ data: announcements }, { status: 200 });
+      }
+      return HttpResponse.json({ error: 'Reviews not found' }, { status: 404 });
+    },
+  ),
 
   http.post(END_POINT.EMAIL_DUPLICATE, async ({ request }) => {
     const { email } = (await request.json()) as { email: string };
@@ -237,5 +236,34 @@ http.get(`${END_POINT.RESTAURANTS}/:restaurantId/announcements`, ({ params }) =>
       { success: '두 번째 이후 요청은 200' },
       { status: 200 },
     );
+  }),
+
+  http.put('/api/reservations/:id/visited', async ({ params }) => {
+    const { id } = params;
+    return HttpResponse.json({
+      message: 'Successfully updated to visited',
+      reservationId: id,
+      status: 'CONFIRMED',
+    });
+  }),
+
+  // 노쇼 처리
+  http.put('/api/reservations/:id/no-show', async ({ params }) => {
+    const { id } = params;
+    return HttpResponse.json({
+      message: 'Successfully updated to no-show',
+      reservationId: id,
+      status: 'NO_SHOW',
+    });
+  }),
+
+  // 취소 처리
+  http.put('/api/reservations/:id/cancel/owner', async ({ params }) => {
+    const { id } = params;
+    return HttpResponse.json({
+      message: 'Successfully canceled reservation',
+      reservationId: id,
+      status: 'CANCELED',
+    });
   }),
 ];
