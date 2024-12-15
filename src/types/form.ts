@@ -65,3 +65,11 @@ export interface SubmitRestaurantData {
   facilities: string[];
   hashtags: string[];
 }
+
+export interface MainRestaurantType {
+  id: number;
+  name: string;
+  address: string;
+  category: string;
+  averageRating: number;
+}
