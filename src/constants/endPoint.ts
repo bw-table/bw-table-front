@@ -10,4 +10,5 @@ export const END_POINT = {
   TOKEN_REFRESH: '/api/auth/refresh',
   RESTAURANTS: 'api/restaurants',
   NEW_RESTAURANTS:'api/restaurants/new',
+  MAIN_PAGE:'api/main/restaurants',
 } as const;
