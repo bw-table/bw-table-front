@@ -1,6 +1,7 @@
 'use client';
 
 import Carousel from '@/components/feature/main-page/Carousel';
+import CategoryList from '@/components/feature/main-page/CategoryList';
 import React from 'react';
 
 const MainPage = () => {
@@ -10,6 +11,7 @@ const MainPage = () => {
         <img src='/Logo.svg' />
       </div>
       <Carousel />
+      <CategoryList />
     </>
   );
 };
