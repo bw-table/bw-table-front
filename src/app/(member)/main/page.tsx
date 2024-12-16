@@ -1,6 +1,7 @@
 'use client';
 
 import SearchInput from '@/components/common/input/SearchInput';
+import BottomNavigationBar from '@/components/common/navigation-bar/BottomNavigationBar';
 import Carousel from '@/components/feature/main-page/Carousel';
 import CategoryList from '@/components/feature/main-page/CategoryList';
 import React from 'react';
@@ -14,6 +15,7 @@ const MainPage = () => {
       <SearchInput />
       <Carousel />
       <CategoryList />
+      <BottomNavigationBar />
     </>
   );
 };
