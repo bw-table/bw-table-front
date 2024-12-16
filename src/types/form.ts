@@ -29,15 +29,18 @@ export interface ReviewFormData {
   images?: string[];
   createdAt: string;
   updatedAt: string;
-  userId: number;
+  memberId: number;
+  memberNickname: string;
+  memberProfileImage: string;
 }
 
 export interface MenuFormData {
   id?: number;
-  image?: File | null;
   name: string;
-  price: string;
+  price: number;
   description: string;
+  imageUrl?: string;
+  restaurantId: number;
 }
 
 export interface OperatingHourData {
@@ -67,6 +70,7 @@ export interface SubmitRestaurantData {
 }
 
 export interface MainRestaurantType {
+  image: string;
   id: number;
   name: string;
   address: string;
