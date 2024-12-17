@@ -8,7 +8,8 @@ export const categories = [
         className="w-12 h-12"
       />,
       label: "이달의 맛집",
-      badge: "N"
+      badge: "N",
+      key: "top-of-the-month"
   },
   { icon:
     <img
@@ -16,7 +17,8 @@ export const categories = [
       alt="모임 예약"
       className="w-12 h-12"
   />,
-    label: "모임 예약"
+    label: "모임 예약",
+    key: "for-group"
   },
   { icon:
     <img
@@ -24,7 +26,8 @@ export const categories = [
       alt="스페셜 혜택"
       className="w-12 h-12"
   />,
-    label: "스페셜 혜택"
+    label: "스페셜 혜택",
+    key: "with-event"
   },
   { icon:
     <img
@@ -32,7 +35,8 @@ export const categories = [
       alt="히든플레이스"
       className="w-12 h-12"
   />,
-    label: "히든플레이스"
+    label: "히든플레이스",
+    key: "hidden-place"
   },
   { icon:
       <img
@@ -40,7 +44,8 @@ export const categories = [
         alt="오마카세"
         className="w-12 h-12"
     />,
-    label: "오마카세"
+    label: "오마카세",
+    key: "omakase"
   },
   { icon:     
       <img
@@ -48,7 +53,8 @@ export const categories = [
         alt="중식"
         className="w-12 h-12"
       />,
-      label: "중식"
+      label: "중식",
+      key: "chinese"
     },
   { icon:
       <img
@@ -56,14 +62,17 @@ export const categories = [
       alt="파인다이닝"
       className="w-12 h-12"
     />,
-    label: "파인다이닝" },
+    label: "파인다이닝",
+    key: "fine-dining" 
+  },
   { icon:
     <img
       src="/assets/pasta.png"
       alt="파스타"
       className="w-12 h-12"
     />,
-    label: "파스타" 
+    label: "파스타",
+    key: "pasta" 
   },
 ];
 
