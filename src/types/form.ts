@@ -14,7 +14,7 @@ export interface SignInFormData {
 }
 
 export interface AnnouncementFormData {
-  announcementId: number;
+  id: number;
   isEvent: boolean;
   title: string;
   content: string;
