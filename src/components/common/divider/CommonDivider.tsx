@@ -6,6 +6,7 @@ const dividerStyles = cva('w-full my-4 bg-white shadow-md');
 interface DividerProps {
   children?: ReactNode;
   classNames?: string;
+  onClick?: () => void;
 }
 
 const Divider: React.FC<DividerProps> = ({ children, classNames }) => {
