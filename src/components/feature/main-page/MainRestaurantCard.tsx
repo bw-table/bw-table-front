@@ -26,6 +26,7 @@ const MainRestaurantsCard = () => {
           {mainRestaurants?.eventRestaurants?.map((restaurant) => (
             <RestaurantCard
               key={restaurant.id}
+              id={restaurant.id}
               imageSrc={restaurant.image}
               name={restaurant.name}
               averageRating={restaurant.averageRating}
@@ -44,6 +45,7 @@ const MainRestaurantsCard = () => {
           {mainRestaurants?.reviewRestaurants?.map((restaurant) => (
             <RestaurantCard
               key={restaurant.id}
+              id={restaurant.id}
               imageSrc={restaurant.image}
               name={restaurant.name}
               averageRating={restaurant.averageRating}
@@ -63,6 +65,7 @@ const MainRestaurantsCard = () => {
           {mainRestaurants?.recommendations?.map((restaurant) => (
             <RestaurantCard
               key={restaurant.id}
+              id={restaurant.id}
               imageSrc={restaurant.image}
               name={restaurant.name}
               averageRating={restaurant.averageRating}
@@ -82,6 +85,7 @@ const MainRestaurantsCard = () => {
           {mainRestaurants?.newRestaurants?.map((restaurant) => (
             <RestaurantCard
               key={restaurant.id}
+              id={restaurant.id}
               imageSrc={restaurant.image}
               name={restaurant.name}
               averageRating={restaurant.averageRating}
