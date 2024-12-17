@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
   ANNOUNCEMENTS: 'announcements',
   RESERVATIONS: 'reservations',
   MAIN_RESTAURANTS: 'restaurants',
+  MAIN_CATEGORY_RESTAURANTS: 'category'
 } as const;
