@@ -1,3 +1,5 @@
+import { AnnouncementFormData, MenuFormData, ReviewFormData } from "./form";
+
 export interface SignUpRequestType {
   email: string;
   password: string;
@@ -34,16 +36,8 @@ export interface RestaurantDetailRequestType {
   averageRating: number;
   info?: string;
   images: [];
-  menus: [
-    {
-      id: number;
-      name: string;
-      price: number;
-      description: string;
-      imageUrl: string;
-      restaurantId: number;
-    },
-  ];
+  announcements: AnnouncementFormData[];
+  menus: MenuFormData[];
   facilities: [];
   hashtags: [];
   operatingHours?: [
@@ -55,7 +49,9 @@ export interface RestaurantDetailRequestType {
       closingTime: string;
       restaurantId: number;
     },
-  ];
+  ]
+  reviews: ReviewFormData[];
+
 }
 
 export interface ReservationsRequestType {

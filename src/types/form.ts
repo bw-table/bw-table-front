@@ -14,7 +14,7 @@ export interface SignInFormData {
 }
 
 export interface AnnouncementFormData {
-  announcementId: number;
+  id: number;
   isEvent: boolean;
   title: string;
   content: string;
@@ -29,15 +29,18 @@ export interface ReviewFormData {
   images?: string[];
   createdAt: string;
   updatedAt: string;
-  userId: number;
+  memberId: number;
+  memberNickname: string;
+  memberProfileImage: string;
 }
 
 export interface MenuFormData {
   id?: number;
-  image?: File | null;
   name: string;
-  price: string;
+  price: number;
   description: string;
+  imageUrl?: string;
+  restaurantId: number;
 }
 
 export interface OperatingHourData {
@@ -64,4 +67,13 @@ export interface SubmitRestaurantData {
   images: File[];
   facilities: string[];
   hashtags: string[];
+}
+
+export interface MainRestaurantType {
+  image: string;
+  id: number;
+  name: string;
+  address: string;
+  category: string;
+  averageRating: number;
 }

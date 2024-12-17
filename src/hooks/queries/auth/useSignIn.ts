@@ -24,7 +24,7 @@ export const useSignIn = () => {
   const { mutate: signInMutation } = useMutation({
     mutationFn: signInFetch,
     onSuccess: async () => {
-      router.push('/');
+      router.push('/main');
     },
     onError: (error) => {
       console.error('로그인 실패:', error);

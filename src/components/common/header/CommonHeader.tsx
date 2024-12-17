@@ -18,7 +18,7 @@ const headerStyles = cva('flex items-center justify-center gap-3 bg-white mb-3',
 });
 
 interface CommonHeaderProps {
-  label?: string;
+  label?: string | string[] ;
   variant?: 'default';
   classNames?: '';
 }
