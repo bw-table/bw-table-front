@@ -19,8 +19,8 @@ const nicknameDuplicate = async (nickname: string) => {
 };
 
 // 전화번호 중복 체크
-const telDuplicate = async (tel: string) => {
-  const res = await axiosDefault.post(END_POINT.TEL_DUPLICATE, { tel });
+const telDuplicate = async (phone: string) => {
+  const res = await axiosDefault.post(END_POINT.TEL_DUPLICATE, { phone });
   return res.data;
 };
 
