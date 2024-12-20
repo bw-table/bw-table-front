@@ -31,15 +31,16 @@ const businessDuplicate = async (business: string) => {
   });
   return res.data;
 };
+// 실제 사업자번호 여부 체크 -> 차후 재도입 예정
+// const businessCheck = async (business: string) => {
+//   const res = await axios.post(process.env.NEXT_PUBLIC_API_URL as string, {
+//     b_no: [business],
+//   });
+//   return res.data;
+// };
 
-const businessCheck = async (business: string) => {
-  const res = await axios.post(process.env.NEXT_PUBLIC_API_URL as string, {
-    b_no: [business],
-  });
-  return res.data;
 };
 
-// 메인 쿼리 훅
 export const useSignupDuplicate = () => {
   const {
     setEmailDuplicate,
@@ -101,6 +102,13 @@ export const useSignupDuplicate = () => {
       console.error(error);
     },
   });
+  // const { mutateAsync: businessCheckMutation } = useMutation({
+  //   mutationFn: businessCheck,
+  //   onSuccess: (data) => {
+  //     return data;
+  //   },
+  //   onError: handleMutationError,
+  // });
 
   return {
     businessCheckMutation,
@@ -108,5 +116,6 @@ export const useSignupDuplicate = () => {
     nicknameDuplicateMutation,
     telDuplicateMutation,
     businessDuplicateMutation,
+    // businessCheckMutation,
   };
 };
