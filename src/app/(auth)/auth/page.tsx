@@ -18,7 +18,7 @@ export default function AuthPage() {
         </CommonButton>
         <div className="flex items-center w-full">
           <div className="flex-1 max-h-[1px] border-t border-solid border-border-300" />
-          <p className="px-4 text-gray200">또는</p>
+          <p className="px-4 text-gray-200">또는</p>
           <div className="flex-1 max-h-[1px] border-t border-solid border-border-300" />
         </div>
         <div className="relative w-full">
