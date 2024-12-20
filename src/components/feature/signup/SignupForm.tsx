@@ -10,9 +10,11 @@ import { useWatchDuplicate } from '@/hooks/useWatchDuplicate';
 import { SignupFormData } from '@/types';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 export default function SignupForm() {
   const [management, setManagement] = useState<boolean>(false);
+  const router = useRouter();
 
   const {
     register,
@@ -46,14 +48,22 @@ export default function SignupForm() {
         role: 'OWNER',
         loginType: 'EMAIL',
       };
-      signUpMutation(managementData);
+      signUpMutation(managementData, {
+        onSuccess: () => {
+          router.push('/new-restaurant');
+        },
+      });
     } else {
       const guestData = {
         ...baseData,
         role: 'GUEST',
         loginType: 'EMAIL',
       };
-      signUpMutation(guestData);
+      signUpMutation(guestData, {
+        onSuccess: () => {
+          router.push('/main');
+        },
+      });
     }
   };
 
