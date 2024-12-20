@@ -44,12 +44,14 @@ export default function SignupForm() {
         ...baseData,
         businessNumber,
         role: 'OWNER',
+        loginType: 'EMAIL',
       };
       signUpMutation(managementData);
     } else {
       const guestData = {
         ...baseData,
         role: 'GUEST',
+        loginType: 'EMAIL',
       };
       signUpMutation(guestData);
     }
