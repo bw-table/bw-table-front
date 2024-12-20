@@ -1,4 +1,5 @@
 export interface SignupFormData {
+  loginType: string;
   email: string;
   password: string;
   checkPassword: string;

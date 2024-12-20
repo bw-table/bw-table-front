@@ -10,7 +10,7 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
     businessDuplicateMutation,
     telDuplicateMutation,
     emailDuplicateMutation,
-    businessCheckMutation,
+    // businessCheckMutation,
   } = useSignupDuplicate();
 
   const {
@@ -31,7 +31,7 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
         return true;
       }
       const res = await emailDuplicateMutation(value);
-      return res.data.isEmailDuplicate ? '이미 존재하는 이메일 입니다' : true;
+      return res.data?.isEmailDuplicate ? '이미 존재하는 이메일 입니다' : true;
     },
   };
 
@@ -84,7 +84,7 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
         return true;
       }
       const res = await nicknameDuplicateMutation(value);
-      return res.data.isNicknameDuplicate
+      return res.data?.isNicknameDuplicate
         ? '이미 존재하는 닉네임 입니다'
         : true;
     },
@@ -101,7 +101,7 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
         return true;
       }
       const res = await telDuplicateMutation(value);
-      return res.data.isPhoneDuplicate ? '이미 존재하는 번호 입니다' : true;
+      return res.data?.isPhoneDuplicate ? '이미 존재하는 번호 입니다' : true;
     },
   } as const;
 
@@ -116,14 +116,14 @@ export const useSignupRules = (getValues: UseFormGetValues<SignupFormData>) => {
         return true;
       }
       const res = await businessDuplicateMutation(value);
-      const check = await businessCheckMutation(value);
-      const isChecked = check.match_cnt === 1;
-      if (res.data.isBusinessNumberDuplicate) {
+      // const check = await businessCheckMutation(value);
+      // const isChecked = check.match_cnt === 1;
+      if (res.data?.isBusinessNumberDuplicate) {
         return '이미 존재하는 사업자 번호 입니다';
       }
-      if (!isChecked) {
-        return '없는 사업자 번호 입니다.';
-      }
+      // if (!isChecked) {
+      //   return '없는 사업자 번호 입니다.';
+      // }
       return true;
     },
   };

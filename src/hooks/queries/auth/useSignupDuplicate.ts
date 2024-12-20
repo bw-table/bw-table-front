@@ -1,4 +1,4 @@
-import axios from 'axios'; // 이메일 중복 체크
+// import axios from 'axios';
 import { axiosDefault } from '@/api/axiosInstance';
 import { END_POINT } from '@/constants/endPoint';
 import { useAuthStore } from '@/store';
@@ -39,8 +39,12 @@ const businessDuplicate = async (businessNumber: string) => {
 //   return res.data;
 // };
 
+// 에러 핸들링 함수
+const handleMutationError = (error: any) => {
+  console.error('중복 체크 실패:', error);
 };
 
+// 메인 훅
 export const useSignupDuplicate = () => {
   const {
     setEmailDuplicate,
@@ -52,56 +56,39 @@ export const useSignupDuplicate = () => {
   const { mutateAsync: emailDuplicateMutation } = useMutation({
     mutationFn: emailDuplicate,
     onSuccess: (data) => {
-      setEmailDuplicate(!data.data.isEmailDuplicate);
-      return data;
+      const isDuplicate = data?.isEmailDuplicate ?? false;
+      setEmailDuplicate(!isDuplicate);
     },
-    onError: (error) => {
-      console.error(error);
-    },
+    onError: handleMutationError,
   });
 
   const { mutateAsync: nicknameDuplicateMutation } = useMutation({
     mutationFn: nicknameDuplicate,
     onSuccess: (data) => {
-      setNicknameDuplicate(!data.data.isNicknameDuplicate);
-      return data;
+      const isDuplicate = data?.isNicknameDuplicate ?? false;
+      setNicknameDuplicate(!isDuplicate);
     },
-    onError: (error) => {
-      console.error(error);
-    },
+    onError: handleMutationError,
   });
 
   const { mutateAsync: telDuplicateMutation } = useMutation({
     mutationFn: telDuplicate,
     onSuccess: (data) => {
-      setTelDuplicate(!data.data.isPhoneDuplicate);
-      return data;
+      const isDuplicate = data?.isPhoneDuplicate ?? false;
+      setTelDuplicate(!isDuplicate);
     },
-    onError: (error) => {
-      console.error(error);
-    },
+    onError: handleMutationError,
   });
 
   const { mutateAsync: businessDuplicateMutation } = useMutation({
     mutationFn: businessDuplicate,
     onSuccess: (data) => {
-      setBusinessDuplicate(!data.data.isBusinessNumberDuplicate);
-      return data;
+      const isDuplicate = data?.isBusinessNumberDuplicate ?? false;
+      setBusinessDuplicate(!isDuplicate);
     },
-    onError: (error) => {
-      console.error(error);
-    },
+    onError: handleMutationError,
   });
 
-  const { mutateAsync: businessCheckMutation } = useMutation({
-    mutationFn: businessCheck,
-    onSuccess: (data) => {
-      return data;
-    },
-    onError: (error) => {
-      console.error(error);
-    },
-  });
   // const { mutateAsync: businessCheckMutation } = useMutation({
   //   mutationFn: businessCheck,
   //   onSuccess: (data) => {
@@ -111,7 +98,6 @@ export const useSignupDuplicate = () => {
   // });
 
   return {
-    businessCheckMutation,
     emailDuplicateMutation,
     nicknameDuplicateMutation,
     telDuplicateMutation,
