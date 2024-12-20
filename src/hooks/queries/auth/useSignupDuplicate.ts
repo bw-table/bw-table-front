@@ -25,9 +25,9 @@ const telDuplicate = async (phone: string) => {
 };
 
 // 사업자 번호 중복 체크
-const businessDuplicate = async (business: string) => {
+const businessDuplicate = async (businessNumber: string) => {
   const res = await axiosDefault.post(END_POINT.BUSINESS_DUPLICATE, {
-    business,
+    businessNumber,
   });
   return res.data;
 };
