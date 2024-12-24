@@ -40,7 +40,7 @@ export interface MenuFormData {
   name: string;
   price: number;
   description: string;
-  imageUrl?: string;
+  menuImages?: string;
   restaurantId: number;
 }
 

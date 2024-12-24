@@ -26,6 +26,7 @@ export interface CommonInputProps
   type: InputType;
   variant?: 'default' | 'disabled';
   classNames?: string;
+  label?: string;
 }
 
 export interface FormInputProps<T extends FieldValues>
