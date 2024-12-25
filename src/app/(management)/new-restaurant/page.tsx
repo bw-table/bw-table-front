@@ -206,7 +206,7 @@ const NewRestaurantForm = () => {
         />
       </div>
         {/* 가맹점 식별코드 등록 */}
-        <div className="mb-4 flex flex-col gap-3">
+        {/* <div className="mb-4 flex flex-col gap-3">
           <label htmlFor="imp-code" className="block text-sm font-medium">가맹점 식별코드 등록</label>
           <FormInput 
             register={register} 
@@ -215,7 +215,7 @@ const NewRestaurantForm = () => {
             classNames="w-full bg-gray-100 border-none" 
             placeholder="KG이니시스에서 발급받은 가맹점 식별코드를 입력해주세요." 
           />
-        </div>
+        </div> */}
         {/* 안내 및 유의사항 */}
         <CommonTextarea
           id="info"
