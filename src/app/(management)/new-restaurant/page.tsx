@@ -16,15 +16,26 @@ import HashtagInput from '@/components/feature/management/HashTagInput';
 import FacilitySelect from '@/components/feature/management/FacilitiesSelect';
 import CommonTextarea from '@/components/common/textarea/CommonTextArea';
 import CategorySelect from '@/components/feature/management/CategorySelect';
+import { useForm } from 'react-hook-form';
 
 
 const NewRestaurantForm = () => {
   const {
-    register,
     handleSubmit,
+    register,
     setValue,
-    submitRestaurant,
-  } = usePostRestaurant();
+  } = useForm<SubmitRestaurantData>({
+    defaultValues: {
+      name: '',
+      description: '',
+      address: '',
+      contact: '',
+      category: '',
+      deposit: 0,
+      info: '',
+      link: '',
+    }});
+  const { submitRestaurant } = usePostRestaurant();
   const [images, setImages] = useState<File[]>([]);
   const [location, setLocation] = useState('');
   const [hashtags, setHashtags] = useState<string[]>([]);
