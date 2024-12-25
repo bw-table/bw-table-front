@@ -1,17 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
 import { END_POINT } from '@/constants/endPoint';
-import { axiosDefault } from '@/api/axiosInstance';
-import { SubmitRestaurantData } from '@/types';
+import { axiosAuth } from '@/api/axiosInstance';
 
-const fetchAPI = async (data: SubmitRestaurantData) => {
-  const response = await axiosDefault.post(END_POINT.NEW_RESTAURANTS, data);
+const fetchAPI = async (data: FormData) => {
+  const response = await axiosAuth.post(END_POINT.NEW_RESTAURANTS, data);
   return response.data;
 };
 
 export const usePostRestaurant = () => {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<SubmitRestaurantData>();
-
   const { mutate: submitRestaurant, isPending, isSuccess, isError } = useMutation({
     mutationFn: fetchAPI,
     onSuccess: (data) => {
@@ -23,13 +19,10 @@ export const usePostRestaurant = () => {
   });
 
   return {
-    register,
-    handleSubmit,
     submitRestaurant,
-    setValue,
-    errors,
     isPending,
     isSuccess,
     isError,
   };
 };
+
