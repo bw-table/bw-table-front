@@ -57,17 +57,67 @@ const NewRestaurantForm = () => {
     router.push('/menus');
   };
 
-  const onSubmit = (data:SubmitRestaurantData) => {
-    const formData = {
-      ...data,
-      location,
-      operatingHours,
-      hashtags,
-      images,
+  const onSubmit = (data: SubmitRestaurantData) => {
+    const formData = new FormData();
+
+    // 1. 모든 요일 목록
+    const allDaysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
+
+    // 2. 영업일 요일 목록 추출
+    const operatingDays = operatingHours.map((hour) => hour.dayOfWeek);
+
+    // 3. 닫힌 요일 계산
+    const closedDay = allDaysOfWeek.filter((day) => !operatingDays.includes(day));
+
+    // 1. Restaurant JSON 데이터 추가
+    const restaurant = {
+      name: data.name,
+      description: data.description,
+      address: data.address,
+      latitude: data.latitude || 0,
+      longitude: data.longitude || 0,
+      contact: data.contact,
+      closedDay: closedDay.join(',') || '',
+      category: data.category,
+      info: data.info || '',
+      link: data.link || '',
+      deposit: Number(data.deposit),
+      menus: menuItems.map((menu) => ({
+        name: menu.name,
+        price: Number(menu.price),
+        description: menu.description,
+      })),
+      operatingHours: operatingHours.map((hour) => ({
+        dayOfWeek: hour.dayOfWeek,
+        openingTime: hour.openingTime,
+        closingTime: hour.closingTime,
+      })),
       facilities,
+      hashtags,
     };
+
+
+    const jsonBlob = new Blob([JSON.stringify(restaurant)], { type: 'application/json' });
+    formData.append('restaurant', jsonBlob);
+  
+    // 2. 일반 이미지 추가
+    images.forEach((image) => {
+      formData.append('images', image);
+    });
+  
+    // 3. 메뉴 이미지 추가
+    menuItems.forEach((menu) => {
+      if (menu.image) {
+        formData.append('menuImages', menu.image);
+      }
+    });
+  
+    // 4. 서버로 전송
+    console.log(...formData.entries());
     submitRestaurant(formData);
+
   };
+  
   return (
     <div className="container mx-auto max-w-2xl p-4">
       <CommonHeader label='나의 가게 등록'/>  
