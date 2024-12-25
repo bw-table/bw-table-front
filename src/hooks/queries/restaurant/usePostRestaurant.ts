@@ -13,6 +13,7 @@ export const usePostRestaurant = () => {
   const router = useRouter();
   const { toastSuccess, toastError } = useToast();
   const { mutate: submitRestaurant, isPending, isSuccess, isError } = useMutation({
+    mutationKey:['newRestaurant'],
     mutationFn: fetchAPI,
     onSuccess: (data) => {
       console.log('가게 등록 성공:', data);
