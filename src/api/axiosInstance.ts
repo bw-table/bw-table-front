@@ -6,14 +6,14 @@ export const axiosDefault = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 export const axiosAuth = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
+    // 'Content-Type': 'application/json',
   },
-  withCredentials: true,
 });
 
 axiosAuth.interceptors.request.use(requestInterceptor, (error) =>
