@@ -4,6 +4,7 @@ import { pretendard } from '@/utils/fonts';
 import type { Metadata } from 'next';
 import './globals.css';
 import AuthSessionProvider from '@/provider/AuthSessionProvider';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,6 +21,18 @@ export default function RootLayout({
       <body className={`${pretendard.variable}`}>
         <QueryProvider>
           <AuthSessionProvider>{children}</AuthSessionProvider>
+                {/* 토스트 컨테이너 */}
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </QueryProvider>
       </body>
     </html>

@@ -1,4 +1,5 @@
 export interface SignupFormData {
+  loginType: string;
   email: string;
   password: string;
   checkPassword: string;
@@ -39,7 +40,7 @@ export interface MenuFormData {
   name: string;
   price: number;
   description: string;
-  imageUrl?: string;
+  menuImages?: string;
   restaurantId: number;
 }
 
