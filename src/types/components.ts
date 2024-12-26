@@ -70,7 +70,7 @@ export interface CommonModalProps {
 export interface ReservationConfirmProps {
   date: string;
   time: string;
-  people: number;
+  numberOfPeople: number;
   onSpecialRequest: string;
   onCancel: () => void;
   onConfirm: () => void;

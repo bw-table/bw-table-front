@@ -11,9 +11,10 @@ export interface SignUpRequestType {
 }
 
 export interface ReservationData {
-  date: string;
-  time: string;
-  people: number;
+  restaurantId: number;
+  reservationDate: string;
+  reservationTime: string;
+  numberOfPeople: number;
   specialRequest: string;
 }
 
