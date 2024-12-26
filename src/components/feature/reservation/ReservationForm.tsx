@@ -25,11 +25,14 @@ export default function ReservationForm({
 
   const peopleOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const timeOptions = [
-    '오후 5:00',
-    '오후 5:30',
-    '오후 6:00',
-    '오후 6:30',
-    '오후 7:00',
+    '17:00',
+    '17:30',
+    '18:00',
+    '19:30',
+    '20:00',
+    '20:30',
+    '21:00',
+    '21:30',
   ];
 
   const handleDateChange = (date: Date | null) => {

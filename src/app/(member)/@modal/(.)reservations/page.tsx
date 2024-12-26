@@ -47,9 +47,11 @@ export default function ReservationsPage() {
   // 예약 전송 함수
   const handleConfirmReservation = () => {
     submitReservation({
-      date: selectedDate?.toISOString() || '',
-      time: selectedTime || '',
-      people: selectedPeople || 1,
+      reservationDate: selectedDate
+      ? `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
+      : '',
+      reservationTime: selectedTime || '',
+      numberOfPeople: selectedPeople || 1,
       specialRequest: specialRequest,
       restaurantId,
     });
@@ -92,7 +94,7 @@ export default function ReservationsPage() {
               <ReservationConfirm
                 date={selectedDate.toLocaleDateString()}
                 time={selectedTime}
-                people={selectedPeople}
+                numberOfPeople={selectedPeople}
                 onCancel={prevStep}
                 onSpecialRequest={specialRequest}
                 onConfirm={handleConfirmReservation}
