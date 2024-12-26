@@ -9,6 +9,7 @@ export const END_POINT = {
   SIGN_IN: '/api/auth/login',
   TOKEN_REFRESH: '/api/auth/refresh',
   RESTAURANTS: 'api/restaurants',
+  RESERVATION_SUCCESS: '/api/reservations/complete',
   NEW_RESTAURANTS:'api/restaurants/new',
   MAIN_PAGE:'api/main/restaurants',
 } as const;

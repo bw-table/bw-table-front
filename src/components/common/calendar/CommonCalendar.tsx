@@ -39,6 +39,12 @@ export default function CommonCalendar({
 
   const handleDateClick = (value: Value) => {
     const selectedDate = value instanceof Date ? value : null;
+  
+    if (selectedDate) {
+      // 로컬 시간대 기준으로 시간 초기화
+      selectedDate.setHours(0, 0, 0, 0);
+    }
+  
     setValue(selectedDate);
     onDateChangeAction(selectedDate);
   };

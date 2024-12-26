@@ -11,7 +11,7 @@ import {
 export default function ReservationConfirm({
   date,
   time,
-  people,
+  numberOfPeople,
   onCancel,
   onConfirm,
   onSpecialRequest,
@@ -49,7 +49,7 @@ export default function ReservationConfirm({
             <span className="text-2xl mb-1">
               <BsFillPeopleFill />
             </span>
-            <span>{people}명</span>
+            <span>{numberOfPeople}명</span>
           </div>
         </div>
         <div className="p-4 mx-auto bg-white">
