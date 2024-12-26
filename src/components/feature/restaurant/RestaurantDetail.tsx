@@ -27,7 +27,7 @@ export default function RestaurantDetail({ restaurantId }: RestaurantDetailProps
   const { restaurantDetail } = useGetRestaurantDetail(restaurantId);
 
   const handleOpenModal = () => {
-    router.push('/reservations');
+    router.push(`/reservations?id=${restaurantId}`);
   };
 
   const tabs = [

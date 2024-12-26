@@ -5,7 +5,7 @@ import CommonButton from '@/components/common/button/CommonButton';
 import CommonModal from '@/components/common/modal/CommonModal';
 import ReservationConfirm from '@/components/feature/reservation/ReservationConfirm';
 import ReservationForm from '@/components/feature/reservation/ReservationForm';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { usePostReservation } from '@/hooks/queries/reservation/usePostReservation';
 
 export default function ReservationsPage() {
@@ -16,6 +16,8 @@ export default function ReservationsPage() {
   const [selectedPeople, setSelectedPeople] = useState<number | null>(null);
   const [specialRequest, setSpecialRequest] = useState<string>('');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const restaurantId = Number(searchParams.get('id'));
 
   // 예약 POST 요청 훅 설정
   const { submitReservation, isPending } = usePostReservation();
@@ -49,6 +51,7 @@ export default function ReservationsPage() {
       time: selectedTime || '',
       people: selectedPeople || 1,
       specialRequest: specialRequest,
+      restaurantId,
     });
     closeModal();
   };
