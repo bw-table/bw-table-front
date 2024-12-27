@@ -14,7 +14,7 @@ type InputType = 'text' | 'password' | 'email' | 'date' | 'number' | 'tel';
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string | ReactNode;
-  type: ButtonType;
+  type?: ButtonType;
   href?: string;
   onClick?: () => void;
   classNames?: string;
