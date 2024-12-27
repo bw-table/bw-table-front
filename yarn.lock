@@ -10973,6 +10973,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"supports-color@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "supports-color@npm:10.0.0"
+  checksum: 10c0/0e7884dfd02a07b3c6e0b235346f58c19f0201f1e44f7807583581761b354688c8577378785b5a4e3b03110809786c4c808e0e086cd91911f7b8bc59132703a8
+  languageName: node
+  linkType: hard
+
 "supports-color@npm:^7.1.0":
   version: 7.2.0
   resolution: "supports-color@npm:7.2.0"
@@ -11726,6 +11733,7 @@ __metadata:
     react-toastify: "npm:^11.0.2"
     sockjs-client: "npm:^1.6.1"
     storybook: "npm:^8.3.6"
+    supports-color: "npm:^10.0.0"
     tailwind-merge: "npm:^2.5.4"
     tailwindcss: "npm:^3.4.1"
     typescript: "npm:^5"

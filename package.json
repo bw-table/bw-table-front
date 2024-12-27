@@ -34,6 +34,7 @@
     "react-kakao-maps-sdk": "^1.1.27",
     "react-toastify": "^11.0.2",
     "sockjs-client": "^1.6.1",
+    "supports-color": "^10.0.0",
     "tailwind-merge": "^2.5.4",
     "zustand": "^5.0.0"
   },
