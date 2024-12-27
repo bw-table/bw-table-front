@@ -16,7 +16,9 @@ export default function ReservationDetail() {
   }
 
   const { restaurant, reservation } = reservationData;
-
+  const handleChat = () =>{
+    router.push('/chat');
+  }
   return (
     <div className="p-4 mx-auto bg-white">
       {/* Header */}
@@ -28,7 +30,7 @@ export default function ReservationDetail() {
       {/* Image */}
       <div className="mb-4">
         <img
-          src={restaurant.images[0] || '/assets/restaurant-example.png'}
+          src={restaurant.images?.[0] || '/assets/restaurant-example.png'}
           alt={restaurant.name}
           className="w-full h-52 object-cover"
         />
@@ -85,7 +87,11 @@ export default function ReservationDetail() {
 
       {/* 버튼들 */}
       <div className="px-4 flex justify-between gap-2">
-        <CommonButton type="button" classNames="bg-mainColor-500 text-white w-full py-3">
+        <CommonButton 
+          type="button"
+          classNames="bg-mainColor-500 text-white w-full py-3"
+          onClick={handleChat}
+        >
           식당과 채팅하기
         </CommonButton>
         <CommonButton type="button" classNames="bg-mainColor-500 text-white w-full py-3">

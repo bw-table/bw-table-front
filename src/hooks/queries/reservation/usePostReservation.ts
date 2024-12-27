@@ -5,6 +5,7 @@ import { ReservationData } from '@/types/request';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { completeReservation } from './useGetReservationSuccess';
+import { useReservationStore } from '@/store/reservations/useReservationStore';
 import useToast from '../useToast';
 
 declare const window: any;
@@ -62,6 +63,7 @@ export const usePostReservation = () => {
             if (paymentResponse.success) {
               try {
                 await completeReservation(reservationToken, paymentResponse.imp_uid);
+                useReservationStore.getState().setReservationData(paymentResponse);
                 router.push('/reservations-success');
                 toastSuccess('예약에 성공하였습니다 🍴')
               } catch (error) {

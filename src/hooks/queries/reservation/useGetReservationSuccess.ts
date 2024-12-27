@@ -1,6 +1,5 @@
 import { axiosAuth } from "@/api/axiosInstance";
 import { END_POINT } from "@/constants/endPoint";
-import { useReservationStore } from "@/store/reservations/useReservationStore";
 
 export const completeReservation = async (reservationToken: string, impUid: string) => {
   try {
@@ -8,11 +7,6 @@ export const completeReservation = async (reservationToken: string, impUid: stri
       reservationToken,
       impUid,
     });
-
-    const { restaurant, reservation } = response.data;
-
-    const setReservationData = useReservationStore.getState().setReservationData;
-    setReservationData({ restaurant, reservation });
 
     alert('예약이 성공적으로 완료되었습니다.');
     console.log(response.data);
