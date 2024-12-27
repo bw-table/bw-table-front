@@ -12,4 +12,5 @@ export const END_POINT = {
   RESERVATION_SUCCESS: '/api/reservations/complete',
   NEW_RESTAURANTS:'api/restaurants/new',
   MAIN_PAGE:'api/main/restaurants',
+  GUEST_CHAT_LIST: 'api/members/me/chats',
 } as const;
