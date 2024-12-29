@@ -10,6 +10,7 @@ export const END_POINT = {
   TOKEN_REFRESH: '/api/auth/refresh',
   RESTAURANTS: 'api/restaurants',
   RESERVATION_SUCCESS: '/api/reservations/complete',
+  MANAGEMENT_RESERVATIONS: '/api/reservations/restaurants',
   NEW_RESTAURANTS:'api/restaurants/new',
   MAIN_PAGE:'api/main/restaurants',
   GUEST_CHAT_LIST: 'api/members/me/chats',
