@@ -15,7 +15,7 @@ import { useSession } from 'next-auth/react';
 
 dayjs.locale('ko');
 
-export default function DashBord() {
+export default function DashBoard() {
   const [selectedReservation, setSelectedReservation] =
     useState<ReservationType | null>(null);
 
@@ -68,7 +68,7 @@ export default function DashBord() {
         {dayjs(date).format('YYYY-MM-DD (dd)')} 예약 목록
       </p>
       <div className="join join-vertical w-full">
-        {Object.entries(groupReservationsByTime(reservationData?.content || []))
+        {Object.entries(groupReservationsByTime(reservationData || []))
           .sort(([timeA], [timeB]) => timeA.localeCompare(timeB))
           .map(([time, reservations]) => (
             <div

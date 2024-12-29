@@ -1,4 +1,4 @@
-import DashBord from '@/components/feature/dashbord/DashBord';
+import DashBoard from '@/components/feature/dashbord/DashBoard';
 import TodayReservation from '@/components/feature/TodayReservation/TodayReservation';
 import Logo from '@public/Logo.svg';
 
@@ -11,7 +11,7 @@ export default async function ManagementPage() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-8 gap-3">
         <TodayReservation />
-        <DashBord />
+        <DashBoard />
       </div>
     </div>
   );
