@@ -9,21 +9,13 @@ const fetchAPI = async (params: ReservationsRequestType) => {
     page,
     size,
     restaurantId,
-    memberId,
-    reservationStatus,
-    reservationDate,
-    reservationTime,
+
   } = params;
 
-  const response = await axiosAuth.get(`${END_POINT.RESERVATIONS}`, {
+  const response = await axiosAuth.get(`${END_POINT.MANAGEMENT_RESERVATIONS}/${restaurantId}`, {
     params: {
       page,
       size,
-      restaurantId,
-      memberId,
-      reservationStatus,
-      reservationDate,
-      reservationTime,
     },
   });
 
