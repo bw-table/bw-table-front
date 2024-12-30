@@ -56,7 +56,7 @@ export interface RestaurantDetailRequestType {
 }
 
 export interface ReservationsRequestType {
-  restaurantCategory: string;
+  restaurantCategory?: string;
   restaurantImages?: string[];
   page?: number;
   size?: number;
@@ -64,7 +64,7 @@ export interface ReservationsRequestType {
   reservationId?: number;
   restaurantName?: string;
   memberId?: number;
-  reservationStatus: string;
+  reservationStatus?: string;
   reservationDate?: string;
   reservationTime: string;
   numberOfPeople?: number;
