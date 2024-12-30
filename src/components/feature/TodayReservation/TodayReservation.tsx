@@ -24,9 +24,9 @@ export default function TodayReservation() {
     undefined,
     dayjs(new Date()).format('YYYY-MM-DD'),
   );
-
-  const reservationCount = reservationData?.content.length;
-  const allPeople = reservationData?.content.reduce(
+  console.log(reservationData);
+  const reservationCount = reservationData?.length;
+  const allPeople = reservationData?.reduce(
     (acc: number, current: ReservationType) => {
       return acc + current.numberOfPeople;
     },
