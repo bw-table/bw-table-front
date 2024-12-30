@@ -1,6 +1,5 @@
 'use client';
 
-import CommonButton from '@/components/common/button/CommonButton';
 import Divider from '@/components/common/divider/CommonDivider';
 import CommonHeader from '@/components/common/header/CommonHeader';
 import CommonNavigationBar from '@/components/common/navigation-bar/CommonNavigationBar';
@@ -29,7 +28,7 @@ const MyPage = () => {
   const{ myInfo } = useGetMyInfo();
   return (
     <>
-      <Divider classNames='h-screen'>
+      <Divider classNames='h-full'>
         <CommonHeader label='마이 페이지'/>
         <div className="flex flex-col items-center mb-4">
           <img 
