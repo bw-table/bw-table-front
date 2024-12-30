@@ -6,7 +6,7 @@ import CommonHeader from '@/components/common/header/CommonHeader';
 import CommonNavigationBar from '@/components/common/navigation-bar/CommonNavigationBar';
 import MyReservationList from '@/components/feature/my-page/MyReservationList';
 import { useSignOut } from '@/hooks/queries/auth/useLogout';
-import { useGetReservationList } from '@/hooks/queries/reservation/useGetReservations';
+import useGetMyReservations from '@/hooks/queries/my-page/useGetMyReservations';
 import React, { useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
 
@@ -21,17 +21,7 @@ const MyPage = () => {
     { key: 'my-reservation', label: '나의 예약' },
     { key: 'my-reviews', label: '나의 리뷰' },
   ];
-
-  const userName = "Pinn";
-  const restaurantId = 2;
-  const memberId = 2;
-
-  const {
-    reservationData,
-    isReservationLoading,
-    isReservationError,
-  } = useGetReservationList(restaurantId, memberId);
-
+  const { myReservations, myReservationsIsLoading, myReservationsIsError } = useGetMyReservations();
   return (
     <>
       <Divider classNames='h-screen'>
@@ -57,9 +47,9 @@ const MyPage = () => {
         />
         {selectedTab === 'my-reservation' && (
           <MyReservationList
-            reservationData={reservationData}
-            isReservationLoading={isReservationLoading}
-            isReservationError={isReservationError}
+            reservationData={myReservations}
+            isReservationLoading={myReservationsIsLoading}
+            isReservationError={myReservationsIsError}
           />
         )}
         {selectedTab === 'my-reviews' && (
