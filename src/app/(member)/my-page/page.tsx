@@ -14,7 +14,7 @@ import useGetMyReviews from '@/hooks/queries/my-page/useGetMyReviews';
 import MyReviewList from '@/components/feature/my-page/MyReviewList';
 
 const MyPage = () => {
-  const [selectedTab, setSelectedTab] = useState('home');
+  const [selectedTab, setSelectedTab] = useState('my-reservation');
   const { signOutMutation } = useSignOut();
 
   const handleLogout = () => {
