@@ -12,13 +12,16 @@ import { ReservationType, StatusVariant } from '@/types';
 import { groupReservationsByTime } from '@/utils/groupReservationsByTime';
 import { switchToKorean } from '@/utils/switchStatusLang';
 import { useSession } from 'next-auth/react';
+import { IoSettingsOutline } from "react-icons/io5";
+import SettingsModal from './ReservationSettingModal';
 
 dayjs.locale('ko');
 
 export default function DashBoard() {
   const [selectedReservation, setSelectedReservation] =
     useState<ReservationType | null>(null);
-
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [reservationStatus, setReservationStatus] = useState<Record<string, StatusVariant>>({});
   const date = useDateStore.use.date();
   const { data: session } = useSession({ required: true });
   const { reservationData, isReservationLoading } = useGetReservationList(
@@ -28,30 +31,44 @@ export default function DashBoard() {
   );
   const { visitedMutation, noShowMutation, cancelMutation } = useStatusChange();
 
-  const handleChange = (
+  const handleChange = async (
     e: React.ChangeEvent<HTMLSelectElement>,
     reservationId: string,
     date: string,
   ) => {
     const status = e.target.value as StatusVariant;
-
-    switch (status) {
-      case 'CONFIRMED':
-        visitedMutation({ reservationId, date });
-        break;
-      case 'NO_SHOW':
-        noShowMutation({ reservationId, date });
-        break;
-      case 'CANCELED':
-        cancelMutation({ reservationId, date });
-        break;
-      default:
-        break;
+    try {
+      switch (status) {
+        case 'VISITED':
+          await visitedMutation({ reservationId, date });
+          break;
+        case 'NO_SHOW':
+          await noShowMutation({ reservationId, date });
+          break;
+        case 'CANCELED':
+          await cancelMutation({ reservationId, date });
+        default:
+          break;
+      }
+      setReservationStatus((prev) => ({
+        ...prev,
+        [reservationId]: status,
+      }));
+    } catch (error) {
+      console.error('Status change failed:', error);
     }
   };
 
   const handleCloseModal = () => {
     setSelectedReservation(null);
+  };
+
+  const handleOpenSettingsModal = () => {
+    setIsSettingsModalOpen(true);
+  };
+
+  const handleCloseSettingsModal = () => {
+    setIsSettingsModalOpen(false);
   };
 
   if (isReservationLoading) {
@@ -64,9 +81,17 @@ export default function DashBoard() {
 
   return (
     <div className="col-span-1 lg:col-span-5 p-3 border border-solid border-border-300 rounded ">
-      <p className="text-2xl font-bold mb-5">
-        {dayjs(date).format('YYYY-MM-DD (dd)')} 예약 목록
-      </p>
+      <div className="flex justify-between">
+        <p className="text-2xl font-bold mb-5">
+          {dayjs(date).format('YYYY-MM-DD (dd)')} 예약 목록
+        </p>
+        <button
+          onClick={handleOpenSettingsModal}
+          className="text-2xl"
+        >
+          <IoSettingsOutline />
+        </button>
+      </div>
       <div className="join join-vertical w-full">
         {Object.entries(groupReservationsByTime(reservationData || []))
           .sort(([timeA], [timeB]) => timeA.localeCompare(timeB))
@@ -93,11 +118,12 @@ export default function DashBoard() {
                     </button>
                     <div className="flex items-center gap-4">
                       <Badge
-                        variant={reservation.reservationStatus as StatusVariant}
+                        variant={reservationStatus[reservation.reservationId] || reservation.reservationStatus as StatusVariant}
                       >
-                        {switchToKorean(reservation.reservationStatus)}
+                        {switchToKorean(reservationStatus[reservation.reservationId] || reservation.reservationStatus)}
                       </Badge>
                       <select
+                        value={reservationStatus[reservation.reservationId] || reservation.reservationStatus}
                         onChange={(e) =>
                           handleChange(
                             e,
@@ -108,7 +134,7 @@ export default function DashBoard() {
                         className="select select-bordered w-full max-w-xs"
                       >
                         <option value="PENDING">선택</option>
-                        <option value="CONFIRMED">방문</option>
+                        <option value="VISITED">방문</option>
                         <option value="NO_SHOW">노쇼</option>
                         <option value="CANCELED">취소</option>
                       </select>
@@ -123,6 +149,7 @@ export default function DashBoard() {
           reservation={selectedReservation}
           onClose={handleCloseModal}
         />
+        <SettingsModal isOpen={isSettingsModalOpen} onClose={handleCloseSettingsModal} />
       </div>
     </div>
   );
