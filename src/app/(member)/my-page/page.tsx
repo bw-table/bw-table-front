@@ -6,6 +6,7 @@ import CommonHeader from '@/components/common/header/CommonHeader';
 import CommonNavigationBar from '@/components/common/navigation-bar/CommonNavigationBar';
 import MyReservationList from '@/components/feature/my-page/MyReservationList';
 import { useSignOut } from '@/hooks/queries/auth/useLogout';
+import useGetMyInfo from '@/hooks/queries/my-page/useGetMyInfo';
 import useGetMyReservations from '@/hooks/queries/my-page/useGetMyReservations';
 import React, { useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
@@ -22,6 +23,7 @@ const MyPage = () => {
     { key: 'my-reviews', label: '나의 리뷰' },
   ];
   const { myReservations, myReservationsIsLoading, myReservationsIsError } = useGetMyReservations();
+  const{ myInfo } = useGetMyInfo();
   return (
     <>
       <Divider classNames='h-screen'>
@@ -32,7 +34,7 @@ const MyPage = () => {
             alt="User Avatar"
             className="w-24 h-24 rounded-full mb-2"
           />
-          <p className="text-lg font-semibold">{userName}</p>
+          <p className="text-lg font-semibold">🍴 {myInfo?.nickname} 님</p>
           <button className="flex items-center text-blue-500 mt-2">
             <AiFillEdit className="mr-1" />
             프로필 수정하기
