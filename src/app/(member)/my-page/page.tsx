@@ -10,6 +10,8 @@ import useGetMyInfo from '@/hooks/queries/my-page/useGetMyInfo';
 import useGetMyReservations from '@/hooks/queries/my-page/useGetMyReservations';
 import React, { useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
+import useGetMyReviews from '@/hooks/queries/my-page/useGetMyReviews';
+import MyReviewList from '@/components/feature/my-page/MyReviewList';
 
 const MyPage = () => {
   const [selectedTab, setSelectedTab] = useState('home');
@@ -23,6 +25,7 @@ const MyPage = () => {
     { key: 'my-reviews', label: '나의 리뷰' },
   ];
   const { myReservations, myReservationsIsLoading, myReservationsIsError } = useGetMyReservations();
+  const { myReviews } = useGetMyReviews();
   const{ myInfo } = useGetMyInfo();
   return (
     <>
@@ -54,12 +57,8 @@ const MyPage = () => {
             isReservationError={myReservationsIsError}
           />
         )}
-        {selectedTab === 'my-reviews' && (
-          <div className="mb-4">
-            {/* 나의 리뷰 리스트가 들어갈 자리 */}
-            <p className="text-gray-500">아직 작성한 리뷰가 없습니다.</p>
-          </div>
-        )}
+        {selectedTab === 'my-reviews' && <MyReviewList reviews={myReviews} />}
+          
         <button type='button' className='fixed bottom-4 left-1/2 transform -translate-x-1/2 text-gray-700w-40 h-10 text-sm' onClick={handleLogout}>
           로그아웃
         </button>
