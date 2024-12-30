@@ -1,6 +1,7 @@
 import React from 'react';
 import Divider from '@/components/common/divider/CommonDivider';
 import { ReservationsRequestType } from '@/types';
+import { CATEGORY } from '@/constants/restaurantCategory';
 
 interface MyReservationListProps {
   reservationData: { content: ReservationsRequestType[] } | null;
@@ -17,7 +18,7 @@ const MyReservationList: React.FC<MyReservationListProps> = ({ reservationData, 
             {/* 이미지 섹션 */}
             <div className="w-24 h-24 mr-4">
               <img 
-                src="assets/restaurant-example.png" // 이미지 URL 변경 필요
+                src={reservation?.restaurantImages?.[0]}
                 alt="Restaurant"
                 className="w-full h-full object-cover rounded-lg"
               />
@@ -29,8 +30,8 @@ const MyReservationList: React.FC<MyReservationListProps> = ({ reservationData, 
                   {reservation.reservationStatus === 'CONFIRMED' ? '예약확정' : '대기중'}
                 </span>
               </div>
-              <h3 className="text-lg font-bold mb-1">{reservation.restaurantId}세이지 앤 버터</h3>
-              <p className="text-sm text-gray-600 mb-1">압구정 | 이탈리아 음식</p> 
+              <h3 className="text-lg font-bold mb-1">{reservation.restaurantName}</h3>
+              <p className="text-sm text-gray-600 mb-1">{CATEGORY[reservation.restaurantCategory] || '카테고리 없음'}</p> 
               <p className="text-sm text-gray-500">
                 {reservation.reservationDate} · {reservation.reservationTime} · {reservation.numberOfPeople}명
               </p>

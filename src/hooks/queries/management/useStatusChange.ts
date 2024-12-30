@@ -8,18 +8,18 @@ type MutationParams = {
 };
 
 export const putVisited = async ({ reservationId, date }: MutationParams) => {
-  const res = await axiosAuth.put(`api/reservations/${reservationId}/visited`);
+  const res = await axiosAuth.put(`api/reservations/${reservationId}/visit`);
   return { data: res.data, date };
 };
 
 export const putNoShow = async ({ reservationId, date }: MutationParams) => {
-  const res = await axiosAuth.put(`api/reservations/${reservationId}/no-show`);
+  const res = await axiosAuth.put(`api/reservations/${reservationId}/noshow`);
   return { data: res.data, date };
 };
 
 export const putCancel = async ({ reservationId, date }: MutationParams) => {
   const res = await axiosAuth.put(
-    `api/reservations/${reservationId}/cancel/owner`,
+    `api/reservations/${reservationId}/cancel`,
   );
   return { data: res.data, date };
 };

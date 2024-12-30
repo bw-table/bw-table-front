@@ -56,13 +56,31 @@ export interface RestaurantDetailRequestType {
 }
 
 export interface ReservationsRequestType {
+  restaurantCategory?: string;
+  restaurantImages?: string[];
   page?: number;
   size?: number;
   restaurantId?: number;
   reservationId?: number;
+  restaurantName?: string;
   memberId?: number;
-  reservationStatus: string;
+  reservationStatus?: string;
   reservationDate?: string;
   reservationTime: string;
   numberOfPeople?: number;
+}
+
+export interface ReviewRequestType {
+  id: number;
+  content: string;
+  rating: number;
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+  restaurantId: number;
+  restaurantName: string;
+  restaurantCategory: string;
+  memberId: number;
+  memberProfileImage: string | null;
+  memberNickname: string;
 }
