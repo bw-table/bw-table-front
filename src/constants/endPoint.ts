@@ -14,4 +14,7 @@ export const END_POINT = {
   NEW_RESTAURANTS:'api/restaurants/new',
   MAIN_PAGE:'api/main/restaurants',
   GUEST_CHAT_LIST: 'api/members/me/chats',
+  GUEST_RESERVATIONS: 'api/members/me/reservations',
+  MY_INFO: 'api/members/me',
+  MY_REVIEWS: 'api/members/me/reviews',
 } as const;
