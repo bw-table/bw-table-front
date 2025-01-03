@@ -104,7 +104,8 @@
 ### 🔫 Trouble-Shooting #1
 </br>
 </br>
-![백엔드 트러블슈팅](https://github.com/user-attachments/assets/cc8a6081-efc0-48ec-9b9d-07c91422e17a)
+
+![백엔드 트러블슈팅](https://github.com/user-attachments/assets/a59d6b66-af42-4897-b8d0-747b6b54a402)
 
 </br>
 </br>
